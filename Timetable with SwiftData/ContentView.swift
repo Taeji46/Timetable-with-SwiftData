@@ -1,57 +1,50 @@
-//
-//  ContentView.swift
-//  Timetable with SwiftData
-//
-//  Created by 細川泰智 on 2023/11/16.
-//
-
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @Query private var courses: [Course]
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        NavigationStack {
+            HStack {
+                ForEach(0..<5) { day in
+                    VStack {
+                        ForEach(0..<6) { period in
+                            if let course = courses.first(where: { $0.day == day && $0.period == period }) {
+                                NavigationLink(destination: {
+                                    CourseView(course: course)
+                                }, label: {
+                                    WeeklyCourseView(course: course, courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
+                                })
+                            } else {
+                                Button(action: {
+                                    addCourse(day: day, period: period)
+                                }, label: {
+                                    WeeklyEmptyCourseView(courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
+                                })
+                            }
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
+    func getCourseHeight() -> CGFloat {
+        return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.6
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+    
+    func getCourseWidth() -> CGFloat {
+        return UIScreen.main.bounds.width / CGFloat(Float(5)) * 0.75
+    }
+    
+    private func addCourse(day: Int, period: Int) {
+        let newCourse = Course(name: "", classroom: "", teacher: "", day: day, period: period)
+        modelContext.insert(newCourse)
+    }
+    
+    private func deleteCourses() {
+        modelContext.delete(courses[courses.count - 1])
     }
 }
 
