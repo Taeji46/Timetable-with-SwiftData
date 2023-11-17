@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F0364C092B06512300401B45 /* Timetable_with_SwiftDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C082B06512300401B45 /* Timetable_with_SwiftDataApp.swift */; };
 		F0364C0B2B06512300401B45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C0A2B06512300401B45 /* ContentView.swift */; };
-		F0364C0D2B06512300401B45 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C0C2B06512300401B45 /* Item.swift */; };
 		F0364C0F2B06512600401B45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0364C0E2B06512600401B45 /* Assets.xcassets */; };
 		F0364C122B06512600401B45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0364C112B06512600401B45 /* Preview Assets.xcassets */; };
 		F0364C192B06517B00401B45 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C182B06517B00401B45 /* Table.swift */; };
@@ -25,7 +24,6 @@
 		F0364C052B06512300401B45 /* Timetable with SwiftData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Timetable with SwiftData.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0364C082B06512300401B45 /* Timetable_with_SwiftDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_with_SwiftDataApp.swift; sourceTree = "<group>"; };
 		F0364C0A2B06512300401B45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		F0364C0C2B06512300401B45 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		F0364C0E2B06512600401B45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0364C112B06512600401B45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F0364C182B06517B00401B45 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 			children = (
 				F0364C082B06512300401B45 /* Timetable_with_SwiftDataApp.swift */,
 				F0364C0A2B06512300401B45 /* ContentView.swift */,
-				F0364C0C2B06512300401B45 /* Item.swift */,
 				F0364C0E2B06512600401B45 /* Assets.xcassets */,
 				F0364C1F2B0653AA00401B45 /* Views */,
 				F0364C202B0653B300401B45 /* Models */,
@@ -178,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0364C0B2B06512300401B45 /* ContentView.swift in Sources */,
-				F0364C0D2B06512300401B45 /* Item.swift in Sources */,
 				F0364C912B07579F00401B45 /* CourseView.swift in Sources */,
 				F0364C8F2B0755D200401B45 /* WeeklyEmptyCourseView.swift in Sources */,
 				F0364C1C2B06528E00401B45 /* Course.swift in Sources */,
