@@ -7,6 +7,6 @@ struct Timetable_with_SwiftDataApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Course.self])
+        .modelContainer(for: Table.self)
     }
 }

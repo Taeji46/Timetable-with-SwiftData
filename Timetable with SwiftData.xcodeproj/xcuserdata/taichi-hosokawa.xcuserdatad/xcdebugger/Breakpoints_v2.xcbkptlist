@@ -20,5 +20,128 @@
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../../../../var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - ba254045c2d96eda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init() -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - ba254045c2d96eda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init() -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - ba254045c2d96eda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init() -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - ba254045c2d96eda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init() -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - ba254045c2d96eda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init() -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - 2a5e585650083977"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init(id: Foundation.UUID, title: Swift.String, numOfDays: Swift.Int, numOfPeriods: Swift.Int, courses: Swift.Array&lt;Timetable_with_SwiftData.Course&gt;) -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "60376984-027D-47F9-A1EA-3A01B3E2F027 - a4cbf0fb705d6ed0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.Table.init(title: Swift.String, numOfDays: Swift.Int, numOfPeriods: Swift.Int) -&gt; Timetable_with_SwiftData.Table"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/49/4bq52f613wv4ws0gsp3bxvp80000gn/T/swift-generated-sources/@__swiftmacro_24Timetable_with_SwiftData5Table5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2"
+                  offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -3,7 +3,7 @@ import SwiftData
 
 struct WeeklyTableView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var courses: [Course]
+    @State var table: Table
     
     var body: some View {
         NavigationStack {
@@ -11,7 +11,7 @@ struct WeeklyTableView: View {
                 ForEach(0..<5) { day in
                     VStack {
                         ForEach(0..<6) { period in
-                            if let course = courses.first(where: { $0.day == day && $0.period == period }) {
+                            if let course = table.courses.first(where: { $0.day == day && $0.period == period }) {
                                 NavigationLink(destination: {
                                     CourseView(course: course)
                                 }, label: {
@@ -41,6 +41,6 @@ struct WeeklyTableView: View {
     
     private func addCourse(day: Int, period: Int) {
         let newCourse = Course(name: "", classroom: "", teacher: "", day: day, period: period)
-        modelContext.insert(newCourse)
+        table.courses.append(newCourse)
     }
 }

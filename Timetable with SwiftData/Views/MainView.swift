@@ -2,12 +2,12 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-    @State var selectedTab: Int
-    @State var navigationTitle: String
+    @State var table: Table
+    @State var selectedTab: Int = 0
+    @State var navigationTitle: String = String(localized: "Today's Lectures")
     
-    init() {
-        selectedTab = 0;
-        navigationTitle = String(localized: "Today's Lectures")
+    init(table: Table) {
+        self.table = table
     }
     
     var body: some View {
@@ -20,7 +20,7 @@ struct MainView: View {
                     }
                     .tag(0)
                 
-                WeeklyTableView()
+                WeeklyTableView(table: table)
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Timetable")
