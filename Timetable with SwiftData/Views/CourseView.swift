@@ -27,7 +27,7 @@ struct CourseView: View {
                 ZStack {
                     Rectangle().fill(.white).frame(width: courseWidth, height: mainInfoHeight + 70).cornerRadius(12)
                     Rectangle()
-                        .fill(.blue.opacity(0.75))
+                        .fill(course.getSelectedColor().opacity(0.75))
                         .frame(width: courseWidth, height: mainInfoHeight + 70)
                         .cornerRadius(12)
                         .onTapGesture {
@@ -59,7 +59,7 @@ struct CourseView: View {
                 ZStack {
                     Rectangle().fill(.white).frame(width: courseWidth, height: attendanceInfoHeight + 70).cornerRadius(12)
                     Rectangle()
-                        .fill(.blue.opacity(0.75))
+                        .fill(course.getSelectedColor().opacity(0.75))
                         .frame(width: courseWidth, height: attendanceInfoHeight + 70)
                         .cornerRadius(12)
                         .onTapGesture {
@@ -154,7 +154,7 @@ struct CourseView: View {
         })
         .sheet(isPresented: $isShowingEditView) {
             NavigationView {
-                CourseEditView(course: course, selectedColor: .blue)
+                CourseEditView(course: course, selectedColor: course.getSelectedColor())
                     .navigationBarTitle("Details", displayMode: .inline)
                     .navigationBarItems(
                         trailing:
@@ -165,17 +165,17 @@ struct CourseView: View {
             }
         }
         .sheet(isPresented: $isShowingAttendanceRecordView) {
-                    NavigationView {
-                        AttendanceRecordView(course: course)
-                            .navigationBarTitle("Attendance Status", displayMode: .inline)
-                            .navigationBarItems(
-                                trailing:
-                                    Button("Done") {
-                                        isShowingAttendanceRecordView = false
-                                    }
-                            )
-                    }
-                }
+            NavigationView {
+                AttendanceRecordView(course: course)
+                    .navigationBarTitle("Attendance Status", displayMode: .inline)
+                    .navigationBarItems(
+                        trailing:
+                            Button("Done") {
+                                isShowingAttendanceRecordView = false
+                            }
+                    )
+            }
+        }
     }
     
     func titleView() -> some View {
@@ -197,7 +197,7 @@ struct CourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
-                    .foregroundColor(.blue.opacity(0.75))
+                    .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 16)
             }
                 .frame(width: courseWidth - 20, height: 16, alignment: .leading)
@@ -211,7 +211,7 @@ struct CourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
-                    .foregroundColor(.blue.opacity(0.75))
+                    .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 16)
                 
                 Text(course.classroom)
@@ -229,7 +229,7 @@ struct CourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
-                    .foregroundColor(.blue.opacity(0.75))
+                    .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 16)
                 
                 Text(course.teacher)

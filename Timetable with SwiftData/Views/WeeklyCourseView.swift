@@ -12,7 +12,7 @@ struct WeeklyCourseView: View {
                 .fill(.white)
                 .frame(width: courseWidth, height: courseHeight).cornerRadius(12)
             Rectangle()
-                .fill(.blue.opacity(0.4))
+                .fill(course.getSelectedColor().opacity(0.4))
                 .frame(width: courseWidth, height: courseHeight)
                 .cornerRadius(12)
             VStack {
@@ -37,7 +37,7 @@ struct WeeklyCourseView: View {
         return (
             ZStack {
                 Rectangle()
-                    .fill(.blue)
+                    .fill(course.getSelectedColor())
                     .cornerRadius(4)
                 
                 Text(course.classroom)

@@ -10,6 +10,7 @@ final class Course {
     var day: Int
     var period: Int
     var attendanceRecords: [Attendance]
+    var colorName: String
     
     init(name: String, classroom: String, teacher: String, day: Int, period: Int) {
         self.name = name
@@ -18,11 +19,21 @@ final class Course {
         self.day = day
         self.period = period
         attendanceRecords = []
+        colorName = "Blue"
     }
     
     func isCourseEmpty() -> Bool {
         return name.isEmpty && classroom.isEmpty && teacher.isEmpty
     }
+    
+    func getSelectedColor() -> Color { // 講義の色を取得
+            for colorTemplate in courseColorTemplates {
+                if colorTemplate.name == colorName {
+                    return colorTemplate.color
+                }
+            }
+            return Color.clear
+        }
     
     func countAttendance(status: AttendanceStatus) -> Int { // statusを引数として受け取りattendanceRecords内から数え上げる
         let filteredAttendance = attendanceRecords.filter { $0.status == status }
