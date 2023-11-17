@@ -6,10 +6,6 @@ struct MainView: View {
     @State var selectedTab: Int = 0
     @State var navigationTitle: String = String(localized: "Today's Lectures")
     
-    init(table: Table) {
-        self.table = table
-    }
-    
     var body: some View {
         NavigationStack {
             TabView(selection: $selectedTab) {
@@ -20,7 +16,7 @@ struct MainView: View {
                     }
                     .tag(0)
                 
-                WeeklyTableView(table: table)
+                WeeklyTableView(table: $table)
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Timetable")

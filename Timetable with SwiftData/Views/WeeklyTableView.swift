@@ -3,17 +3,100 @@ import SwiftData
 
 struct WeeklyTableView: View {
     @Environment(\.modelContext) private var modelContext
-    @State var table: Table
+    @Binding var table: Table
     
     var body: some View {
-        NavigationStack {
+        ZStack {
+            LinearGradient(
+                gradient:
+                    Gradient(stops: [
+                        .init(color: table.getSelectedColor().opacity(0.25), location: 0.0),
+                        .init(color: table.getSelectedColor().opacity(0.25), location: 0.1),
+                        .init(color: table.getSelectedColor().opacity(0.1), location: 0.25),
+                        .init(color: table.getSelectedColor().opacity(0.1), location: 0.85),
+                        .init(color: table.getSelectedColor().opacity(0.0), location: 0.95),
+                        .init(color: table.getSelectedColor().opacity(0.0), location: 1.0)
+                    ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
+            VStack {
+                Spacer()
+                weekView()
+                ScrollView {
+                    HStack() {
+                        periodView()
+                        courseTableView()
+                    }
+                }
+                Spacer()
+            }
+        }
+    }
+    
+    func weekView() -> some View {
+        let daysOfWeek = [String(localized: "MON"),
+                          String(localized: "TUE"),
+                          String(localized: "WED"),
+                          String(localized: "THU"),
+                          String(localized: "FRI"),
+                          String(localized: "SAT"),
+                          String(localized: "SUN")].prefix(upTo: table.numOfDays)
+        
+        return (
             HStack {
-                ForEach(0..<5) { day in
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(width: 20, height: 20)
+                
+                ForEach(daysOfWeek, id: \.self) { day in
+                    ZStack {
+                        Rectangle()
+                            .fill(table.getSelectedColor().opacity(0.75))
+                            .cornerRadius(8)
+                        
+                        Text(day)
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 12))
+                            .bold()
+                    }
+                    .frame(width: getCourseWidth(), height: 20)
+                }
+            }
+        )
+    }
+    
+    func periodView() -> some View {
+        return (
+            VStack {
+                ForEach(1...table.numOfPeriods, id: \.self) { period in
+                    ZStack {
+                        Rectangle()
+                            .fill(table.getSelectedColor().opacity(0.75))
+                            .cornerRadius(8)
+                        
+                        Text(String(period))
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 12))
+                            .bold()
+                    }
+                    .frame(width: 20, height: getCourseHeight())
+                }
+            }
+        )
+    }
+    
+    func courseTableView() -> some View {
+        return (
+            HStack {
+                ForEach(0..<table.numOfDays, id: \.self) { day in
                     VStack {
-                        ForEach(0..<6) { period in
+                        ForEach(0..<table.numOfPeriods, id: \.self) { period in
                             if let course = table.courses.first(where: { $0.day == day && $0.period == period }) {
                                 NavigationLink(destination: {
-                                    CourseView(course: course)
+                                    CourseView(table: table, course: course)
                                 }, label: {
                                     WeeklyCourseView(course: course, courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
                                 })
@@ -27,20 +110,29 @@ struct WeeklyTableView: View {
                         }
                     }
                 }
+                .id(UUID())
             }
-        }
+        )
     }
     
     func getCourseHeight() -> CGFloat {
-        return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.6
+        if table.numOfPeriods < 7 {
+            return UIScreen.main.bounds.height / CGFloat(Float(table.numOfPeriods)) * 0.6
+        } else {
+            return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.6
+        }
     }
     
     func getCourseWidth() -> CGFloat {
-        return UIScreen.main.bounds.width / CGFloat(Float(5)) * 0.75
+        return UIScreen.main.bounds.width / CGFloat(Float(table.numOfDays)) * 0.75
     }
     
     private func addCourse(day: Int, period: Int) {
         let newCourse = Course(name: "", classroom: "", teacher: "", day: day, period: period)
         table.courses.append(newCourse)
+    }
+    
+    private func saveContext() {
+        try? modelContext.save()
     }
 }

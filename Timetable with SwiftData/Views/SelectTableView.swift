@@ -4,7 +4,7 @@ import SwiftData
 struct SelectTableView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var tables: [Table]
-    @State private var isShow: Bool = false
+//    @State private var isShow: Bool = false
     
     var body: some View {
         NavigationStack {

@@ -1,20 +1,25 @@
 import SwiftUI
 
 struct CourseView: View {
+    @State var table: Table
     @State var course: Course
     @State var isShowingEditView: Bool
     @State var isShowingAttendanceRecordView: Bool
+    @State var isShowingAlert: Bool
     var courseWidth: CGFloat
     var courseHeight: CGFloat
     var mainInfoHeight: CGFloat
     var attendanceInfoHeight: CGFloat
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.presentationMode) var presentationMode
     
-    init(course: Course) {
+    init(table: Table, course: Course) {
+        self._table = State(initialValue: table)
         self._course = State(initialValue: course)
         _isShowingEditView = State(initialValue: false)
         _isShowingAttendanceRecordView = State(initialValue: false)
+        _isShowingAlert = State(initialValue: false)
         courseWidth = UIScreen.main.bounds.width * 0.925
         courseHeight = UIScreen.main.bounds.height / 4.0 * 1.5
         mainInfoHeight = 100
@@ -148,13 +153,13 @@ struct CourseView: View {
         }
         .navigationTitle(course.name)
         .navigationBarItems(trailing: Button(action: {
-            isShowingEditView = true
+            isShowingAlert = true
         }) {
-            Image(systemName: "pencil")
+            Image(systemName: "trash")
         })
         .sheet(isPresented: $isShowingEditView) {
             NavigationView {
-                CourseEditView(course: course, selectedColor: course.getSelectedColor())
+                CourseEditView(table: table, course: course, selectedColor: course.getSelectedColor())
                     .navigationBarTitle("Details", displayMode: .inline)
                     .navigationBarItems(
                         trailing:
@@ -175,6 +180,17 @@ struct CourseView: View {
                             }
                     )
             }
+        }
+        .alert(isPresented: $isShowingAlert) {
+            Alert(
+                title: Text("Confirm Deletion"),
+                message: Text("Are you sure you want to delete this course?"),
+                primaryButton: .destructive(Text("Delete")) {
+                    table.courses.removeAll(where: {$0 == course})
+                    presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
         }
     }
     
