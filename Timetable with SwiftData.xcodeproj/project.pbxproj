@@ -19,6 +19,8 @@
 		F0364C912B07579F00401B45 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C902B07579F00401B45 /* CourseView.swift */; };
 		F0364C932B0757FD00401B45 /* CourseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C922B0757FD00401B45 /* CourseEditView.swift */; };
 		F0364C952B0767C700401B45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C942B0767C700401B45 /* MainView.swift */; };
+		F0364C972B076D1200401B45 /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C962B076D1200401B45 /* Attendance.swift */; };
+		F0364C992B076FF400401B45 /* AttendanceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C982B076FF400401B45 /* AttendanceRecordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		F0364C902B07579F00401B45 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
 		F0364C922B0757FD00401B45 /* CourseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseEditView.swift; sourceTree = "<group>"; };
 		F0364C942B0767C700401B45 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F0364C962B076D1200401B45 /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		F0364C982B076FF400401B45 /* AttendanceRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceRecordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 				F0364C8E2B0755D200401B45 /* WeeklyEmptyCourseView.swift */,
 				F0364C902B07579F00401B45 /* CourseView.swift */,
 				F0364C922B0757FD00401B45 /* CourseEditView.swift */,
+				F0364C982B076FF400401B45 /* AttendanceRecordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 			children = (
 				F0364C182B06517B00401B45 /* Table.swift */,
 				F0364C1B2B06528E00401B45 /* Course.swift */,
+				F0364C962B076D1200401B45 /* Attendance.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0364C972B076D1200401B45 /* Attendance.swift in Sources */,
 				F0364C0B2B06512300401B45 /* ContentView.swift in Sources */,
 				F0364C912B07579F00401B45 /* CourseView.swift in Sources */,
 				F0364C8F2B0755D200401B45 /* WeeklyEmptyCourseView.swift in Sources */,
@@ -186,6 +193,7 @@
 				F0364C192B06517B00401B45 /* Table.swift in Sources */,
 				F0364C262B06550000401B45 /* WeeklyTableView.swift in Sources */,
 				F0364C242B06548800401B45 /* WeeklyCourseView.swift in Sources */,
+				F0364C992B076FF400401B45 /* AttendanceRecordView.swift in Sources */,
 				F0364C092B06512300401B45 /* Timetable_with_SwiftDataApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
