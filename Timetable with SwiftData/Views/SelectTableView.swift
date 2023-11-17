@@ -36,18 +36,18 @@ struct SelectTableView: View {
             }
             .navigationBarTitle("Timetable List")
         }
-        .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                var transaction = Transaction()
-                transaction.disablesAnimations = true
-                withTransaction(transaction) {
-                    self.isShow = true
-                }
-            }
-        })
-        .fullScreenCover(isPresented: $isShow) {
-            MainView(table: tables[0])
-        }
+//        .onAppear(perform: {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                var transaction = Transaction()
+//                transaction.disablesAnimations = true
+//                withTransaction(transaction) {
+//                    self.isShow = true
+//                }
+//            }
+//        })
+//        .fullScreenCover(isPresented: $isShow) {
+//            MainView(table: tables[0])
+//        }
     }
     
     private func addTable() {

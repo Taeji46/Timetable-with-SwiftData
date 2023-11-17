@@ -27,7 +27,7 @@ struct MainView: View {
                     }
                     .tag(1)
                 
-                Text("Setting")
+                SettingView(table: table)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Settings")
@@ -41,7 +41,7 @@ struct MainView: View {
                 case 0:
                     navigationTitle = String(localized: "Today's Lectures")
                 case 1:
-                    navigationTitle = "table.title"
+                    navigationTitle = table.title
                 case 2:
                     navigationTitle = String(localized: "Settings")
                 default:
