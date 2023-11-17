@@ -28,6 +28,19 @@ struct CourseView: View {
     
     var body: some View {
         ZStack {
+            LinearGradient(
+                gradient: (colorScheme == .dark ?
+                           Gradient(stops: [
+                            .init(color: course.getSelectedColor().opacity(0.25), location: 0.0),
+                            .init(color: course.getSelectedColor().opacity(0.25), location: 0.1),
+                            .init(color: course.getSelectedColor().opacity(0.1), location: 0.25),
+                            .init(color: course.getSelectedColor().opacity(0.0), location: 1.0)
+                           ]):
+                            Gradient(colors: [course.getSelectedColor().opacity(0.1), course.getSelectedColor().opacity(0.1)])),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             VStack(spacing: 10) {
                 ZStack {
                     Rectangle().fill(.white).frame(width: courseWidth, height: mainInfoHeight + 70).cornerRadius(12)
@@ -149,6 +162,7 @@ struct CourseView: View {
                     }
                 }
                 .frame(width: courseWidth, height: attendanceInfoHeight + 70)
+                Spacer()
             }
         }
         .navigationTitle(course.name)

@@ -3,7 +3,10 @@ import SwiftData
 
 struct WeeklyTableView: View {
     @Environment(\.modelContext) private var modelContext
-    @Binding var table: Table
+    @State var table: Table
+    @State var isShowingAddNewCourseView: Bool = false
+    @State var newCourseDay: Int = -1
+    @State var newCoursePeriod: Int = -1
     
     var body: some View {
         ZStack {
@@ -101,8 +104,8 @@ struct WeeklyTableView: View {
                                     WeeklyCourseView(course: course, courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
                                 })
                             } else {
-                                Button(action: {
-                                    addCourse(day: day, period: period)
+                                NavigationLink(destination: {
+                                    AddNewCourseView(table: table, day: day, period: period)
                                 }, label: {
                                     WeeklyEmptyCourseView(courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
                                 })
@@ -110,7 +113,6 @@ struct WeeklyTableView: View {
                         }
                     }
                 }
-                .id(UUID())
             }
         )
     }
@@ -128,7 +130,7 @@ struct WeeklyTableView: View {
     }
     
     private func addCourse(day: Int, period: Int) {
-        let newCourse = Course(name: "", classroom: "", teacher: "", day: day, period: period)
+        let newCourse = Course(name: "", classroom: "", teacher: "", day: day, period: period, colorName: "Blue")
         table.courses.append(newCourse)
     }
     

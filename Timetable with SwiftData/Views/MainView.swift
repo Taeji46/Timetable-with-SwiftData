@@ -16,7 +16,7 @@ struct MainView: View {
                     }
                     .tag(0)
                 
-                WeeklyTableView(table: $table)
+                WeeklyTableView(table: table)
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Timetable")

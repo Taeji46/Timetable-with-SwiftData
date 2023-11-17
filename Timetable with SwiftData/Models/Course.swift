@@ -12,14 +12,14 @@ final class Course {
     var attendanceRecords: [Attendance]
     var colorName: String
     
-    init(name: String, classroom: String, teacher: String, day: Int, period: Int) {
+    init(name: String, classroom: String, teacher: String, day: Int, period: Int, colorName: String) {
         self.name = name
         self.classroom = classroom
         self.teacher = teacher
         self.day = day
         self.period = period
         attendanceRecords = []
-        colorName = "Blue"
+        self.colorName = colorName
     }
     
     func isCourseEmpty() -> Bool {

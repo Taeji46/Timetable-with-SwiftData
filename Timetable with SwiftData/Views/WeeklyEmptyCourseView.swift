@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 struct WeeklyEmptyCourseView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme

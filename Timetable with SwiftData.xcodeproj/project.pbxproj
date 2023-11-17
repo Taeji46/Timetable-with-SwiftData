@@ -25,6 +25,7 @@
 		F0364CA12B07E67100401B45 /* SelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA02B07E67100401B45 /* SelectTableView.swift */; };
 		F0364CA32B07E8D700401B45 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA22B07E8D700401B45 /* WelcomeView.swift */; };
 		F0364CA52B07EDE300401B45 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA42B07EDE300401B45 /* SettingView.swift */; };
+		F0364CA72B0814D400401B45 /* AddNewCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA62B0814D400401B45 /* AddNewCourseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		F0364CA02B07E67100401B45 /* SelectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTableView.swift; sourceTree = "<group>"; };
 		F0364CA22B07E8D700401B45 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F0364CA42B07EDE300401B45 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		F0364CA62B0814D400401B45 /* AddNewCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCourseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				F0364C252B06550000401B45 /* WeeklyTableView.swift */,
 				F0364C232B06548800401B45 /* WeeklyCourseView.swift */,
 				F0364C8E2B0755D200401B45 /* WeeklyEmptyCourseView.swift */,
+				F0364CA62B0814D400401B45 /* AddNewCourseView.swift */,
 				F0364C902B07579F00401B45 /* CourseView.swift */,
 				F0364C922B0757FD00401B45 /* CourseEditView.swift */,
 				F0364C982B076FF400401B45 /* AttendanceRecordView.swift */,
@@ -197,6 +200,7 @@
 			files = (
 				F0364C972B076D1200401B45 /* Attendance.swift in Sources */,
 				F0364C0B2B06512300401B45 /* ContentView.swift in Sources */,
+				F0364CA72B0814D400401B45 /* AddNewCourseView.swift in Sources */,
 				F0364C912B07579F00401B45 /* CourseView.swift in Sources */,
 				F0364CA12B07E67100401B45 /* SelectTableView.swift in Sources */,
 				F0364C8F2B0755D200401B45 /* WeeklyEmptyCourseView.swift in Sources */,
