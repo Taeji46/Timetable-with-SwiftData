@@ -9,6 +9,7 @@ final class Table {
     var numOfDays: Int
     var numOfPeriods: Int
     var courses: [Course]
+    var periods: [Period]
     
     init(title: String, numOfDays: Int, numOfPeriods: Int) {
         self.title = title
@@ -16,6 +17,7 @@ final class Table {
         self.numOfDays = numOfDays
         self.numOfPeriods = numOfPeriods
         courses = []
+        periods = (0..<10).map { Period(index: $0) }
     }
     
     func getSelectedColor() -> Color {
