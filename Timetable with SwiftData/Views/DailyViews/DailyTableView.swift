@@ -38,11 +38,7 @@ struct DailyTableView: View {
                 ForEach(0..<table.numOfPeriods, id: \.self) { period in
                     if let course = table.courses.first(where: { $0.day == getCurrentDayOfWeekIndex() && $0.period == period }) {
                         if currentTime < table.periods[course.period].endTime {
-                            NavigationLink(destination: {
-                                CourseView(table: table, course: course)
-                            }, label: {
-                                DailyCourseView(table: table, course: course, courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
-                            })
+                            DailyCourseView(table: table, course: course, currentTime: getCurrentTime(), courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
                         }
                     }
                 }

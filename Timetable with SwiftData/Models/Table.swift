@@ -29,8 +29,8 @@ final class Table {
         return Color.clear
     }
     
-    func isNowInLectureTime(index: Int) -> Bool { // 現在が講義時間内か
-        return periods[index].startTime <= getCurrentTime() && getCurrentTime() < periods[index].endTime
+    func isNowInLectureTime(index: Int, currentTime: Date) -> Bool { // 現在が講義時間内か
+        return periods[index].startTime <= currentTime && currentTime < periods[index].endTime
     }
     
     func isCourseExistToday() -> Bool { // 今日講義があるか

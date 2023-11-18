@@ -3,6 +3,7 @@ import SwiftData
 
 struct SettingView: View {
     @Environment(\.modelContext) private var modelContext
+    @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
     @State var table: Table
     @State var selectedColor: Color
     @State var selectedNumOfDays: Int
@@ -22,6 +23,17 @@ struct SettingView: View {
             Form {
                 Section(header: Text("Title")) {
                     TextField("Title", text: $table.title)
+                }
+                Section(header: Text("Appearance mode")) {
+                    Picker("Appearance Setting", selection: $appearanceMode) {
+                        Text("System")
+                            .tag(0)
+                        Text("Light")
+                            .tag(1)
+                        Text("Dark")
+                            .tag(2)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
                 Section(header: Text("Theme")) {
                     HStack {
@@ -121,5 +133,22 @@ struct SettingView: View {
     }
     
     func resetSetting() {
+    }
+}
+
+enum AppearanceModeSetting: Int {
+    case followSystem = 0
+    case lightMode = 1
+    case darkMode = 2
+    
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .followSystem:
+            return .none
+        case .lightMode:
+            return .light
+        case .darkMode:
+            return .dark
+        }
     }
 }

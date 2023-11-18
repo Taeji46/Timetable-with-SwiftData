@@ -3,8 +3,10 @@ import SwiftUI
 struct DailyCourseView: View {
     @State var table: Table
     @State var course: Course
+    @State var currentTime: Date
     var courseWidth: CGFloat
     var courseHeight: CGFloat
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         HStack {
@@ -13,7 +15,7 @@ struct DailyCourseView: View {
                     .fill(.white)
                     .cornerRadius(8)
                 Rectangle()
-                    .fill(table.isNowInLectureTime(index: course.period) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .cornerRadius(8)
                 
                 Text(String(course.period + 1))
@@ -29,7 +31,7 @@ struct DailyCourseView: View {
                 ZStack {
                     Rectangle().fill(.white).frame(width: courseWidth, height: courseHeight).cornerRadius(12)
                     Rectangle()
-                        .fill(table.isNowInLectureTime(index: course.period) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                         .frame(width: courseWidth, height: courseHeight)
                         .cornerRadius(12)
                     
@@ -52,6 +54,12 @@ struct DailyCourseView: View {
                 }
                 .frame(width: courseWidth, height: courseHeight)
             })
+        }
+        .onAppear {
+            currentTime = getCurrentTime()
+        }
+        .onReceive(timer) { _ in
+            currentTime = getCurrentTime()
         }
     }
     
@@ -76,11 +84,11 @@ struct DailyCourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(startTimeText + " ~ " + endTimeText)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period) ? Color.black.opacity(0.4) : Color.black)
+                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
             }
                 .frame(width: courseWidth - 20, height: 15, alignment: .leading)
@@ -94,11 +102,11 @@ struct DailyCourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(course.classroom)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period) ? Color.black.opacity(0.4) : Color.black)
+                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
             }
                 .frame(width: courseWidth - 20, height: 15, alignment: .leading)
@@ -112,11 +120,11 @@ struct DailyCourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(course.teacher)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period) ? Color.black.opacity(0.4) : Color.black)
+                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
             }
                 .frame(width: courseWidth - 20, height: 15, alignment: .leading)
