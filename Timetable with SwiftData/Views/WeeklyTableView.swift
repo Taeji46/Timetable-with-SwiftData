@@ -97,7 +97,7 @@ struct WeeklyTableView: View {
                 ForEach(0..<table.numOfDays, id: \.self) { day in
                     VStack {
                         ForEach(0..<table.numOfPeriods, id: \.self) { period in
-                            if let course = table.courses.first(where: { $0.day == day && $0.period == period }) {
+                            if let course = table.courses.first(where: { $0.day == day && $0.period.index == period }) {
                                 NavigationLink(destination: {
                                     CourseView(table: table, course: course)
                                 }, label: {
