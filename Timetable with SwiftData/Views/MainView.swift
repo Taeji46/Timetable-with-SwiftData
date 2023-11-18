@@ -9,7 +9,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             TabView(selection: $selectedTab) {
-                Text("Today")
+                DailyTableView(table: table, currentTime: getCurrentTime())
                     .tabItem {
                         Image(systemName: "sun.max")
                         Text("Today")

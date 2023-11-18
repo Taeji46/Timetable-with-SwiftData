@@ -27,6 +27,10 @@
 		F0364CA52B07EDE300401B45 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA42B07EDE300401B45 /* SettingView.swift */; };
 		F0364CA72B0814D400401B45 /* AddNewCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA62B0814D400401B45 /* AddNewCourseView.swift */; };
 		F0364CA92B08CC8000401B45 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CA82B08CC8000401B45 /* Period.swift */; };
+		F0364CAC2B08E3EA00401B45 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CAB2B08E3EA00401B45 /* DateUtils.swift */; };
+		F0364CB02B08E48600401B45 /* DailyCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CAF2B08E48600401B45 /* DailyCourseView.swift */; };
+		F0364CB22B08E49D00401B45 /* DailyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CB12B08E49D00401B45 /* DailyTableView.swift */; };
+		F0364CB52B08E4C500401B45 /* Colorful in Frameworks */ = {isa = PBXBuildFile; productRef = F0364CB42B08E4C500401B45 /* Colorful */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +55,9 @@
 		F0364CA42B07EDE300401B45 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F0364CA62B0814D400401B45 /* AddNewCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCourseView.swift; sourceTree = "<group>"; };
 		F0364CA82B08CC8000401B45 /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		F0364CAB2B08E3EA00401B45 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		F0364CAF2B08E48600401B45 /* DailyCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCourseView.swift; sourceTree = "<group>"; };
+		F0364CB12B08E49D00401B45 /* DailyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0364CB52B08E4C500401B45 /* Colorful in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +95,7 @@
 				F0364C0E2B06512600401B45 /* Assets.xcassets */,
 				F0364C1F2B0653AA00401B45 /* Views */,
 				F0364C202B0653B300401B45 /* Models */,
+				F0364CAA2B08E3CF00401B45 /* Utils */,
 				F0364C102B06512600401B45 /* Preview Content */,
 			);
 			path = "Timetable with SwiftData";
@@ -107,10 +116,8 @@
 				F0364CA22B07E8D700401B45 /* WelcomeView.swift */,
 				F0364CA02B07E67100401B45 /* SelectTableView.swift */,
 				F0364C942B0767C700401B45 /* MainView.swift */,
-				F0364C252B06550000401B45 /* WeeklyTableView.swift */,
-				F0364C232B06548800401B45 /* WeeklyCourseView.swift */,
-				F0364C8E2B0755D200401B45 /* WeeklyEmptyCourseView.swift */,
-				F0364CA62B0814D400401B45 /* AddNewCourseView.swift */,
+				F0364CAE2B08E45100401B45 /* DailyViews */,
+				F0364CAD2B08E42E00401B45 /* WeeklyViews */,
 				F0364C902B07579F00401B45 /* CourseView.swift */,
 				F0364C922B0757FD00401B45 /* CourseEditView.swift */,
 				F0364C982B076FF400401B45 /* AttendanceRecordView.swift */,
@@ -131,6 +138,34 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F0364CAA2B08E3CF00401B45 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F0364CAB2B08E3EA00401B45 /* DateUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F0364CAD2B08E42E00401B45 /* WeeklyViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0364C252B06550000401B45 /* WeeklyTableView.swift */,
+				F0364C232B06548800401B45 /* WeeklyCourseView.swift */,
+				F0364C8E2B0755D200401B45 /* WeeklyEmptyCourseView.swift */,
+				F0364CA62B0814D400401B45 /* AddNewCourseView.swift */,
+			);
+			path = WeeklyViews;
+			sourceTree = "<group>";
+		};
+		F0364CAE2B08E45100401B45 /* DailyViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0364CAF2B08E48600401B45 /* DailyCourseView.swift */,
+				F0364CB12B08E49D00401B45 /* DailyTableView.swift */,
+			);
+			path = DailyViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,6 +182,9 @@
 			dependencies = (
 			);
 			name = "Timetable with SwiftData";
+			packageProductDependencies = (
+				F0364CB42B08E4C500401B45 /* Colorful */,
+			);
 			productName = "Timetable with SwiftData";
 			productReference = F0364C052B06512300401B45 /* Timetable with SwiftData.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +213,9 @@
 				Base,
 			);
 			mainGroup = F0364BFC2B06512300401B45;
+			packageReferences = (
+				F0364CB32B08E4C500401B45 /* XCRemoteSwiftPackageReference "Colorful" */,
+			);
 			productRefGroup = F0364C062B06512300401B45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -203,6 +244,9 @@
 			files = (
 				F0364C972B076D1200401B45 /* Attendance.swift in Sources */,
 				F0364C0B2B06512300401B45 /* ContentView.swift in Sources */,
+				F0364CAC2B08E3EA00401B45 /* DateUtils.swift in Sources */,
+				F0364CB22B08E49D00401B45 /* DailyTableView.swift in Sources */,
+				F0364CB02B08E48600401B45 /* DailyCourseView.swift in Sources */,
 				F0364CA72B0814D400401B45 /* AddNewCourseView.swift in Sources */,
 				F0364C912B07579F00401B45 /* CourseView.swift in Sources */,
 				F0364CA92B08CC8000401B45 /* Period.swift in Sources */,
@@ -424,6 +468,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F0364CB32B08E4C500401B45 /* XCRemoteSwiftPackageReference "Colorful" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Lakr233/Colorful";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F0364CB42B08E4C500401B45 /* Colorful */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0364CB32B08E4C500401B45 /* XCRemoteSwiftPackageReference "Colorful" */;
+			productName = Colorful;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F0364BFD2B06512300401B45 /* Project object */;
 }
