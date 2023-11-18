@@ -26,3 +26,11 @@ func getCurrentInfoText() -> String {
     let date = Date()
     return dateFormatter.string(from: date)
 }
+
+func convertDatetoString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    let dateFormatKey =  "HH : mm"
+    let localizedFormat = NSLocalizedString(dateFormatKey, comment: "")
+    dateFormatter.dateFormat = localizedFormat
+    return dateFormatter.string(from: date)
+}

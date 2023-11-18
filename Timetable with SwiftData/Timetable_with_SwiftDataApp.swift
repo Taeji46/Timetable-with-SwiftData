@@ -9,6 +9,6 @@ struct Timetable_with_SwiftDataApp: App {
             ContentView()
                 .preferredColorScheme(AppearanceModeSetting(rawValue: appearanceMode)?.colorScheme)
         }
-        .modelContainer(for: Table.self)
+        .modelContainer(for: [Table.self, Period.self])
     }
 }

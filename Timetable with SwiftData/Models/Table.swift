@@ -30,7 +30,7 @@ final class Table {
     }
     
     func isNowInLectureTime(index: Int, currentTime: Date) -> Bool { // 現在が講義時間内か
-        return periods[index].startTime <= currentTime && currentTime < periods[index].endTime
+        return getPeriod(index: index)!.startTime <= currentTime && currentTime < getPeriod(index: index)!.endTime
     }
     
     func isCourseExistToday() -> Bool { // 今日講義があるか
@@ -41,10 +41,14 @@ final class Table {
     func isAllCourseFinishedToday() -> Bool { // 今日の講義が全て終了したか
         var isAllCourseFinished: Bool = false
         if let todaysLastPeriod = courses.filter({ $0.day == getCurrentDayOfWeekIndex() }).max(by: { $0.period < $1.period }) {
-            if periods[todaysLastPeriod.period].endTime <= getCurrentTime() {
+            if getPeriod(index: todaysLastPeriod.period)!.endTime <= getCurrentTime() {
                 isAllCourseFinished = true
             }
         }
         return isAllCourseFinished
+    }
+    
+    func getPeriod(index: Int) -> Period? {
+        return periods.first { $0.index == index }
     }
 }
