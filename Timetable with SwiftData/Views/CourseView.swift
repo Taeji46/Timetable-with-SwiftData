@@ -221,6 +221,8 @@ struct CourseView: View {
     }
     
     func timeView() -> some View {
+        let startTimeText = table.periods[course.period].getStartTimeText()
+        let endTimeText = table.periods[course.period].getEndTimeText()
         return (
             HStack {
                 Image(systemName: "clock.fill")
@@ -229,6 +231,9 @@ struct CourseView: View {
                     .frame(width: 16, height: 16)
                     .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 16)
+                Text(startTimeText + " ~ " + endTimeText)
+                                    .foregroundColor(Color.black)
+                                    .font(.system(size: 16))
             }
                 .frame(width: courseWidth - 20, height: 16, alignment: .leading)
         )

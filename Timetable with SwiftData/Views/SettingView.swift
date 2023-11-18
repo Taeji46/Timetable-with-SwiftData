@@ -68,6 +68,23 @@ struct SettingView: View {
                         table.numOfPeriods = newValue
                     }
                 }
+                Section(header: Text("Time range of periods")) {
+                    if table.periods.count > 0 { // Table削除の際のOutOfRangeエラーの回避
+                        List {
+                            ForEach(0..<table.numOfPeriods, id: \.self) { period in
+                                HStack {
+                                    Text("\(period + 1)")
+                                        .frame(width: 20)
+                                    Divider()
+                                    DatePicker("Start", selection: $table.periods[period].startTime, in: getMinStartTime(period: period)..., displayedComponents: .hourAndMinute)
+                                    Divider()
+                                    DatePicker("End", selection: $table.periods[period].endTime, in: getMinEndTime(period: period)..., displayedComponents: .hourAndMinute)
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
                 Section() {
                     Button(action: {
                         isShowingAlert = true
@@ -89,6 +106,18 @@ struct SettingView: View {
                 secondaryButton: .cancel()
             )
         }
+    }
+    
+    func getMinStartTime(period: Int) -> Date { // 設定できる開始時間の最小値
+        var minStartTime = Calendar.current.date(from: DateComponents(hour: 0, minute: 0)) ?? Date()
+        if period > 0 {
+            minStartTime = table.periods[period - 1].endTime
+        }
+        return minStartTime
+    }
+    
+    func getMinEndTime(period: Int) -> Date { // 設定できる終了時間の最小値
+        return table.periods[period].startTime
     }
     
     func resetSetting() {

@@ -8,7 +8,7 @@ final class Course {
     var classroom: String
     var teacher: String
     var day: Int
-    var period: Period
+    var period: Int
     var attendanceRecords: [Attendance]
     var colorName: String
     
@@ -17,7 +17,7 @@ final class Course {
         self.classroom = classroom
         self.teacher = teacher
         self.day = day
-        self.period = Period(index: period)
+        self.period = period
         attendanceRecords = []
         self.colorName = colorName
     }
