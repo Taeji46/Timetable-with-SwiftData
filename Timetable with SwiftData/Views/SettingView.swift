@@ -105,6 +105,26 @@ struct SettingView: View {
                     }
                 }
                 Section() {
+                    if !table.isAllCoursesNotificationScheduled(value: true) {
+                        Button(action: {
+                            table.setAllCoursesNotification(value: true)
+                            table.updateNotificationSetting()
+                        }, label: {
+                            Text("Turn on notifications for all courses")
+                                .foregroundColor(.green)
+                        })
+                    }
+                    if !table.isAllCoursesNotificationScheduled(value: false) {
+                        Button(action: {
+                            table.setAllCoursesNotification(value: false)
+                            table.updateNotificationSetting()
+                        }, label: {
+                            Text("Turn off notifications for all courses")
+                                .foregroundColor(.red)
+                        })
+                    }
+                }
+                Section() {
                     Button(action: {
                         isShowingAlert = true
                     }) {

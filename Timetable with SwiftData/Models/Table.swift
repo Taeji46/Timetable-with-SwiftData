@@ -11,7 +11,6 @@ final class Table {
     var courses: [Course]
     var periods: [Period]
     var notificationTime: Int
-    var isAllCoursesNotificationOn: Bool
     
     init(title: String, numOfDays: Int, numOfPeriods: Int) {
         self.title = title
@@ -21,7 +20,6 @@ final class Table {
         courses = []
         periods = (0..<10).map { Period(index: $0) }
         notificationTime = 15
-        isAllCoursesNotificationOn = true
     }
     
     func getSelectedColor() -> Color {
@@ -67,11 +65,7 @@ final class Table {
         }
         return isAllCourseFinished
     }
-    
-    func test(course: Course) {
-        print("")
-    }
-    
+
     func updateNotificationSetting() { // isNotificationScheduledに応じて通知を設定
         for course in courses {
             if course.isNotificationScheduled {
@@ -80,5 +74,17 @@ final class Table {
                 cancelScheduledNotification(course: course)
             }
         }
+    }
+    
+    func isAllCoursesNotificationScheduled(value: Bool) -> Bool {
+        if value {
+            return courses.allSatisfy { $0.isNotificationScheduled }
+        } else {
+            return !courses.contains { $0.isNotificationScheduled }
+        }
+    }
+    
+    func setAllCoursesNotification(value: Bool) {
+        courses.forEach { $0.isNotificationScheduled = value }
     }
 }
