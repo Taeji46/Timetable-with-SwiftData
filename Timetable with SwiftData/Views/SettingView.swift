@@ -15,7 +15,7 @@ struct SettingView: View {
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("Title")) {
+                Section(header: Text("Title of timetable")) {
                     TextField("Title", text: $table.title)
                 }
                 Section(header: Text("Appearance mode")) {
@@ -70,15 +70,15 @@ struct SettingView: View {
                 Section(header: Text("Time range of periods")) {
                     if table.periods.count > 0 { // Table削除の際のOutOfRangeエラーの回避
                         List {
-                            ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in
+                            ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
                                 if period.index < table.numOfPeriods {
                                     HStack {
                                         Text("\(period.index + 1)")
                                             .frame(width: 20)
                                         Divider()
-                                        DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, displayedComponents: .hourAndMinute)
+                                        DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, in: getMinStartTime(period: period.index)..., displayedComponents: .hourAndMinute)
                                         Divider()
-                                        DatePicker("End", selection: $table.periods[table.periods.firstIndex(of: period)!].endTime, displayedComponents: .hourAndMinute)
+                                        DatePicker("End", selection: $table.periods[table.periods.firstIndex(of: period)!].endTime, in: getMinEndTime(period: period.index)..., displayedComponents: .hourAndMinute)
                                     }
                                 }
                             }
@@ -89,7 +89,7 @@ struct SettingView: View {
                     Button(action: {
                         isShowingAlert = true
                     }) {
-                        Text("Reset the timetable")
+                        Text("Reset the Timetable")
                             .foregroundColor(.red)
                     }
                 }
@@ -98,7 +98,7 @@ struct SettingView: View {
         .alert(isPresented: $isShowingAlert) {
             Alert(
                 title: Text("Confirm Reset"),
-                message: Text("Are you sure you want to reset this timetable?"),
+                message: Text("Are you sure you want to delete this timetable?"),
                 primaryButton: .destructive(Text("Reset")) {
                     modelContext.delete(table)
                     resetSetting()

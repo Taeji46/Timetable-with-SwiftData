@@ -58,11 +58,11 @@ struct AddNewCourseView: View {
                     addCourse()
                     dismiss()
                 }, label: {
-                    Text("Add a new course")
+                    Text("Add to Timetable")
                 }).disabled(name.isEmpty)
             }
         }
-        .navigationBarTitle("Add a new course")
+        .navigationBarTitle("Add a New Course")
     }
     
     private func addCourse() {

@@ -13,7 +13,7 @@ struct WelcomeView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Title of Timetable")) {
+                Section(header: Text("Title of timetable")) {
                     TextField("Title of Timetable", text: $title)
                 }
                 
@@ -42,7 +42,7 @@ struct WelcomeView: View {
                     Button(action: {
                         addTable()
                     }, label: {
-                        Text("Create a new timetable")
+                        Text("Create a New Timetable")
                     })
                 }
             }

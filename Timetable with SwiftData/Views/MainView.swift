@@ -30,7 +30,7 @@ struct MainView: View {
                     }
                     .tag(2)
             }
-            .accentColor(.blue)
+            .accentColor(table.getSelectedColor())
             .navigationTitle(navigationTitle)
             .onChange(of: selectedTab, initial: true) { oldTab, newTab in
                 switch newTab {

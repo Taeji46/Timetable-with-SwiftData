@@ -1,0 +1,72 @@
+"MON" = "MON";
+"TUE" = "TUE";
+"WED" = "WED";
+"THU" = "THU";
+"FRI" = "FRI";
+"SAT" = "SAT";
+"SUN" = "SUN";
+"currentInfoText" = "EEEE, d MMMM";
+"st period" = "st period";
+"nd period" = "nd period";
+"rd period" = "rd period";
+"th period" = "th period";
+
+"Done" = "Done";
+"Details" = "Details";
+
+"Time" = "Time";
+
+/* TableView */
+"Today's Lectures" = "Today's Lectures";
+"Today" = "Today";
+"TimeTable" = "TimeTable";
+"Settings" = "Settings";
+
+/* DailyTableView */
+"No lecture today." = "No lecture today.";
+"All lectures of today were finished." = "All lectures of today were finished.";
+
+/* CourseEditView */
+"Course Name" = "Course Name";
+"Classroom" = "Classroom";
+"Teacher" = "Teacher";
+"Color" = "Color";
+"Notification" = "Notification";
+"Delete the course" = "Notification";
+"Confirm Deletion" = "Confirm Deletion";
+"Are you sure you want to delete this course?" = "Are you sure you want to delete this course?";
+"Delete" = "Delete";
+
+/* SettingView */
+"Title of timetable" = "Title of timetable";
+"Appearance mode" = "Appearance mode";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+"Theme" = "Theme";
+"Days of the Week" = "Days of the Week";
+"Number of periods" = "Number of periods";
+"Time range of periods" = "Time range of periods";
+"Start" = "Start";
+"End" = "End";
+"Notification time (minutes before)" = "Notification time (minutes before)";
+"Turn on notifications for all courses" = "Turn on notifications for all courses";
+"Turn off notifications for all courses" = "Turn off notifications for all courses";
+"Reset the Timetable" = "Reset the Timetable";
+"Confirm Reset" = "Confirm Reset";
+"Are you sure you want to reset this timetable?" = "Are you sure you want to reset this timetable?";
+"Reset" = "Reset";
+
+/* Attendance */
+"Attendance Status" = "Attendance Status";
+"Attend" = "Attend";
+"Absent" = "Absent";
+"Late" = "Late";
+"Canceled" = "Canceled";
+
+/* AddNewCourseView */
+"Add a New Course" = "Add a New Course";
+"Add to Timetable" = "Add to Timetable";
+
+/* WelcomeView */
+"Create a New Timetable" = "Create a New Timetable";
