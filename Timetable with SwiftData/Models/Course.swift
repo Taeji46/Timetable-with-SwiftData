@@ -24,10 +24,6 @@ final class Course {
         self.isNotificationScheduled = false
     }
     
-    func isCourseEmpty() -> Bool {
-        return name.isEmpty && classroom.isEmpty && teacher.isEmpty
-    }
-    
     func getSelectedColor() -> Color { // 講義の色を取得
         for colorTemplate in courseColorTemplates {
             if colorTemplate.name == colorName {
@@ -37,7 +33,7 @@ final class Course {
         return Color.clear
     }
     
-    func getPeriodInfoText() -> String { // 講義が何限目か
+    func getPeriodInfoText() -> String { // 講義が何限目かをテキストで取得
         var periodInfoText: String
         let periodNum = period + 1
         switch(periodNum) {

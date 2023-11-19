@@ -36,20 +36,18 @@ struct DailyCourseView: View {
                         .cornerRadius(12)
                     
                     VStack {
-                        if !course.isCourseEmpty() {
-                            titleView()
-                            ZStack {
-                                Rectangle()
-                                    .fill(Color.white.opacity(0.75))
-                                    .cornerRadius(12)
-                                VStack {
-                                    timeView()
-                                    classroomView()
-                                    teacherView()
-                                }
+                        titleView()
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.white.opacity(0.75))
+                                .cornerRadius(12)
+                            VStack {
+                                timeView()
+                                classroomView()
+                                teacherView()
                             }
-                            .frame(width: courseWidth - 20, height: courseHeight * 0.6)
                         }
+                        .frame(width: courseWidth - 20, height: courseHeight * 0.6)
                     }
                 }
                 .frame(width: courseWidth, height: courseHeight)

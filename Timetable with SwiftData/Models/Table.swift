@@ -31,8 +31,7 @@ final class Table {
         return Color.clear
     }
     
-    
-    func getPeriod(index: Int) -> Period? {
+    func getPeriod(index: Int) -> Period? { // periodsからindex限の情報を取得
         return periods.first { $0.index == index }
     }
     
@@ -76,7 +75,7 @@ final class Table {
         }
     }
     
-    func isAllCoursesNotificationScheduled(value: Bool) -> Bool {
+    func isAllCoursesNotificationScheduled(value: Bool) -> Bool { // courses[].isNotificationScheduledがすべてvalueかどうか
         if value {
             return courses.allSatisfy { $0.isNotificationScheduled }
         } else {
