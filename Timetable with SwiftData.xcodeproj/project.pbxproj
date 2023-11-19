@@ -32,6 +32,7 @@
 		F0364CB22B08E49D00401B45 /* DailyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CB12B08E49D00401B45 /* DailyTableView.swift */; };
 		F0364CB52B08E4C500401B45 /* Colorful in Frameworks */ = {isa = PBXBuildFile; productRef = F0364CB42B08E4C500401B45 /* Colorful */; };
 		F08E1EF52B0940C8006F0D0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08E1EF72B0940C8006F0D0F /* Localizable.strings */; };
+		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		F0364CB12B08E49D00401B45 /* DailyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableView.swift; sourceTree = "<group>"; };
 		F08E1EF62B0940C8006F0D0F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF82B0940CA006F0D0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseNotificationUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				F0364CAB2B08E3EA00401B45 /* DateUtils.swift */,
+				F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				F0364C1C2B06528E00401B45 /* Course.swift in Sources */,
 				F0364C932B0757FD00401B45 /* CourseEditView.swift in Sources */,
 				F0364C192B06517B00401B45 /* Table.swift in Sources */,
+				F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */,
 				F0364C9B2B07945B00401B45 /* ColorTemplate.swift in Sources */,
 				F0364CA32B07E8D700401B45 /* WelcomeView.swift in Sources */,
 				F0364C262B06550000401B45 /* WeeklyTableView.swift in Sources */,

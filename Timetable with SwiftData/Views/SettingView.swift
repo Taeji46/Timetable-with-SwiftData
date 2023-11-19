@@ -77,12 +77,31 @@ struct SettingView: View {
                                             .frame(width: 20)
                                         Divider()
                                         DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, in: getMinStartTime(period: period.index)..., displayedComponents: .hourAndMinute)
+                                            .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].startTime.wrappedValue) {
+                                                table.updateNotificationSetting()
+                                            }
                                         Divider()
                                         DatePicker("End", selection: $table.periods[table.periods.firstIndex(of: period)!].endTime, in: getMinEndTime(period: period.index)..., displayedComponents: .hourAndMinute)
+                                            .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].endTime.wrappedValue) {
+                                                table.updateNotificationSetting()
+                                            }
                                     }
                                 }
                             }
                         }
+                    }
+                }
+                Section(header: Text("Notification time (minutes before)")) {
+                    Picker("", selection: $table.notificationTime) {
+                        Text("5").tag(5)
+                        Text("10").tag(10)
+                        Text("15").tag(15)
+                        Text("20").tag(20)
+                        Text("30").tag(30)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .onChange(of: $table.notificationTime.wrappedValue) {
+                        table.updateNotificationSetting()
                     }
                 }
                 Section() {

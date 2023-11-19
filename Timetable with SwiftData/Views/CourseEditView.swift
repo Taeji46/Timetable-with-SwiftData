@@ -6,18 +6,28 @@ struct CourseEditView: View {
     @State var table: Table
     @State var course: Course
     @State var selectedColor: Color
+    @State var isShowingAlert = false
     
     var body: some View {
         VStack {
             Form {
                 Section(header: Text("Course Name")) {
                     TextField("Course Name", text: $course.name)
+                        .onChange(of: course.name) {
+                            table.updateNotificationSetting()
+                        }
                 }
                 Section(header: Text("Classroom")) {
                     TextField("Classroom", text: $course.classroom)
+                        .onChange(of: course.classroom) {
+                            table.updateNotificationSetting()
+                        }
                 }
                 Section(header: Text("Teacher")) {
                     TextField("Teacher", text: $course.teacher)
+                        .onChange(of: course.teacher) {
+                            table.updateNotificationSetting()
+                        }
                 }
                 Section(header: Text("Color")) {
                     HStack {
@@ -37,6 +47,20 @@ struct CourseEditView: View {
                             }
                             .padding(.horizontal, 5)
                         }
+                    }
+                }
+                Section() {
+                    Toggle("Notification", isOn: $course.isNotificationScheduled)
+                        .onChange(of: course.isNotificationScheduled) {
+                            table.updateNotificationSetting()
+                        }
+                }
+                Section() {
+                    Button(action: {
+                        isShowingAlert = true
+                    }) {
+                        Text("Delete the course")
+                            .foregroundColor(.red)
                     }
                 }
             }

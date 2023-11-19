@@ -10,6 +10,8 @@ final class Table {
     var numOfPeriods: Int
     var courses: [Course]
     var periods: [Period]
+    var notificationTime: Int
+    var isAllCoursesNotificationOn: Bool
     
     init(title: String, numOfDays: Int, numOfPeriods: Int) {
         self.title = title
@@ -18,6 +20,8 @@ final class Table {
         self.numOfPeriods = numOfPeriods
         courses = []
         periods = (0..<10).map { Period(index: $0) }
+        notificationTime = 15
+        isAllCoursesNotificationOn = true
     }
     
     func getSelectedColor() -> Color {
@@ -29,14 +33,30 @@ final class Table {
         return Color.clear
     }
     
+    
+    func getPeriod(index: Int) -> Period? {
+        return periods.first { $0.index == index }
+    }
+    
     func isNowInLectureTime(index: Int, currentTime: Date) -> Bool { // 現在が講義時間内か
         return getPeriod(index: index)!.startTime <= currentTime && currentTime < getPeriod(index: index)!.endTime
+    }
+    
+    func getStartTimeText(index: Int) -> String { // 講義開始時刻 H:mm
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "H:mm"
+        return dateFormatter.string(from: getPeriod(index: index)!.startTime)
+    }
+    
+    func getEndTimeText(index: Int) -> String { // 講義終了時刻 H:mm
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "H:mm"
+        return dateFormatter.string(from: getPeriod(index: index)!.endTime)
     }
     
     func isCourseExistToday() -> Bool { // 今日講義があるか
         return courses.contains { $0.day == getCurrentDayOfWeekIndex() }
     }
-    
     
     func isAllCourseFinishedToday() -> Bool { // 今日の講義が全て終了したか
         var isAllCourseFinished: Bool = false
@@ -48,7 +68,17 @@ final class Table {
         return isAllCourseFinished
     }
     
-    func getPeriod(index: Int) -> Period? {
-        return periods.first { $0.index == index }
+    func test(course: Course) {
+        print("")
+    }
+    
+    func updateNotificationSetting() { // isNotificationScheduledに応じて通知を設定
+        for course in courses {
+            if course.isNotificationScheduled {
+                scheduleWeeklyNotification(table: self, course: course)
+            } else {
+                cancelScheduledNotification(course: course)
+            }
+        }
     }
 }
