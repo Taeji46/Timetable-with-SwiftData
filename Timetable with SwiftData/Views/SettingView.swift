@@ -139,8 +139,9 @@ struct SettingView: View {
                 title: Text("Confirm Reset"),
                 message: Text("Are you sure you want to delete this timetable?"),
                 primaryButton: .destructive(Text("Reset")) {
+                    table.setAllCoursesNotification(value: false)
+                    table.updateNotificationSetting()
                     modelContext.delete(table)
-                    resetSetting()
                 },
                 secondaryButton: .cancel()
             )
@@ -157,9 +158,6 @@ struct SettingView: View {
     
     func getMinEndTime(period: Int) -> Date { // 設定できる終了時間の最小値
         return table.getPeriod(index: period)!.startTime
-    }
-    
-    func resetSetting() {
     }
 }
 

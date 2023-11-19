@@ -19,7 +19,7 @@ final class Table {
         self.numOfPeriods = numOfPeriods
         courses = []
         periods = (0..<10).map { Period(index: $0) }
-        notificationTime = 15
+        notificationTime = 5
     }
     
     func getSelectedColor() -> Color {

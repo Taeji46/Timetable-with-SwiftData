@@ -22,7 +22,7 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
             if let error = error {
                 print("Failed to schedule notification: \(error.localizedDescription)")
             } else {
-                print("Notification scheduled: " + createNotificationIdentifier(course: course) + ", " + String("Name") + ": " + course.name + ", " + String("Classroom") + ": " + course.classroom + ", " + String("Time") + ": " + table.getPeriod(index: course.period)!.getStartTimeText() + " ~ " + table.getPeriod(index: course.period)!.getEndTimeText() + ", " + String("Before") + ": " + String(table.notificationTime))
+                print("Notification ON: " + createNotificationIdentifier(course: course) + ", " + String("Name") + ": " + course.name + ", " + String("Classroom") + ": " + course.classroom + ", " + String("Time") + ": " + table.getPeriod(index: course.period)!.getStartTimeText() + " ~ " + table.getPeriod(index: course.period)!.getEndTimeText() + ", " + String("Before") + ": " + String(table.notificationTime))
             }
         }
     } else {
@@ -33,7 +33,7 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
 func cancelScheduledNotification(course: Course) {
     let center = UNUserNotificationCenter.current()
     center.removePendingNotificationRequests(withIdentifiers: [createNotificationIdentifier(course: course)])
-    print("Notification deleted: " + createNotificationIdentifier(course: course))
+    print("Notification OFF: " + createNotificationIdentifier(course: course))
 }
 
 func createNotificationIdentifier(course: Course) -> String {
