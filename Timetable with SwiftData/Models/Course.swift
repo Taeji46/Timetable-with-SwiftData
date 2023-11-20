@@ -3,13 +3,15 @@ import SwiftData
 
 @Model
 final class Course {
+    var table: Table? // parent
+    
     var id = UUID()
     var name: String
     var classroom: String
     var teacher: String
     var day: Int
     var period: Int
-    var attendanceRecords: [Attendance]
+    @Relationship(deleteRule: .cascade, inverse: \Attendance.course) var attendanceRecords: [Attendance]
     var colorName: String
     var isNotificationScheduled: Bool
     

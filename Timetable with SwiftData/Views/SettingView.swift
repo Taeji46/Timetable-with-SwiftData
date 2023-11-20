@@ -151,13 +151,13 @@ struct SettingView: View {
     func getMinStartTime(period: Int) -> Date { // 設定できる開始時間の最小値
         var minStartTime = Calendar.current.date(from: DateComponents(hour: 0, minute: 0)) ?? Date()
         if period > 0 {
-            minStartTime = table.getPeriod(index: period - 1)!.endTime
+            minStartTime = table.getPeriod(index: period - 1).endTime
         }
         return minStartTime
     }
     
     func getMinEndTime(period: Int) -> Date { // 設定できる終了時間の最小値
-        return table.getPeriod(index: period)!.startTime
+        return table.getPeriod(index: period).startTime
     }
 }
 

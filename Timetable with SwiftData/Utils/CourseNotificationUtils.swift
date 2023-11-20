@@ -4,7 +4,7 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
     var dateComponents = DateComponents()
     dateComponents.weekday = convertCourseDayToDCFormat(day: course.day)
     
-    let startTime = Calendar.current.date(byAdding: .minute, value: -table.notificationTime, to: table.getPeriod(index: course.period)!.startTime) ?? Date()
+    let startTime = Calendar.current.date(byAdding: .minute, value: -table.notificationTime, to: table.getPeriod(index: course.period).startTime) ?? Date()
     dateComponents.hour = Calendar.current.component(.hour, from: startTime)
     dateComponents.minute = Calendar.current.component(.minute, from: startTime)
     
@@ -12,7 +12,7 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
     if let nextWednesday = calendar.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) {
         let content = UNMutableNotificationContent()
         content.title = course.getPeriodInfoText() + ": " + course.name
-        content.body = String(localized: "Classroom") + ": " + course.classroom + "\n" + String(localized: "Time") + ": " + table.getPeriod(index: course.period)!.getStartTimeText() + " ~ " + table.getPeriod(index: course.period)!.getEndTimeText()
+        content.body = String(localized: "Classroom") + ": " + course.classroom + "\n" + String(localized: "Time") + ": " + table.getPeriod(index: course.period).getStartTimeText() + " ~ " + table.getPeriod(index: course.period).getEndTimeText()
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.weekday, .hour, .minute], from: nextWednesday), repeats: true)
         
@@ -22,7 +22,7 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
             if let error = error {
                 print("Failed to schedule notification: \(error.localizedDescription)")
             } else {
-                print("Notification ON: " + createNotificationIdentifier(course: course) + ", " + String("Name") + ": " + course.name + ", " + String("Classroom") + ": " + course.classroom + ", " + String("Time") + ": " + table.getPeriod(index: course.period)!.getStartTimeText() + " ~ " + table.getPeriod(index: course.period)!.getEndTimeText() + ", " + String("Before") + ": " + String(table.notificationTime))
+                print("Notification ON: " + createNotificationIdentifier(course: course) + ", " + String("Name") + ": " + course.name + ", " + String("Classroom") + ": " + course.classroom + ", " + String("Time") + ": " + table.getPeriod(index: course.period).getStartTimeText() + " ~ " + table.getPeriod(index: course.period).getEndTimeText() + ", " + String("Before") + ": " + String(table.notificationTime))
             }
         }
     } else {

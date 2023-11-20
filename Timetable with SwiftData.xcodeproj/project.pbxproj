@@ -137,9 +137,9 @@
 			children = (
 				F0364C182B06517B00401B45 /* Table.swift */,
 				F0364C1B2B06528E00401B45 /* Course.swift */,
+				F0364CA82B08CC8000401B45 /* Period.swift */,
 				F0364C962B076D1200401B45 /* Attendance.swift */,
 				F0364C9A2B07945B00401B45 /* ColorTemplate.swift */,
-				F0364CA82B08CC8000401B45 /* Period.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

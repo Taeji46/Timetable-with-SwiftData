@@ -3,6 +3,8 @@ import SwiftData
 
 @Model
 final class Period {
+    var table: Table? // parent
+    
     var id = UUID()
     var index: Int
     var startTime: Date

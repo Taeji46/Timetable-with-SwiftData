@@ -14,6 +14,8 @@ enum AttendanceStatus: String, Codable {
 
 @Model
 final class Attendance {
+    var course: Course? // parent
+    
     var id = UUID()
     var status: AttendanceStatus
     var date: Date

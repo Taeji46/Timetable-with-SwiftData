@@ -8,8 +8,8 @@ final class Table {
     var colorName: String
     var numOfDays: Int
     var numOfPeriods: Int
-    var courses: [Course]
-    var periods: [Period]
+    @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
+    @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
     var notificationTime: Int
     
     init(title: String, numOfDays: Int, numOfPeriods: Int) {
@@ -31,24 +31,24 @@ final class Table {
         return Color.clear
     }
     
-    func getPeriod(index: Int) -> Period? { // periodsからindex限の情報を取得
-        return periods.first { $0.index == index }
+    func getPeriod(index: Int) -> Period { // periodsからindex限の情報を取得
+        return periods.first { $0.index == index } ?? Period(index: -1)
     }
     
     func isNowInLectureTime(index: Int, currentTime: Date) -> Bool { // 現在が講義時間内か
-        return getPeriod(index: index)!.startTime <= currentTime && currentTime < getPeriod(index: index)!.endTime
+        return getPeriod(index: index).startTime <= currentTime && currentTime < getPeriod(index: index).endTime
     }
     
     func getStartTimeText(index: Int) -> String { // 講義開始時刻 H:mm
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "H:mm"
-        return dateFormatter.string(from: getPeriod(index: index)!.startTime)
+        return dateFormatter.string(from: getPeriod(index: index).startTime)
     }
     
     func getEndTimeText(index: Int) -> String { // 講義終了時刻 H:mm
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "H:mm"
-        return dateFormatter.string(from: getPeriod(index: index)!.endTime)
+        return dateFormatter.string(from: getPeriod(index: index).endTime)
     }
     
     func isCourseExistToday() -> Bool { // 今日講義があるか
@@ -58,7 +58,7 @@ final class Table {
     func isAllCourseFinishedToday() -> Bool { // 今日の講義が全て終了したか
         var isAllCourseFinished: Bool = false
         if let todaysLastPeriod = courses.filter({ $0.day == getCurrentDayOfWeekIndex() }).max(by: { $0.period < $1.period }) {
-            if getPeriod(index: todaysLastPeriod.period)!.endTime <= getCurrentTime() {
+            if getPeriod(index: todaysLastPeriod.period).endTime <= getCurrentTime() {
                 isAllCourseFinished = true
             }
         }

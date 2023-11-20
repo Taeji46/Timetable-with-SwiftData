@@ -5,7 +5,7 @@ struct AttendanceRecordView: View {
     
     var body: some View {
         List {
-            ForEach(course.attendanceRecords.reversed(), id: \.id) { attendance in
+            ForEach(course.attendanceRecords.sorted { $0.date > $1.date }, id: \.id) { attendance in
                 VStack(alignment: .leading) {
                     HStack {
                         Text(formattedDate(attendance.date))
