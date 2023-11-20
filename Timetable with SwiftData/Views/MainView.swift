@@ -44,6 +44,9 @@ struct MainView: View {
                     navigationTitle = String(localized: "Today's Lectures")
                 }
             }
+            .onAppear() {
+                table.initPeriods()
+            }
         }
         .navigationViewStyle(.stack)
     }

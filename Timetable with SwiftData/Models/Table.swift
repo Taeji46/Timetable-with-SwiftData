@@ -18,8 +18,14 @@ final class Table {
         self.numOfDays = numOfDays
         self.numOfPeriods = numOfPeriods
         courses = []
-        periods = (0..<10).map { Period(index: $0) }
+        periods = []
         notificationTime = 5
+    }
+    
+    func initPeriods() {
+        if periods.count == 0 {
+            periods = (0..<10).map { Period(index: $0) }
+        }
     }
     
     func getSelectedColor() -> Color {
@@ -57,8 +63,8 @@ final class Table {
     
     func isAllCourseFinishedToday() -> Bool { // 今日の講義が全て終了したか
         var isAllCourseFinished: Bool = false
-        if let todaysLastPeriod = courses.filter({ $0.day == getCurrentDayOfWeekIndex() }).max(by: { $0.period < $1.period }) {
-            if getPeriod(index: todaysLastPeriod.period).endTime <= getCurrentTime() {
+        if let lastPeriodOfToday = courses.filter({ $0.day == getCurrentDayOfWeekIndex() }).max(by: { $0.period < $1.period }) {
+            if getPeriod(index: lastPeriodOfToday.period).endTime <= getCurrentTime() {
                 isAllCourseFinished = true
             }
         }

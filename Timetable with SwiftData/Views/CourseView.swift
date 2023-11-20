@@ -13,6 +13,7 @@ struct CourseView: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) private var modelContext
     
     init(table: Table, course: Course) {
         self._table = State(initialValue: table)
@@ -198,6 +199,7 @@ struct CourseView: View {
                 primaryButton: .destructive(Text("Delete")) {
                     cancelScheduledNotification(course: course)
                     table.courses.removeAll(where: {$0 == course})
+                    try? modelContext.save()
                     presentationMode.wrappedValue.dismiss()
                 },
                 secondaryButton: .cancel()

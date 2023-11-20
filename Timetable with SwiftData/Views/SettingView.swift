@@ -68,24 +68,22 @@ struct SettingView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 Section(header: Text("Time range of periods")) {
-                    if table.periods.count > 0 { // Table削除の際のOutOfRangeエラーの回避
-                        List {
-                            ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
-                                if period.index < table.numOfPeriods {
-                                    HStack {
-                                        Text("\(period.index + 1)")
-                                            .frame(width: 20)
-                                        Divider()
-                                        DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, in: getMinStartTime(period: period.index)..., displayedComponents: .hourAndMinute)
-                                            .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].startTime.wrappedValue) {
-                                                table.updateNotificationSetting()
-                                            }
-                                        Divider()
-                                        DatePicker("End", selection: $table.periods[table.periods.firstIndex(of: period)!].endTime, in: getMinEndTime(period: period.index)..., displayedComponents: .hourAndMinute)
-                                            .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].endTime.wrappedValue) {
-                                                table.updateNotificationSetting()
-                                            }
-                                    }
+                    List {
+                        ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
+                            if period.index < table.numOfPeriods {
+                                HStack {
+                                    Text("\(period.index + 1)")
+                                        .frame(width: 20)
+                                    Divider()
+                                    DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, in: getMinStartTime(period: period.index)..., displayedComponents: .hourAndMinute)
+                                        .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].startTime.wrappedValue) {
+                                            table.updateNotificationSetting()
+                                        }
+                                    Divider()
+                                    DatePicker("End", selection: $table.periods[table.periods.firstIndex(of: period)!].endTime, in: getMinEndTime(period: period.index)..., displayedComponents: .hourAndMinute)
+                                        .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].endTime.wrappedValue) {
+                                            table.updateNotificationSetting()
+                                        }
                                 }
                             }
                         }
@@ -142,6 +140,7 @@ struct SettingView: View {
                     table.setAllCoursesNotification(value: false)
                     table.updateNotificationSetting()
                     modelContext.delete(table)
+                    try? modelContext.save()
                 },
                 secondaryButton: .cancel()
             )
