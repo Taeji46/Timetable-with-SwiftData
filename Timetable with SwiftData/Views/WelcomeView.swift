@@ -3,6 +3,7 @@ import SwiftData
 
 struct WelcomeView: View {
     @Environment(\.modelContext) private var modelContext
+    @Binding var selectedTableId: String
     @Query private var tables: [Table]
     
     @State var title: String = "TIMETABLE"
@@ -53,5 +54,6 @@ struct WelcomeView: View {
     private func addTable() {
         let newTable = Table(title: title, numOfDays: selectedNumOfDays, numOfPeriods: selectedNumOfPeriods)
         modelContext.insert(newTable)
+        selectedTableId = tables[0].id.uuidString
     }
 }

@@ -2,14 +2,21 @@ import SwiftUI
 import SwiftData
 
 struct SettingView: View {
+    enum AlertType {
+        case showTableList
+        case deleteTable
+    }
+    
     @Environment(\.modelContext) private var modelContext
     @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
+    @Binding var selectedTableId: String
     @State var table: Table
-    @State var isShowingAlert: Bool
+    @State var isShowingAlert: Bool = false
+    @State var alertType: AlertType = .showTableList
     
-    init(table: Table) {
+    init(table: Table, selectedTableId: Binding<String>) {
+        _selectedTableId = selectedTableId
         self.table = table
-        isShowingAlert = false
     }
     
     var body: some View {
@@ -123,15 +130,18 @@ struct SettingView: View {
                     }
                 }
                 Section() {
-                    NavigationLink(destination: {
-                        SelectTableView()
-                    }, label: {
-                        Text("List of Timetable")
-                    })
+                    Button(action: {
+                        alertType = .showTableList
+                        isShowingAlert.toggle()
+                    }) {
+                        Text("時間割表を変更")
+                            .foregroundColor(.blue)
+                    }
                 }
                 Section() {
                     Button(action: {
-                        isShowingAlert = true
+                        alertType = .deleteTable
+                        isShowingAlert.toggle()
                     }) {
                         Text("Reset the Timetable")
                             .foregroundColor(.red)
@@ -140,17 +150,32 @@ struct SettingView: View {
             }
         }
         .alert(isPresented: $isShowingAlert) {
-            Alert(
-                title: Text("Confirm Reset"),
-                message: Text("Are you sure you want to delete this timetable?"),
-                primaryButton: .destructive(Text("Reset")) {
-                    table.setAllCoursesNotification(value: false)
-                    table.updateNotificationSetting()
-                    modelContext.delete(table)
-                    try? modelContext.save()
-                },
-                secondaryButton: .cancel()
-            )
+            switch alertType {
+            case .showTableList:
+                return Alert(
+                    title: Text("Confirm Notifications Off"),
+                    message: Text("Notifications for the current timetable will be turned off"),
+                    primaryButton: .destructive(Text("OK")) {
+                        table.setAllCoursesNotification(value: false)
+                        table.updateNotificationSetting()
+                        selectedTableId = "unselected"
+                    },
+                    secondaryButton: .cancel()
+                )
+            case .deleteTable:
+                return Alert(
+                    title: Text("Confirm Reset"),
+                    message: Text("Are you sure you want to delete this timetable?"),
+                    primaryButton: .destructive(Text("Reset")) {
+                        table.setAllCoursesNotification(value: false)
+                        table.updateNotificationSetting()
+                        selectedTableId = "unselected"
+                        modelContext.delete(table)
+                        try? modelContext.save()
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
         }
     }
     

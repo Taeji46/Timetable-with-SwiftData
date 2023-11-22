@@ -56,6 +56,9 @@
 "Confirm Reset" = "確認";
 "Are you sure you want to delete this timetable?" = "本当に時間割を削除しますか？";
 "Reset" = "はい";
+"Confirm Notifications Off" = "時間割表一覧の表示";
+"Notifications for the current timetable will be turned off" = "現在の時間割表の通知がオフになります";
+"OK" = "はい";
 
 /* Attendance */
 "Attendance Status" = "出席状況";
@@ -70,3 +73,6 @@
 
 /* WelcomeView */
 "Create a New Timetable" = "時間割を新規作成";
+
+/* SelectTableView */
+"Timetable List" = "時間割表の一覧";

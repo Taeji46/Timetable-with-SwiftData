@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
+    @Binding var selectedTableId: String
     @State var table: Table
     @State var selectedTab: Int = 0
     @State var navigationTitle: String = String(localized: "Today's Lectures")
@@ -23,7 +24,7 @@ struct MainView: View {
                     }
                     .tag(1)
                 
-                SettingView(table: table)
+                SettingView(table: table, selectedTableId: $selectedTableId)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Settings")
@@ -45,6 +46,7 @@ struct MainView: View {
                 }
             }
             .onAppear() {
+                selectedTableId = table.id.uuidString
                 table.initPeriods()
             }
         }
