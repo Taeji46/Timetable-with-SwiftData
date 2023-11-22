@@ -123,6 +123,13 @@ struct SettingView: View {
                     }
                 }
                 Section() {
+                    NavigationLink(destination: {
+                        SelectTableView()
+                    }, label: {
+                        Text("List of Timetable")
+                    })
+                }
+                Section() {
                     Button(action: {
                         isShowingAlert = true
                     }) {
@@ -157,22 +164,5 @@ struct SettingView: View {
     
     func getMinEndTime(period: Int) -> Date { // 設定できる終了時間の最小値
         return table.getPeriod(index: period).startTime
-    }
-}
-
-enum AppearanceModeSetting: Int {
-    case followSystem = 0
-    case lightMode = 1
-    case darkMode = 2
-    
-    var colorScheme: ColorScheme? {
-        switch self {
-        case .followSystem:
-            return .none
-        case .lightMode:
-            return .light
-        case .darkMode:
-            return .dark
-        }
     }
 }
