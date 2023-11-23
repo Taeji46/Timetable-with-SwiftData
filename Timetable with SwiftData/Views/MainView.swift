@@ -59,7 +59,6 @@ struct MainView: View {
         }
     }
         
-    
     func getTable() -> Table {
         return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }

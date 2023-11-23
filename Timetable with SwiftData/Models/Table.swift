@@ -12,9 +12,9 @@ final class Table {
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
     var notificationTime: Int
     
-    init(title: String, numOfDays: Int, numOfPeriods: Int) {
+    init(title: String, colorName: String, numOfDays: Int, numOfPeriods: Int) {
         self.title = title
-        colorName = "Blue"
+        self.colorName = colorName
         self.numOfDays = numOfDays
         self.numOfPeriods = numOfPeriods
         courses = []
@@ -29,9 +29,9 @@ final class Table {
     }
     
     func getSelectedColor() -> Color {
-        for colorTemplate in themeColorTemplates {
-            if colorTemplate.name == colorName {
-                return colorTemplate.color
+        for color in ThemeColors.allCases {
+            if color.rawValue == colorName {
+                return color.colorData
             }
         }
         return Color.clear

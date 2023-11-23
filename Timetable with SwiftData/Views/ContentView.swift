@@ -7,10 +7,10 @@ struct ContentView: View {
     @Query private var tables: [Table]
     
     var body: some View {
-        if tables.count == 0 {
+        if tables.isEmpty {
             WelcomeView(selectedTableId: $selectedTableId)
         } else {
-            SelectTableView(selectedTableId: $selectedTableId)
+            UsualView(selectedTableId: $selectedTableId)
         }
     }
 }

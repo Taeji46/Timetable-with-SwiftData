@@ -6,18 +6,48 @@ struct ColorTemplate: Identifiable {
     let name: String
 }
 
-let courseColorTemplates: [ColorTemplate] = [
-    ColorTemplate(color: .blue, name: "Blue"),
-    ColorTemplate(color: .red, name: "Red"),
-    ColorTemplate(color: .orange, name: "Orange"),
-    ColorTemplate(color: .yellow, name: "Yellow"),
-    ColorTemplate(color: .green, name: "Green"),
-]
+enum ThemeColors: String, CaseIterable {
+    case blue = "blue"
+    case red = "red"
+    case orange = "orange"
+    case yellow = "yellow"
+    case green = "green"
+    
+    var colorData: Color {
+        switch self {
+        case .blue:
+            return .blue
+        case .red:
+            return .red
+        case .orange:
+            return .orange
+        case .yellow:
+            return .yellow
+        case .green:
+            return .green
+        }
+    }
+}
 
-let themeColorTemplates: [ColorTemplate] = [
-    ColorTemplate(color: .blue, name: "Blue"),
-    ColorTemplate(color: .red, name: "Red"),
-    ColorTemplate(color: .orange, name: "Orange"),
-    ColorTemplate(color: .yellow, name: "Yellow"),
-    ColorTemplate(color: .green, name: "Green"),
-]
+enum CourseColors: String, CaseIterable {
+    case blue = "blue"
+    case red = "red"
+    case orange = "orange"
+    case yellow = "yellow"
+    case green = "green"
+    
+    var colorData: Color {
+        switch self {
+        case .blue:
+            return .blue
+        case .red:
+            return .red
+        case .orange:
+            return .orange
+        case .yellow:
+            return .yellow
+        case .green:
+            return .green
+        }
+    }
+}

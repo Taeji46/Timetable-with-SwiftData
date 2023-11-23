@@ -6,7 +6,6 @@ struct Timetable_with_SwiftDataApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
     @AppStorage(wrappedValue: "unselected", "selectedTableId") var selectedTableId
-    @State private var refreshView = false
     var body: some Scene {
         WindowGroup {
             ContentView(selectedTableId: $selectedTableId)

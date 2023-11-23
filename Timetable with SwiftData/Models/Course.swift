@@ -25,11 +25,11 @@ final class Course {
         self.colorName = colorName
         self.isNotificationScheduled = false
     }
-    
+
     func getSelectedColor() -> Color { // 講義の色を取得
-        for colorTemplate in courseColorTemplates {
-            if colorTemplate.name == colorName {
-                return colorTemplate.color
+        for color in CourseColors.allCases {
+            if color.rawValue == colorName {
+                return color.colorData
             }
         }
         return Color.clear

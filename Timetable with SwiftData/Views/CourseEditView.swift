@@ -31,19 +31,18 @@ struct CourseEditView: View {
                 }
                 Section(header: Text("Color")) {
                     HStack {
-                        ForEach(courseColorTemplates) { colorTemplate in
+                        ForEach(CourseColors.allCases, id: \.self) { color in
                             Button(action: {}) {
                                 Circle()
-                                    .fill(colorTemplate.color.opacity(0.4))
+                                    .fill(color.colorData.opacity(0.75))
                                     .frame(width: 30, height: 30)
                             }
                             .overlay(
                                 Circle()
-                                    .stroke(selectedColor == colorTemplate.color ? Color.blue : Color.clear, lineWidth: 2)
+                                    .stroke(course.getSelectedColor() == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
                             )
                             .onTapGesture {
-                                selectedColor = colorTemplate.color
-                                course.colorName = colorTemplate.name
+                                course.colorName = color.rawValue
                             }
                             .padding(.horizontal, 5)
                         }

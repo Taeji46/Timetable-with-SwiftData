@@ -34,18 +34,18 @@ struct SettingView: View {
                 }
                 Section(header: Text("Theme")) {
                     HStack {
-                        ForEach(themeColorTemplates) { colorTemplate in
+                        ForEach(ThemeColors.allCases, id: \.self) { color in
                             Button(action: {}) {
                                 Circle()
-                                    .fill(colorTemplate.color.opacity(0.75))
+                                    .fill(color.colorData.opacity(0.75))
                                     .frame(width: 30, height: 30)
                             }
                             .overlay(
                                 Circle()
-                                    .stroke(table.getSelectedColor() == colorTemplate.color ? Color.blue : Color.clear, lineWidth: 2)
+                                    .stroke(table.getSelectedColor() == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
                             )
                             .onTapGesture {
-                                table.colorName = colorTemplate.name
+                                table.colorName = color.rawValue
                             }
                             .padding(.horizontal, 5)
                         }

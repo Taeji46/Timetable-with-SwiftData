@@ -35,19 +35,19 @@ struct AddNewCourseView: View {
             }
             Section(header: Text("Color")) {
                 HStack {
-                    ForEach(courseColorTemplates) { colorTemplate in
+                    ForEach(CourseColors.allCases, id: \.self) { color in
                         Button(action: {}) {
                             Circle()
-                                .fill(colorTemplate.color.opacity(0.4))
+                                .fill(color.colorData.opacity(0.75))
                                 .frame(width: 30, height: 30)
                         }
                         .overlay(
                             Circle()
-                                .stroke(selectedColor == colorTemplate.color ? Color.blue : Color.clear, lineWidth: 2)
+                                .stroke(selectedColor == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
                         )
                         .onTapGesture {
-                            selectedColor = colorTemplate.color
-                            colorName = colorTemplate.name
+                            selectedColor = color.colorData
+                            colorName = color.rawValue
                         }
                         .padding(.horizontal, 5)
                     }

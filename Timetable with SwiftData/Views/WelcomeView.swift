@@ -2,11 +2,14 @@ import SwiftUI
 import SwiftData
 
 struct WelcomeView: View {
+    @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
     @Environment(\.modelContext) private var modelContext
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     
     @State var title: String = "TIMETABLE"
+    @State var colorName: String = "blue"
+    @State var selectedColor: Color = .blue
     @State var selectedNumOfDays: Int = 5
     @State var selectedNumOfPeriods: Int = 5
     
@@ -16,6 +19,39 @@ struct WelcomeView: View {
             Form {
                 Section(header: Text("Title of timetable")) {
                     TextField("Title of Timetable", text: $title)
+                }
+                
+                Section(header: Text("Appearance mode")) {
+                    Picker("Appearance Setting", selection: $appearanceMode) {
+                        Text("System")
+                            .tag(0)
+                        Text("Light")
+                            .tag(1)
+                        Text("Dark")
+                            .tag(2)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section(header: Text("Theme")) {
+                    HStack {
+                        ForEach(ThemeColors.allCases, id: \.self) { color in
+                            Button(action: {}) {
+                                Circle()
+                                    .fill(color.colorData.opacity(0.75))
+                                    .frame(width: 30, height: 30)
+                            }
+                            .overlay(
+                                Circle()
+                                    .stroke(selectedColor == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
+                            )
+                            .onTapGesture {
+                                selectedColor = color.colorData
+                                colorName = color.rawValue
+                            }
+                            .padding(.horizontal, 5)
+                        }
+                    }
                 }
                 
                 Section(header: Text("Days of the Week")) {
@@ -52,7 +88,7 @@ struct WelcomeView: View {
     }
     
     private func addTable() {
-        let newTable = Table(title: title, numOfDays: selectedNumOfDays, numOfPeriods: selectedNumOfPeriods)
+        let newTable = Table(title: title, colorName: colorName, numOfDays: selectedNumOfDays, numOfPeriods: selectedNumOfPeriods)
         modelContext.insert(newTable)
         selectedTableId = tables[0].id.uuidString
     }
