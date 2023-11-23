@@ -33,22 +33,23 @@ struct SettingView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 Section(header: Text("Theme")) {
-                    HStack {
-                        ForEach(ThemeColors.allCases, id: \.self) { color in
-                            Button(action: {}) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(ThemeColors.allCases, id: \.self) { color in
                                 Circle()
                                     .fill(color.colorData.opacity(0.75))
                                     .frame(width: 30, height: 30)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(table.getSelectedColor() == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
+                                    )
+                                    .onTapGesture {
+                                        table.colorName = color.rawValue
+                                    }
+                                    .padding(.horizontal, 5)
                             }
-                            .overlay(
-                                Circle()
-                                    .stroke(table.getSelectedColor() == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
-                            )
-                            .onTapGesture {
-                                table.colorName = color.rawValue
-                            }
-                            .padding(.horizontal, 5)
                         }
+                        .frame(height: 34)
                     }
                 }
                 Section(header: Text("Days of the Week")) {

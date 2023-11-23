@@ -169,10 +169,58 @@
             filePath = "Timetable with SwiftData/Views/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "getMinStartTime(period:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EB6E221-2945-48CD-AFCE-34B586CB227F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Timetable with SwiftData/Models/ColorTemplate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "colorData"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5EB6E221-2945-48CD-AFCE-34B586CB227F - bcf7de7d9288ecea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.CourseColors.colorData.getter : SwiftUI.Color"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taichi-hosokawa/Library/Mobile%20Documents/com~apple~CloudDocs/Programming/Swift/Timetable%20with%20SwiftData/Timetable%20with%20SwiftData/Models/ColorTemplate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  uuid = "5EB6E221-2945-48CD-AFCE-34B586CB227F - bcf7de7d9288eca4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timetable_with_SwiftData.CourseColors.colorData.getter : SwiftUI.Color"
+                  moduleName = "Timetable with SwiftData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taichi-hosokawa/Library/Mobile%20Documents/com~apple~CloudDocs/Programming/Swift/Timetable%20with%20SwiftData/Timetable%20with%20SwiftData/Models/ColorTemplate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

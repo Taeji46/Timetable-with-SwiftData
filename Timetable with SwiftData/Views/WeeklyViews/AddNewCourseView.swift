@@ -16,7 +16,7 @@ struct AddNewCourseView: View {
         self._name = State(initialValue: "")
         self._classroom = State(initialValue: "")
         self._teacher = State(initialValue: "")
-        self._colorName = State(initialValue: "Blue")
+        self._colorName = State(initialValue: "blue")
         self._selectedColor = State(initialValue: .blue)
         self._day = State(initialValue: day)
         self._period = State(initialValue: period)
@@ -34,23 +34,24 @@ struct AddNewCourseView: View {
                 TextField("Teacher", text: $teacher)
             }
             Section(header: Text("Color")) {
-                HStack {
-                    ForEach(CourseColors.allCases, id: \.self) { color in
-                        Button(action: {}) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(CourseColors.allCases, id: \.self) { color in
                             Circle()
                                 .fill(color.colorData.opacity(0.75))
                                 .frame(width: 30, height: 30)
+                                .overlay(
+                                    Circle()
+                                        .stroke(selectedColor == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
+                                )
+                                .onTapGesture {
+                                    selectedColor = color.colorData
+                                    colorName = color.rawValue
+                                }
+                                .padding(.horizontal, 5)
                         }
-                        .overlay(
-                            Circle()
-                                .stroke(selectedColor == color.colorData ? Color.blue : Color.clear, lineWidth: 2)
-                        )
-                        .onTapGesture {
-                            selectedColor = color.colorData
-                            colorName = color.rawValue
-                        }
-                        .padding(.horizontal, 5)
                     }
+                    .frame(height: 34)
                 }
             }
             Section {

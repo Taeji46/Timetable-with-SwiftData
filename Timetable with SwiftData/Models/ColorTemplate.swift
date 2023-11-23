@@ -1,17 +1,13 @@
 import SwiftUI
 
-struct ColorTemplate: Identifiable {
-    let id = UUID()
-    let color: Color
-    let name: String
-}
-
 enum ThemeColors: String, CaseIterable {
     case blue = "blue"
     case red = "red"
     case orange = "orange"
     case yellow = "yellow"
     case green = "green"
+    case mint = "mint"
+    case purple = "purple"
     
     var colorData: Color {
         switch self {
@@ -25,6 +21,10 @@ enum ThemeColors: String, CaseIterable {
             return .yellow
         case .green:
             return .green
+        case .mint:
+            return .mint
+        case .purple:
+            return .purple
         }
     }
 }
@@ -35,6 +35,8 @@ enum CourseColors: String, CaseIterable {
     case orange = "orange"
     case yellow = "yellow"
     case green = "green"
+    case mint = "mint"
+    case purple = "purple"
     
     var colorData: Color {
         switch self {
@@ -48,6 +50,10 @@ enum CourseColors: String, CaseIterable {
             return .yellow
         case .green:
             return .green
+        case .mint:
+            return .mint
+        case .purple:
+            return .purple
         }
     }
 }

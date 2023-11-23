@@ -30,7 +30,7 @@ struct WeeklyTableView: View {
             VStack {
                 Spacer()
                 weekView()
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     HStack() {
                         periodView()
                         courseTableView()

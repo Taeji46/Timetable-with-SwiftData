@@ -1,8 +1,8 @@
 import SwiftUI
 import SwiftData
 
-struct WelcomeView: View {
-    @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
+struct AddNewTableView: View {
+    @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
@@ -13,24 +13,11 @@ struct WelcomeView: View {
     @State var selectedNumOfDays: Int = 5
     @State var selectedNumOfPeriods: Int = 5
     
-    
     var body: some View {
         NavigationStack {
             Form {
                 Section(header: Text("Title of timetable")) {
                     TextField("Title of Timetable", text: $title)
-                }
-                
-                Section(header: Text("Appearance mode")) {
-                    Picker("Appearance Setting", selection: $appearanceMode) {
-                        Text("System")
-                            .tag(0)
-                        Text("Light")
-                            .tag(1)
-                        Text("Dark")
-                            .tag(2)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
                 }
                 
                 Section(header: Text("Theme")) {
@@ -79,18 +66,18 @@ struct WelcomeView: View {
                 Section {
                     Button(action: {
                         addTable()
+                        dismiss()
                     }, label: {
                         Text("Create a New Timetable")
                     })
                 }
             }
-            .navigationBarTitle("Welcome!")
+            .navigationBarTitle("Add a New Table")
         }
     }
     
     private func addTable() {
         let newTable = Table(title: title, colorName: colorName, numOfDays: selectedNumOfDays, numOfPeriods: selectedNumOfPeriods)
         modelContext.insert(newTable)
-        selectedTableId = tables[0].id.uuidString
     }
 }
