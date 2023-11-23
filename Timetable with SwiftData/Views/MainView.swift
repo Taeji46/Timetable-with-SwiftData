@@ -3,6 +3,7 @@ import SwiftData
 
 struct MainView: View {
     @Binding var selectedTableId: String
+    @Query private var tables: [Table]
     @State var table: Table
     @State var selectedTab: Int = 0
     @State var navigationTitle: String = String(localized: "Today's Lectures")
@@ -10,21 +11,21 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             TabView(selection: $selectedTab) {
-                DailyTableView(table: table, currentTime: getCurrentTime())
+                DailyTableView(table: table, selectedTableId: $selectedTableId, currentTime: getCurrentTime())
                     .tabItem {
                         Image(systemName: "sun.max")
                         Text("Today")
                     }
                     .tag(0)
                 
-                WeeklyTableView(table: table)
+                WeeklyTableView(selectedTableId: $selectedTableId, table: table)
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Timetable")
                     }
                     .tag(1)
                 
-                SettingView(table: table, selectedTableId: $selectedTableId)
+                SettingView(selectedTableId: $selectedTableId, table: table)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Settings")
@@ -51,5 +52,15 @@ struct MainView: View {
             }
         }
         .navigationViewStyle(.stack)
+        .onChange(of: selectedTableId) {
+            if !tables.isEmpty {
+                table = getTable()
+            }
+        }
+    }
+        
+    
+    func getTable() -> Table {
+        return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }
 }

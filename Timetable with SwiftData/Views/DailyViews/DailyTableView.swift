@@ -1,8 +1,11 @@
 import SwiftUI
+import SwiftData
 import Colorful
 
 struct DailyTableView: View {
     @State var table: Table
+    @Binding var selectedTableId: String
+    @Query private var tables: [Table]
     @State var currentTime: Date
     @State private var counter = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -28,6 +31,11 @@ struct DailyTableView: View {
             }
             .onReceive(timer) { _ in
                 currentTime = getCurrentTime()
+            }
+        }
+        .onChange(of: selectedTableId) {
+            if !tables.isEmpty {
+                table = getTable()
             }
         }
     }
@@ -60,5 +68,9 @@ struct DailyTableView: View {
     
     func getCourseWidth() -> CGFloat {
         return UIScreen.main.bounds.width * 0.85
+    }
+    
+    func getTable() -> Table {
+        return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }
 }

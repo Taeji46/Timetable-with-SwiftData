@@ -9,15 +9,11 @@ struct SettingView: View {
     
     @Environment(\.modelContext) private var modelContext
     @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
+    @Query private var tables: [Table]
     @Binding var selectedTableId: String
     @State var table: Table
     @State var isShowingAlert: Bool = false
     @State var alertType: AlertType = .showTableList
-    
-    init(table: Table, selectedTableId: Binding<String>) {
-        _selectedTableId = selectedTableId
-        self.table = table
-    }
     
     var body: some View {
         VStack {
@@ -177,6 +173,11 @@ struct SettingView: View {
                 )
             }
         }
+        .onChange(of: selectedTableId) {
+            if !tables.isEmpty {
+                table = getTable()
+            }
+        }
     }
     
     func getMinStartTime(period: Int) -> Date { // 設定できる開始時間の最小値
@@ -189,5 +190,9 @@ struct SettingView: View {
     
     func getMinEndTime(period: Int) -> Date { // 設定できる終了時間の最小値
         return table.getPeriod(index: period).startTime
+    }
+    
+    func getTable() -> Table {
+        return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }
 }

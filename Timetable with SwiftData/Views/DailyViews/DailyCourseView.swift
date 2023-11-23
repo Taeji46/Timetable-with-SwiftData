@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct DailyCourseView: View {
     @State var table: Table

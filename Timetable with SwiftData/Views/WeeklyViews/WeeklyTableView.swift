@@ -3,6 +3,8 @@ import SwiftData
 
 struct WeeklyTableView: View {
     @Environment(\.modelContext) private var modelContext
+    @Binding var selectedTableId: String
+    @Query private var tables: [Table]
     @State var table: Table
     @State var isShowingAddNewCourseView: Bool = false
     @State var newCourseDay: Int = -1
@@ -35,6 +37,11 @@ struct WeeklyTableView: View {
                     }
                 }
                 Spacer()
+            }
+        }
+        .onChange(of: selectedTableId) {
+            if !tables.isEmpty {
+                table = getTable()
             }
         }
     }
@@ -136,5 +143,9 @@ struct WeeklyTableView: View {
     
     private func saveContext() {
         try? modelContext.save()
+    }
+    
+    func getTable() -> Table {
+        return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }
 }

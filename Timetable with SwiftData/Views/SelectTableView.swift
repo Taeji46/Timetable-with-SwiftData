@@ -15,6 +15,7 @@ struct SelectTableView: View {
                             selectedTableId = table.id.uuidString
                         }, label: {
                             Text(table.title)
+                                .foregroundColor(table.getSelectedColor())
                         })
                     }
                     
@@ -36,14 +37,16 @@ struct SelectTableView: View {
                 .navigationBarTitle("Timetable List")
             }
         } else {
-            if let foundTable = tables.first(where: { $0.id.uuidString == selectedTableId }) {
-                MainView(selectedTableId: $selectedTableId, table: foundTable)
-            }
+            MainView(selectedTableId: $selectedTableId, table: getTable())
         }
     }
     
     private func addTable() {
         let newTable = Table(title: "New TimeTable", numOfDays: 5, numOfPeriods: 6)
         modelContext.insert(newTable)
+    }
+    
+    func getTable() -> Table {
+        return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }
 }
