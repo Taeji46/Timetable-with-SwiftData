@@ -131,7 +131,7 @@ struct SettingView: View {
                         alertType = .showTableList
                         isShowingAlert.toggle()
                     }) {
-                        Text("時間割表を変更")
+                        Text("List of Timetables")
                             .foregroundColor(.blue)
                     }
                 }

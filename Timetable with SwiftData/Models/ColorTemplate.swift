@@ -4,10 +4,10 @@ enum ThemeColors: String, CaseIterable {
     case blue = "blue"
     case red = "red"
     case orange = "orange"
-    case yellow = "yellow"
     case green = "green"
     case mint = "mint"
     case purple = "purple"
+    case pink = "pink"
     
     var colorData: Color {
         switch self {
@@ -17,14 +17,14 @@ enum ThemeColors: String, CaseIterable {
             return .red
         case .orange:
             return .orange
-        case .yellow:
-            return .yellow
         case .green:
             return .green
         case .mint:
             return .mint
         case .purple:
             return .purple
+        case .pink:
+            return .pink
         }
     }
 }
@@ -33,10 +33,10 @@ enum CourseColors: String, CaseIterable {
     case blue = "blue"
     case red = "red"
     case orange = "orange"
-    case yellow = "yellow"
     case green = "green"
     case mint = "mint"
     case purple = "purple"
+    case pink = "pink"
     
     var colorData: Color {
         switch self {
@@ -46,14 +46,14 @@ enum CourseColors: String, CaseIterable {
             return .red
         case .orange:
             return .orange
-        case .yellow:
-            return .yellow
         case .green:
             return .green
         case .mint:
             return .mint
         case .purple:
             return .purple
+        case .pink:
+            return .pink
         }
     }
 }

@@ -7,7 +7,7 @@ struct WelcomeView: View {
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     
-    @State var title: String = "TIMETABLE"
+    @State var title: String = ""
     @State var colorName: String = "blue"
     @State var selectedColor: Color = .blue
     @State var selectedNumOfDays: Int = 5
@@ -81,7 +81,7 @@ struct WelcomeView: View {
                         addTable()
                     }, label: {
                         Text("Create a New Timetable")
-                    })
+                    }).disabled(title.isEmpty)
                 }
             }
             .navigationBarTitle("Welcome!")

@@ -22,7 +22,7 @@ struct DailyTableView: View {
                 .ignoresSafeArea()
             VStack {
                 Text(getCurrentInfoText())
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     courseTableView()
                 }
             }

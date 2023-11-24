@@ -8,6 +8,15 @@
         "revision" : "0bcf960c856d9f7cde10a0b464208585736c5e47",
         "version" : "1.1.0"
       }
+    },
+    {
+      "identity" : "liquid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maustinstar/liquid",
+      "state" : {
+        "branch" : "master",
+        "revision" : "067aecd19425b3d37d1bca176aca9a0dc5ff6ed0"
+      }
     }
   ],
   "version" : 2

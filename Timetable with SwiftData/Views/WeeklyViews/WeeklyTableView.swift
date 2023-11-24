@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Colorful
 
 struct WeeklyTableView: View {
     @Environment(\.modelContext) private var modelContext
