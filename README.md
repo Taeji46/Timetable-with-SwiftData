@@ -7,7 +7,7 @@
 ・出席状況の記録
 
 ## スクリーンショット
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/d72831ea-df11-40ca-8641-00d6780462f6" width="320px">  
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/d72831ea-df11-40ca-8641-00d6780462f6" width="280px">  
 
 ## 動作環境
 iOS 17.0 以上
