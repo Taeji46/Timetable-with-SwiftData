@@ -68,6 +68,9 @@
 "Absent" = "Absent";
 "Late" = "Late";
 "Canceled" = "Canceled";
+"Status" = "Status";
+"Date" = "Date";
+"Are you sure you want to delete this Attendance Record?" = "Are you sure you want to delete this Attendance Record?";
 
 /* AddNewCourseView */
 "Add a New Course" = "Add a New Course";

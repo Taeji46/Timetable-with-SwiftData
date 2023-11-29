@@ -67,6 +67,9 @@
 "Absent" = "欠席";
 "Late" = "遅刻";
 "Canceled" = "休講";
+"Status" = "出席状況";
+"Date" = "日付";
+"Are you sure you want to delete this Attendance Record?" = "本当に出席情報を削除しますか？";
 
 /* AddNewCourseView */
 "Add a New Course" = "講義を追加";

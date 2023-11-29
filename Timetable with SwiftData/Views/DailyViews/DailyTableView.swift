@@ -9,6 +9,7 @@ struct DailyTableView: View {
     @State var currentTime: Date
     @State private var counter = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.85
     
     var body: some View {
         ZStack {
@@ -46,7 +47,7 @@ struct DailyTableView: View {
                 ForEach(0..<table.numOfPeriods, id: \.self) { period in
                     if let course = table.courses.first(where: { $0.day == getCurrentDayOfWeekIndex() && $0.period == period }) {
                         if currentTime < table.getPeriod(index: course.period).endTime {
-                            DailyCourseView(table: table, course: course, currentTime: getCurrentTime(), courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
+                            DailyCourseView(table: table, course: course, currentTime: getCurrentTime(), courseWidth: courseWidth)
                         }
                     }
                 }
@@ -60,14 +61,6 @@ struct DailyTableView: View {
                 }
             }
         )
-    }
-    
-    func getCourseHeight() -> CGFloat {
-        return UIScreen.main.bounds.height / 4.0 * 0.6
-    }
-    
-    func getCourseWidth() -> CGFloat {
-        return UIScreen.main.bounds.width * 0.85
     }
     
     func getTable() -> Table {

@@ -19,7 +19,7 @@ struct SettingView: View {
         VStack {
             Form {
                 Section(header: Text("Title of Timetable")) {
-                    TextField("Title", text: $table.title)
+                    TextField("Title of Timetable", text: $table.title)
                 }
                 Section(header: Text("Appearance mode")) {
                     Picker("Appearance Setting", selection: $appearanceMode) {

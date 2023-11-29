@@ -6,7 +6,8 @@ struct DailyCourseView: View {
     @State var course: Course
     @State var currentTime: Date
     var courseWidth: CGFloat
-    var courseHeight: CGFloat
+    let courseInfoHeight: CGFloat = 76
+    let insideFrameWidth: CGFloat = 12
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -23,7 +24,7 @@ struct DailyCourseView: View {
                     .font(.system(size: 12))
                     .bold()
             }
-            .frame(width: 20, height: courseHeight)
+            .frame(width: 20, height: courseInfoHeight + 18 + 3 * insideFrameWidth)
             
             NavigationLink(destination: {
                 CourseView(table: table, course: course)
@@ -34,8 +35,10 @@ struct DailyCourseView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     
-                    VStack(spacing: 10) {
+                    VStack(spacing: 0) {
+                        Spacer().frame(height: insideFrameWidth)
                         titleView()
+                        Spacer().frame(height: insideFrameWidth)
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.white.opacity(0.75))
@@ -45,10 +48,11 @@ struct DailyCourseView: View {
                                 teacherView()
                             }
                         }
-                        .frame(width: courseWidth - 20, height: courseHeight * 0.6)
+                        .frame(width: courseWidth - 2 * insideFrameWidth, height: courseInfoHeight)
+                        Spacer().frame(height: insideFrameWidth)
                     }
                 }
-                .frame(width: courseWidth, height: courseHeight)
+                .frame(width: courseWidth, height: courseInfoHeight + 18 + 3 * insideFrameWidth)
             })
         }
         .onAppear {
@@ -64,7 +68,7 @@ struct DailyCourseView: View {
             Text(course.name)
                 .font(.system(size: 18))
                 .fontWeight(.heavy)
-                .frame(width: courseWidth - 20, height: 18, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
                 .foregroundColor(Color.white)
                 .lineLimit(nil)
                 .padding(.leading, 18)
@@ -87,7 +91,7 @@ struct DailyCourseView: View {
                     .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 15, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
     }
     
@@ -105,7 +109,7 @@ struct DailyCourseView: View {
                     .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 15, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
         )
     }
     
@@ -123,7 +127,7 @@ struct DailyCourseView: View {
                     .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 15, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
         )
     }
 }

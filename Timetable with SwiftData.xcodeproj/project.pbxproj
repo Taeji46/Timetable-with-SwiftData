@@ -37,6 +37,7 @@
 		F070ED162B10BFA1006FA7A3 /* Liquid in Frameworks */ = {isa = PBXBuildFile; productRef = F070ED152B10BFA1006FA7A3 /* Liquid */; };
 		F08E1EF52B0940C8006F0D0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08E1EF72B0940C8006F0D0F /* Localizable.strings */; };
 		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
+		F0CE650E2B17F9B6001A1662 /* AttendanceEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		F08E1EF62B0940C8006F0D0F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF82B0940CA006F0D0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseNotificationUtils.swift; sourceTree = "<group>"; };
+		F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,9 +136,7 @@
 				F0364C942B0767C700401B45 /* MainView.swift */,
 				F0364CAE2B08E45100401B45 /* DailyViews */,
 				F0364CAD2B08E42E00401B45 /* WeeklyViews */,
-				F0364C902B07579F00401B45 /* CourseView.swift */,
-				F0364C922B0757FD00401B45 /* CourseEditView.swift */,
-				F0364C982B076FF400401B45 /* AttendanceRecordView.swift */,
+				F0CE650C2B17F6DF001A1662 /* CourseViews */,
 				F0364CA42B07EDE300401B45 /* SettingView.swift */,
 			);
 			path = Views;
@@ -182,6 +182,17 @@
 				F0364CB12B08E49D00401B45 /* DailyTableView.swift */,
 			);
 			path = DailyViews;
+			sourceTree = "<group>";
+		};
+		F0CE650C2B17F6DF001A1662 /* CourseViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0364C902B07579F00401B45 /* CourseView.swift */,
+				F0364C922B0757FD00401B45 /* CourseEditView.swift */,
+				F0364C982B076FF400401B45 /* AttendanceRecordView.swift */,
+				F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */,
+			);
+			path = CourseViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +288,7 @@
 				F0364C8F2B0755D200401B45 /* WeeklyEmptyCourseView.swift in Sources */,
 				F0364CA52B07EDE300401B45 /* SettingView.swift in Sources */,
 				F0364C952B0767C700401B45 /* MainView.swift in Sources */,
+				F0CE650E2B17F9B6001A1662 /* AttendanceEditView.swift in Sources */,
 				F0364C1C2B06528E00401B45 /* Course.swift in Sources */,
 				F0364C932B0757FD00401B45 /* CourseEditView.swift in Sources */,
 				F0364C192B06517B00401B45 /* Table.swift in Sources */,

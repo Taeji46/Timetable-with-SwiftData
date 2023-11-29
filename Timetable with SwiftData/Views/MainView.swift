@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     @State var table: Table
@@ -32,14 +33,14 @@ struct MainView: View {
                     }
                     .tag(2)
             }
-            .accentColor(table.getSelectedColor())
+            .accentColor(colorScheme == .dark ? .white : .black)
             .navigationTitle(navigationTitle)
             .onChange(of: selectedTab, initial: true) { oldTab, newTab in
                 switch newTab {
                 case 0:
                     navigationTitle = String(localized: "Today's Lectures")
                 case 1:
-                    navigationTitle = table.title
+                    navigationTitle = table.title.isEmpty ? String(localized: "-") : table.title
                 case 2:
                     navigationTitle = String(localized: "Settings")
                 default:

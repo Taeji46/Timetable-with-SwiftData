@@ -7,8 +7,9 @@ struct CourseView: View {
     @State var isShowingAttendanceRecordView: Bool
     @State var isShowingAlert: Bool
     let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.925
-    let courseHeight: CGFloat = UIScreen.main.bounds.height / 4.0 * 0.6
-    let attendanceInfoHeight: CGFloat = UIScreen.main.bounds.height / 4.0 * 0.5
+    let courseInfoHeight: CGFloat = 76
+    let attendanceInfoHeight: CGFloat = 50
+    let insideFrameWidth: CGFloat = 12
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode
@@ -38,114 +39,116 @@ struct CourseView: View {
             )
             .ignoresSafeArea()
             VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10).fill(.white)
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(course.getSelectedColor().opacity(0.75))
-                        .onTapGesture {
-                            isShowingEditView = true
-                        }
-                    
-                    VStack(spacing: 10) {
-                        titleView()
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white.opacity(0.75))
-                            VStack {
-                                timeView()
-                                classroomView()
-                                teacherView()
+                Button(action: {
+                    isShowingEditView = true
+                }, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10).fill(.white)
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(course.getSelectedColor().opacity(0.75))
+                        
+                        VStack(spacing: 0) {
+                            Spacer().frame(height: insideFrameWidth)
+                            titleView()
+                            Spacer().frame(height: insideFrameWidth)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.white.opacity(0.75))
+                                VStack {
+                                    timeView()
+                                    classroomView()
+                                    teacherView()
+                                }
                             }
+                            .frame(width: courseWidth - 2 * insideFrameWidth, height: courseInfoHeight)
+                            Spacer().frame(height: insideFrameWidth)
                         }
-                        .frame(width: courseWidth - 20, height: courseHeight * 0.6)
                     }
-                }
-                .frame(width: courseWidth, height: courseHeight)
+                    .frame(width: courseWidth, height: courseInfoHeight + 18 + 3 * insideFrameWidth)
+                })
                 
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10).fill(.white)
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(course.getSelectedColor().opacity(0.75))
-                        .onTapGesture {
-                            isShowingAttendanceRecordView = true
+                    Button(action: {
+                        isShowingAttendanceRecordView = true
+                    }, label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10).fill(.white)
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(course.getSelectedColor().opacity(0.75))
                         }
+                    })
                     
-                    VStack {
-                        Spacer()
+                    VStack(spacing: 0) {
+                        Spacer().frame(height: insideFrameWidth)
                         Text("Attendance Status")
                             .font(.system(size: 18))
                             .fontWeight(.heavy)
-                            .frame(width: courseWidth - 20, height: 18, alignment: .leading)
+                            .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
                             .foregroundColor(Color.white)
                             .lineLimit(nil)
                             .padding(.leading, 18)
-                        Spacer()
+                        Spacer().frame(height: insideFrameWidth)
                         ZStack {
                             Rectangle()
                                 .fill(Color.white.opacity(0.75))
                                 .cornerRadius(12)
-                            HStack {
-                                Spacer()
-                                VStack {
-                                    Text("Attend")
-                                        .font(.system(size: 14))
-                                    Text(String(course.countAttendance(status: .attend)))
-                                        .font(.system(size: 14))
-                                }
-                                .frame(width: (courseWidth - 100) / 4.0)
-                                .onTapGesture {
+                            HStack(spacing: 0) {
+                                Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .attend, date: Date()))
-                                }
-                                Spacer()
+                                }, label: {
+                                    VStack {
+                                        Text("Attend")
+                                            .font(.system(size: 14))
+                                        Text(String(course.countAttendance(status: .attend)))
+                                            .font(.system(size: 14))
+                                    }
+                                })
+                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 Divider()
-                                Spacer()
-                                VStack {
-                                    Text("Absent")
-                                        .font(.system(size: 14))
-                                    Text(String(course.countAttendance(status: .absent)))
-                                        .font(.system(size: 14))
-                                }
-                                .frame(width: (courseWidth - 100) / 4.0)
-                                .onTapGesture {
+                                Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .absent, date: Date()))
-                                }
-                                Spacer()
+                                }, label: {
+                                    VStack {
+                                        Text("Absent")
+                                            .font(.system(size: 14))
+                                        Text(String(course.countAttendance(status: .absent)))
+                                            .font(.system(size: 14))
+                                    }
+                                })
+                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 Divider()
-                                Spacer()
-                                VStack {
-                                    Text("Late")
-                                        .font(.system(size: 14))
-                                    Text(String(course.countAttendance(status: .late)))
-                                        .font(.system(size: 14))
-                                }
-                                .frame(width: (courseWidth - 100) / 4.0)
-                                .onTapGesture {
+                                Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .late, date: Date()))
-                                }
-                                Spacer()
+                                }, label: {
+                                    VStack {
+                                        Text("Late")
+                                            .font(.system(size: 14))
+                                        Text(String(course.countAttendance(status: .late)))
+                                            .font(.system(size: 14))
+                                    }
+                                })
+                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 Divider()
-                                Spacer()
-                                VStack {
-                                    Spacer()
-                                    Text("Canceled")
-                                        .font(.system(size: 14))
-                                    Text(String(course.countAttendance(status: .canceled)))
-                                        .font(.system(size: 14))
-                                    Spacer()
-                                }
-                                .frame(width: (courseWidth - 100) / 4.0)
-                                .onTapGesture {
+                                Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .canceled, date: Date()))
-                                }
-                                Spacer()
+                                }, label: {
+                                    VStack {
+                                        Text("Canceled")
+                                            .font(.system(size: 14))
+                                        Text(String(course.countAttendance(status: .canceled)))
+                                            .font(.system(size: 14))
+                                    }
+                                })
+                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                             }
                             .foregroundColor(Color.black)
                         }
-                        .frame(width: courseWidth - 20, height: attendanceInfoHeight * 0.4)
-                        Spacer()
+                        .frame(width: courseWidth - 2 * insideFrameWidth, height: attendanceInfoHeight)
+                        Spacer().frame(height: insideFrameWidth)
                     }
                 }
-                .frame(width: courseWidth, height: attendanceInfoHeight)
+                .frame(width: courseWidth, height: attendanceInfoHeight + 18 + 3 * insideFrameWidth)
+                
                 Spacer()
             }
         }
@@ -199,7 +202,7 @@ struct CourseView: View {
             Text(course.name)
                 .font(.system(size: 18))
                 .fontWeight(.heavy)
-                .frame(width: courseWidth - 20, height: 18, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
                 .foregroundColor(Color.white)
                 .lineLimit(nil)
                 .padding(.leading, 18)
@@ -221,7 +224,7 @@ struct CourseView: View {
                     .foregroundColor(Color.black)
                     .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 15, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
     }
     
@@ -239,7 +242,7 @@ struct CourseView: View {
                     .foregroundColor(Color.black)
                     .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 14, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
     }
     
@@ -257,7 +260,7 @@ struct CourseView: View {
                     .foregroundColor(Color.black)
                     .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 14, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
     }
 }
