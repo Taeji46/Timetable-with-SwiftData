@@ -16,7 +16,7 @@ struct AddNewTableView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Title of timetable")) {
+                Section(header: Text("Title of Timetable")) {
                     TextField("Title of Timetable", text: $title)
                 }
                 

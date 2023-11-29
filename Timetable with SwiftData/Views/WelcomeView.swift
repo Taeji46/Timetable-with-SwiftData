@@ -17,7 +17,7 @@ struct WelcomeView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Title of timetable")) {
+                Section(header: Text("Title of Timetable")) {
                     TextField("Title of Timetable", text: $title)
                 }
                 
@@ -84,7 +84,7 @@ struct WelcomeView: View {
                     }).disabled(title.isEmpty)
                 }
             }
-            .navigationBarTitle("Welcome!")
+            .navigationBarTitle("Welcome")
         }
     }
     

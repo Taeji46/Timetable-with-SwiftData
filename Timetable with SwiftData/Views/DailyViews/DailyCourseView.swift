@@ -12,12 +12,11 @@ struct DailyCourseView: View {
     var body: some View {
         HStack {
             ZStack {
-                Rectangle()
-                    .fill(.white)
-                    .cornerRadius(8)
-                Rectangle()
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .clear : .white)
+                
+                RoundedRectangle(cornerRadius: 10)
                     .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
-                    .cornerRadius(8)
                 
                 Text(String(course.period + 1))
                     .foregroundColor(Color.white)
@@ -30,18 +29,16 @@ struct DailyCourseView: View {
                 CourseView(table: table, course: course)
             }, label: {
                 ZStack {
-                    Rectangle().fill(.white).frame(width: courseWidth, height: courseHeight).cornerRadius(12)
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .clear : .white)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
-                        .frame(width: courseWidth, height: courseHeight)
-                        .cornerRadius(12)
                     
-                    VStack {
+                    VStack(spacing: 10) {
                         titleView()
                         ZStack {
-                            Rectangle()
+                            RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.white.opacity(0.75))
-                                .cornerRadius(12)
                             VStack {
                                 timeView()
                                 classroomView()

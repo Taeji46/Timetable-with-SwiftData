@@ -6,7 +6,6 @@ struct CourseEditView: View {
     @State var table: Table
     @State var course: Course
     @State var selectedColor: Color
-    @State var isShowingAlert = false
     
     var body: some View {
         VStack {
@@ -54,14 +53,6 @@ struct CourseEditView: View {
                         .onChange(of: course.isNotificationScheduled) {
                             table.updateNotificationSetting()
                         }
-                }
-                Section() {
-                    Button(action: {
-                        isShowingAlert = true
-                    }) {
-                        Text("Delete the course")
-                            .foregroundColor(.red)
-                    }
                 }
             }
         }

@@ -18,7 +18,7 @@ struct SettingView: View {
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("Title of timetable")) {
+                Section(header: Text("Title of Timetable")) {
                     TextField("Title", text: $table.title)
                 }
                 Section(header: Text("Appearance mode")) {

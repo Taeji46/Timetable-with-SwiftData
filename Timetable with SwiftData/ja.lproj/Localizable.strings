@@ -38,7 +38,7 @@
 "Delete" = "はい";
 
 /* SettingView */
-"Title of timetable" = "時間割表のタイトル";
+"Title of Timetable" = "時間割表のタイトル";
 "Appearance mode" = "外観モード";
 "System" = "システム";
 "Light" = "ライト";

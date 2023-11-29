@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Colorful
 
 struct SelectTableView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -8,14 +9,33 @@ struct SelectTableView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(tables) { table in
-                    Button(action: {
-                        selectedTableId = table.id.uuidString
-                    }, label: {
-                        Text(table.title)
-                            .foregroundColor(.blue)
-                    })
+            ZStack {
+                ColorfulView()
+                    .ignoresSafeArea()
+                VStack() {
+                    Group {
+                        ForEach(tables) { table in
+                            Button(action: {
+                                selectedTableId = table.id.uuidString
+                            }, label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(colorScheme == .dark ? .black : .white)
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(table.getSelectedColor().opacity(0.75))
+                                    
+                                    Text(table.title)
+                                        .bold()
+                                        .padding()
+                                        .foregroundColor(Color.white)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                .frame(width: UIScreen.main.bounds.width * 0.90, height: 50)
+                            })
+                        }
+                    }
+                    .padding(.top, 10)
+                    Spacer()
                 }
             }
             .toolbar {

@@ -6,10 +6,9 @@ struct CourseView: View {
     @State var isShowingEditView: Bool
     @State var isShowingAttendanceRecordView: Bool
     @State var isShowingAlert: Bool
-    var courseWidth: CGFloat
-    var courseHeight: CGFloat
-    var mainInfoHeight: CGFloat
-    var attendanceInfoHeight: CGFloat
+    let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.925
+    let courseHeight: CGFloat = UIScreen.main.bounds.height / 4.0 * 0.6
+    let attendanceInfoHeight: CGFloat = UIScreen.main.bounds.height / 4.0 * 0.5
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode
@@ -21,10 +20,6 @@ struct CourseView: View {
         _isShowingEditView = State(initialValue: false)
         _isShowingAttendanceRecordView = State(initialValue: false)
         _isShowingAlert = State(initialValue: false)
-        courseWidth = UIScreen.main.bounds.width * 0.925
-        courseHeight = UIScreen.main.bounds.height / 4.0 * 1.5
-        mainInfoHeight = 100
-        attendanceInfoHeight = 60
     }
     
     var body: some View {
@@ -42,43 +37,35 @@ struct CourseView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-            VStack(spacing: 10) {
+            VStack {
                 ZStack {
-                    Rectangle().fill(.white).frame(width: courseWidth, height: mainInfoHeight + 70).cornerRadius(12)
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: 10).fill(.white)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(course.getSelectedColor().opacity(0.75))
-                        .frame(width: courseWidth, height: mainInfoHeight + 70)
-                        .cornerRadius(12)
                         .onTapGesture {
                             isShowingEditView = true
                         }
                     
-                    VStack {
-                        Spacer()
+                    VStack(spacing: 10) {
                         titleView()
-                        Spacer()
                         ZStack {
-                            Rectangle()
+                            RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.white.opacity(0.75))
-                                .cornerRadius(12)
                             VStack {
                                 timeView()
                                 classroomView()
                                 teacherView()
                             }
                         }
-                        .frame(width: courseWidth - 20, height: mainInfoHeight)
-                        Spacer()
+                        .frame(width: courseWidth - 20, height: courseHeight * 0.6)
                     }
                 }
-                .frame(width: courseWidth, height: mainInfoHeight + 70)
+                .frame(width: courseWidth, height: courseHeight)
                 
                 ZStack {
-                    Rectangle().fill(.white).frame(width: courseWidth, height: attendanceInfoHeight + 70).cornerRadius(12)
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: 10).fill(.white)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(course.getSelectedColor().opacity(0.75))
-                        .frame(width: courseWidth, height: attendanceInfoHeight + 70)
-                        .cornerRadius(12)
                         .onTapGesture {
                             isShowingAttendanceRecordView = true
                         }
@@ -103,7 +90,7 @@ struct CourseView: View {
                                     Text("Attend")
                                         .font(.system(size: 14))
                                     Text(String(course.countAttendance(status: .attend)))
-                                        .font(.system(size: 18))
+                                        .font(.system(size: 14))
                                 }
                                 .frame(width: (courseWidth - 100) / 4.0)
                                 .onTapGesture {
@@ -116,7 +103,7 @@ struct CourseView: View {
                                     Text("Absent")
                                         .font(.system(size: 14))
                                     Text(String(course.countAttendance(status: .absent)))
-                                        .font(.system(size: 18))
+                                        .font(.system(size: 14))
                                 }
                                 .frame(width: (courseWidth - 100) / 4.0)
                                 .onTapGesture {
@@ -129,7 +116,7 @@ struct CourseView: View {
                                     Text("Late")
                                         .font(.system(size: 14))
                                     Text(String(course.countAttendance(status: .late)))
-                                        .font(.system(size: 18))
+                                        .font(.system(size: 14))
                                 }
                                 .frame(width: (courseWidth - 100) / 4.0)
                                 .onTapGesture {
@@ -143,7 +130,7 @@ struct CourseView: View {
                                     Text("Canceled")
                                         .font(.system(size: 14))
                                     Text(String(course.countAttendance(status: .canceled)))
-                                        .font(.system(size: 18))
+                                        .font(.system(size: 14))
                                     Spacer()
                                 }
                                 .frame(width: (courseWidth - 100) / 4.0)
@@ -154,11 +141,11 @@ struct CourseView: View {
                             }
                             .foregroundColor(Color.black)
                         }
-                        .frame(width: courseWidth - 20, height: attendanceInfoHeight)
+                        .frame(width: courseWidth - 20, height: attendanceInfoHeight * 0.4)
                         Spacer()
                     }
                 }
-                .frame(width: courseWidth, height: attendanceInfoHeight + 70)
+                .frame(width: courseWidth, height: attendanceInfoHeight)
                 Spacer()
             }
         }
@@ -210,12 +197,12 @@ struct CourseView: View {
     func titleView() -> some View {
         return (
             Text(course.name)
-                .font(.system(size: 20))
+                .font(.system(size: 18))
                 .fontWeight(.heavy)
-                .frame(width: courseWidth - 20, height: 20, alignment: .leading)
+                .frame(width: courseWidth - 20, height: 18, alignment: .leading)
                 .foregroundColor(Color.white)
                 .lineLimit(nil)
-                .padding(.leading, 20)
+                .padding(.leading, 18)
         )
     }
     
@@ -227,14 +214,14 @@ struct CourseView: View {
                 Image(systemName: "clock.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
+                    .frame(width: 14, height: 14)
                     .foregroundColor(course.getSelectedColor().opacity(0.75))
-                    .padding(.leading, 16)
+                    .padding(.leading, 14)
                 Text(startTimeText + " ~ " + endTimeText)
                     .foregroundColor(Color.black)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 16, alignment: .leading)
+                .frame(width: courseWidth - 20, height: 15, alignment: .leading)
         )
     }
     
@@ -244,15 +231,15 @@ struct CourseView: View {
                 Image(systemName: "mappin.circle.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
+                    .frame(width: 14, height: 14)
                     .foregroundColor(course.getSelectedColor().opacity(0.75))
-                    .padding(.leading, 16)
+                    .padding(.leading, 14)
                 
                 Text(course.classroom)
                     .foregroundColor(Color.black)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 16, alignment: .leading)
+                .frame(width: courseWidth - 20, height: 14, alignment: .leading)
         )
     }
     
@@ -262,15 +249,15 @@ struct CourseView: View {
                 Image(systemName: "person.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
+                    .frame(width: 14, height: 14)
                     .foregroundColor(course.getSelectedColor().opacity(0.75))
-                    .padding(.leading, 16)
+                    .padding(.leading, 14)
                 
                 Text(course.teacher)
                     .foregroundColor(Color.black)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
             }
-                .frame(width: courseWidth - 20, height: 16, alignment: .leading)
+                .frame(width: courseWidth - 20, height: 14, alignment: .leading)
         )
     }
 }
