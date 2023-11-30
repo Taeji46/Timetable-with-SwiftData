@@ -26,13 +26,19 @@ struct MainView: View {
                     }
                     .tag(1)
                 
-                SettingView(selectedTableId: $selectedTableId, table: table)
+                Text("Todo List")
                     .tabItem {
-                        Image(systemName: "gear")
-                        Text("Settings")
+                        Image(systemName: "checkmark.circle")
+                        Text("Todo")
                     }
                     .tag(2)
             }
+            .navigationBarItems(trailing: NavigationLink(destination: {
+                SettingView(selectedTableId: $selectedTableId, table: table)
+                    .navigationTitle("Settings")
+            }, label: {
+                Image(systemName: "gear")
+            }))
             .accentColor(colorScheme == .dark ? .white : .black)
             .navigationTitle(navigationTitle)
             .onChange(of: selectedTab, initial: true) { oldTab, newTab in
@@ -42,7 +48,7 @@ struct MainView: View {
                 case 1:
                     navigationTitle = table.title.isEmpty ? String(localized: "-") : table.title
                 case 2:
-                    navigationTitle = String(localized: "Settings")
+                    navigationTitle = String(localized: "Todo")
                 default:
                     navigationTitle = String(localized: "Today's Lectures")
                 }
