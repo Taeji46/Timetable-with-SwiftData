@@ -34,12 +34,7 @@ struct MainView: View {
                     }
                     .tag(2)
             }
-            .navigationBarItems(trailing: NavigationLink(destination: {
-                SettingView(selectedTableId: $selectedTableId, table: table)
-                    .navigationTitle("Settings")
-            }, label: {
-                Image(systemName: "gear")
-            }))
+            .navigationBarItems(leading: menu)
             .accentColor(colorScheme == .dark ? .white : .black)
             .navigationTitle(navigationTitle)
             .onChange(of: selectedTab, initial: true) { oldTab, newTab in
@@ -71,7 +66,20 @@ struct MainView: View {
             }
         }
     }
-        
+    
+    var menu: some View {
+        Menu(content: {
+            NavigationLink(destination: {
+                SettingView(selectedTableId: $selectedTableId, table: table)
+                    .navigationTitle("Settings")
+            }, label: {
+                Text("Settings")
+            })
+        }, label: {
+            Image(systemName: "list.bullet")
+        })
+    }
+    
     func getTable() -> Table {
         return tables.first(where: { $0.id.uuidString == selectedTableId }) ?? tables[0]
     }
