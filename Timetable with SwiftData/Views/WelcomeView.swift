@@ -91,6 +91,6 @@ struct WelcomeView: View {
     private func addTable() {
         let newTable = Table(title: title, colorName: colorName, numOfDays: selectedNumOfDays, numOfPeriods: selectedNumOfPeriods)
         modelContext.insert(newTable)
-        selectedTableId = tables[0].id.uuidString
+        selectedTableId = newTable.id.uuidString
     }
 }

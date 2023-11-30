@@ -11,6 +11,7 @@ final class Table {
     @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
     var notificationTime: Int
+    var scheduledToBeDeleted: Bool
     
     init(title: String, colorName: String, numOfDays: Int, numOfPeriods: Int) {
         self.title = title
@@ -20,6 +21,7 @@ final class Table {
         courses = []
         periods = []
         notificationTime = 5
+        scheduledToBeDeleted = false
     }
     
     func initPeriods() {

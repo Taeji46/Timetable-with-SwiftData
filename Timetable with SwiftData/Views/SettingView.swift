@@ -7,7 +7,7 @@ struct SettingView: View {
         case deleteTable
     }
     
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.presentationMode) var presentationMode
     @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
     @Query private var tables: [Table]
     @Binding var selectedTableId: String
@@ -166,9 +166,8 @@ struct SettingView: View {
                     primaryButton: .destructive(Text("Reset")) {
                         table.setAllCoursesNotification(value: false)
                         table.updateNotificationSetting()
-                        selectedTableId = "unselected"
-                        modelContext.delete(table)
-                        try? modelContext.save()
+                        table.scheduledToBeDeleted = true
+                        presentationMode.wrappedValue.dismiss()
                     },
                     secondaryButton: .cancel()
                 )

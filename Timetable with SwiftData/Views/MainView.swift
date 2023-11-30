@@ -3,6 +3,7 @@ import SwiftData
 
 struct MainView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.modelContext) private var modelContext
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     @State var table: Table
@@ -54,8 +55,13 @@ struct MainView: View {
                 }
             }
             .onAppear() {
-                selectedTableId = table.id.uuidString
                 table.initPeriods()
+                
+                if table.scheduledToBeDeleted {
+                    modelContext.delete(table)
+                    try? modelContext.save()
+                    selectedTableId = "unselected"
+                }
             }
         }
         .navigationViewStyle(.stack)
