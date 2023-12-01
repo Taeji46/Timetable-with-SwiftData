@@ -4,7 +4,8 @@
 ## 機能
 ・今日これからある講義情報のタイムライン表示  
 ・講義開始前の講義情報の通知  
-・出席状況の記録
+・出席状況の記録  
+・Todoリスト (実装予定)
 
 ## スクリーンショット
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/d72831ea-df11-40ca-8641-00d6780462f6" width="200px">
