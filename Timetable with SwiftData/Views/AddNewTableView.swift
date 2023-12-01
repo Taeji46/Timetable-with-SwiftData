@@ -72,7 +72,7 @@ struct AddNewTableView: View {
                     }).disabled(title.isEmpty)
                 }
             }
-            .navigationBarTitle("Add a New Table")
+            .navigationBarTitle("Add a New Timetable")
         }
     }
     

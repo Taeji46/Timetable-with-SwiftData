@@ -76,7 +76,10 @@
 "Add to Timetable" = "追加";
 
 /* WelcomeView */
-"Create a New Timetable" = "時間割を新規作成";
+"Create a New Timetable" = "作成";
 
 /* SelectTableView */
 "Timetable List" = "時間割表の一覧";
+
+/* AddNewTableView */
+"Add a New Timetable" = "時間割を新規作成";

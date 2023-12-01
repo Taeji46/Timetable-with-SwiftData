@@ -61,7 +61,6 @@
 "Notifications for the current timetable will be turned off" = "Notifications for the current timetable will be turned off";
 "OK" = "OK";
 
-
 /* Attendance */
 "Attendance Status" = "Attendance Status";
 "Attend" = "Attend";
@@ -81,3 +80,6 @@
 
 /* SelectTableView */
 "Timetable List" = "Timetable List";
+
+/* AddNewTableView */
+"Add a New Timetable" = "Add a New Timetable";
