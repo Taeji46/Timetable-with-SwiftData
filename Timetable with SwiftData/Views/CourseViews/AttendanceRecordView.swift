@@ -20,7 +20,7 @@ struct AttendanceRecordView: View {
             )
             .ignoresSafeArea()
             
-            VStack {
+            ScrollView(showsIndicators: true) {
                 ForEach(course.attendanceRecords.sorted { $0.date > $1.date }, id: \.id) { attendance in
                     NavigationLink(destination: {
                         AttendanceEditView(course: course, attendance: attendance)

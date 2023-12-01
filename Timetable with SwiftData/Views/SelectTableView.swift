@@ -12,7 +12,7 @@ struct SelectTableView: View {
             ZStack {
                 ColorfulView()
                     .ignoresSafeArea()
-                VStack() {
+                ScrollView(showsIndicators: true) {
                     Group {
                         ForEach(tables) { table in
                             Button(action: {
@@ -34,8 +34,7 @@ struct SelectTableView: View {
                             })
                         }
                     }
-                    .padding(.top, 10)
-                    Spacer()
+//                    .padding(.top, 12)
                 }
             }
             .toolbar {

@@ -178,6 +178,11 @@ struct SettingView: View {
                 table = getTable()
             }
         }
+        .onAppear() {
+            UNUserNotificationCenter.current().getPendingNotificationRequests {
+                print("Pending requests :", $0)
+            }
+        }
     }
     
     func getMinStartTime(period: Int) -> Date { // 設定できる開始時間の最小値

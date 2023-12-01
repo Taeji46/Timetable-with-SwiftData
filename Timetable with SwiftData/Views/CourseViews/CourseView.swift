@@ -6,6 +6,10 @@ struct CourseView: View {
     @State var isShowingEditView: Bool
     @State var isShowingAttendanceRecordView: Bool
     @State var isShowingAlert: Bool
+    @State var attendCount: Int
+    @State var absentCount: Int
+    @State var lateCount: Int
+    @State var canceledCount: Int
     let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.925
     let courseInfoHeight: CGFloat = 76
     let attendanceInfoHeight: CGFloat = 50
@@ -21,6 +25,10 @@ struct CourseView: View {
         _isShowingEditView = State(initialValue: false)
         _isShowingAttendanceRecordView = State(initialValue: false)
         _isShowingAlert = State(initialValue: false)
+        _attendCount = State(initialValue: course.countAttendance(status: .attend))
+        _absentCount = State(initialValue: course.countAttendance(status: .absent))
+        _lateCount = State(initialValue: course.countAttendance(status: .late))
+        _canceledCount = State(initialValue: course.countAttendance(status: .canceled))
     }
     
     var body: some View {
@@ -99,7 +107,7 @@ struct CourseView: View {
                                     VStack {
                                         Text("Attend")
                                             .font(.system(size: 14))
-                                        Text(String(course.countAttendance(status: .attend)))
+                                        Text(String(attendCount))
                                             .font(.system(size: 14))
                                     }
                                 })
@@ -111,7 +119,7 @@ struct CourseView: View {
                                     VStack {
                                         Text("Absent")
                                             .font(.system(size: 14))
-                                        Text(String(course.countAttendance(status: .absent)))
+                                        Text(String(absentCount))
                                             .font(.system(size: 14))
                                     }
                                 })
@@ -123,7 +131,7 @@ struct CourseView: View {
                                     VStack {
                                         Text("Late")
                                             .font(.system(size: 14))
-                                        Text(String(course.countAttendance(status: .late)))
+                                        Text(String(lateCount))
                                             .font(.system(size: 14))
                                     }
                                 })
@@ -135,7 +143,7 @@ struct CourseView: View {
                                     VStack {
                                         Text("Canceled")
                                             .font(.system(size: 14))
-                                        Text(String(course.countAttendance(status: .canceled)))
+                                        Text(String(canceledCount))
                                             .font(.system(size: 14))
                                     }
                                 })
@@ -170,7 +178,12 @@ struct CourseView: View {
                     )
             }
         }
-        .sheet(isPresented: $isShowingAttendanceRecordView) {
+        .sheet(isPresented: $isShowingAttendanceRecordView, onDismiss: {
+            attendCount = course.countAttendance(status: .attend)
+            absentCount = course.countAttendance(status: .absent)
+            lateCount = course.countAttendance(status: .late)
+            canceledCount = course.countAttendance(status: .canceled)
+        }) {
             NavigationView {
                 AttendanceRecordView(course: course)
                     .navigationBarTitle("Attendance Status", displayMode: .inline)
@@ -194,6 +207,12 @@ struct CourseView: View {
                 },
                 secondaryButton: .cancel()
             )
+        }
+        .onChange(of: course.attendanceRecords) {
+            attendCount = course.countAttendance(status: .attend)
+            absentCount = course.countAttendance(status: .absent)
+            lateCount = course.countAttendance(status: .late)
+            canceledCount = course.countAttendance(status: .canceled)
         }
     }
     

@@ -9,12 +9,12 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
     dateComponents.minute = Calendar.current.component(.minute, from: startTime)
     
     let calendar = Calendar.current
-    if let nextWednesday = calendar.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) {
+    if let nextNotificationDate = calendar.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) {
         let content = UNMutableNotificationContent()
         content.title = course.getPeriodInfoText() + ": " + course.name
         content.body = String(localized: "Classroom") + ": " + course.classroom + "\n" + String(localized: "Time") + ": " + table.getPeriod(index: course.period).getStartTimeText() + " ~ " + table.getPeriod(index: course.period).getEndTimeText()
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.weekday, .hour, .minute], from: nextWednesday), repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.weekday, .hour, .minute], from: nextNotificationDate), repeats: true)
         
         let request = UNNotificationRequest(identifier: createNotificationIdentifier(course: course), content: content, trigger: trigger)
         
