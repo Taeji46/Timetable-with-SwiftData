@@ -12,6 +12,9 @@
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/835053d7-2ecb-4e7c-b85f-7cc7089bea8f" width="200px">
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/e510aab0-d551-40d8-bf2b-e3931735afdb" width="200px">  
 
+## 利用方法
+Xcode 15がインストールされたMacで Code -> Open with Xcode でクローンしてください
+
 ## 動作環境
 iOS 17.0 以上
 
