@@ -29,7 +29,8 @@ struct WeeklyCourseView: View {
                 .foregroundColor(Color.black)
                 .font(.system(size: 12))
                 .frame(width: courseWidth - 10, height: courseHeight * 0.45, alignment: .top)
-                .lineLimit(nil)
+                .lineLimit(3)
+                .minimumScaleFactor(0.5)
         )
     }
     

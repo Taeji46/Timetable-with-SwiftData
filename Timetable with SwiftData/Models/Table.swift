@@ -10,6 +10,7 @@ final class Table {
     var numOfPeriods: Int
     @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
+    @Relationship(deleteRule: .cascade, inverse: \Todo.table) var todoList: [Todo]
     var notificationTime: Int
     var scheduledToBeDeleted: Bool
     
@@ -20,6 +21,7 @@ final class Table {
         self.numOfPeriods = numOfPeriods
         courses = []
         periods = []
+        todoList = []
         notificationTime = 5
         scheduledToBeDeleted = false
     }

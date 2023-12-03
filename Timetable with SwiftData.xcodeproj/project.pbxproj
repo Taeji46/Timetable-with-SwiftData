@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F025C8772B1CF1590085DCBD /* TodoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F025C8762B1CF1590085DCBD /* TodoEditView.swift */; };
 		F0364C092B06512300401B45 /* Timetable_with_SwiftDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C082B06512300401B45 /* Timetable_with_SwiftDataApp.swift */; };
 		F0364C0B2B06512300401B45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364C0A2B06512300401B45 /* ContentView.swift */; };
 		F0364C0F2B06512600401B45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0364C0E2B06512600401B45 /* Assets.xcassets */; };
@@ -31,6 +32,9 @@
 		F0364CB02B08E48600401B45 /* DailyCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CAF2B08E48600401B45 /* DailyCourseView.swift */; };
 		F0364CB22B08E49D00401B45 /* DailyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0364CB12B08E49D00401B45 /* DailyTableView.swift */; };
 		F0364CB52B08E4C500401B45 /* Colorful in Frameworks */ = {isa = PBXBuildFile; productRef = F0364CB42B08E4C500401B45 /* Colorful */; };
+		F06584552B1ACC030092A37C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06584542B1ACC030092A37C /* Todo.swift */; };
+		F06584572B1AD15F0092A37C /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06584562B1AD15F0092A37C /* TodoListView.swift */; };
+		F06584592B1B68F60092A37C /* AddNewTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06584582B1B68F60092A37C /* AddNewTodoView.swift */; };
 		F070ED0F2B0D2352006FA7A3 /* AppearanceModeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F070ED0E2B0D2352006FA7A3 /* AppearanceModeUtils.swift */; };
 		F070ED112B0F3ACE006FA7A3 /* UsualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F070ED102B0F3ACE006FA7A3 /* UsualView.swift */; };
 		F070ED132B0F9242006FA7A3 /* AddNewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F070ED122B0F9242006FA7A3 /* AddNewTableView.swift */; };
@@ -41,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F025C8762B1CF1590085DCBD /* TodoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditView.swift; sourceTree = "<group>"; };
 		F0364C052B06512300401B45 /* Timetable with SwiftData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Timetable with SwiftData.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0364C082B06512300401B45 /* Timetable_with_SwiftDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_with_SwiftDataApp.swift; sourceTree = "<group>"; };
 		F0364C0A2B06512300401B45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,6 +70,9 @@
 		F0364CAB2B08E3EA00401B45 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		F0364CAF2B08E48600401B45 /* DailyCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCourseView.swift; sourceTree = "<group>"; };
 		F0364CB12B08E49D00401B45 /* DailyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableView.swift; sourceTree = "<group>"; };
+		F06584542B1ACC030092A37C /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		F06584562B1AD15F0092A37C /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
+		F06584582B1B68F60092A37C /* AddNewTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTodoView.swift; sourceTree = "<group>"; };
 		F070ED0E2B0D2352006FA7A3 /* AppearanceModeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceModeUtils.swift; sourceTree = "<group>"; };
 		F070ED102B0F3ACE006FA7A3 /* UsualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsualView.swift; sourceTree = "<group>"; };
 		F070ED122B0F9242006FA7A3 /* AddNewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTableView.swift; sourceTree = "<group>"; };
@@ -136,6 +144,9 @@
 				F0364C942B0767C700401B45 /* MainView.swift */,
 				F0364CAE2B08E45100401B45 /* DailyViews */,
 				F0364CAD2B08E42E00401B45 /* WeeklyViews */,
+				F06584562B1AD15F0092A37C /* TodoListView.swift */,
+				F025C8762B1CF1590085DCBD /* TodoEditView.swift */,
+				F06584582B1B68F60092A37C /* AddNewTodoView.swift */,
 				F0CE650C2B17F6DF001A1662 /* CourseViews */,
 				F0364CA42B07EDE300401B45 /* SettingView.swift */,
 			);
@@ -149,6 +160,7 @@
 				F0364C1B2B06528E00401B45 /* Course.swift */,
 				F0364CA82B08CC8000401B45 /* Period.swift */,
 				F0364C962B076D1200401B45 /* Attendance.swift */,
+				F06584542B1ACC030092A37C /* Todo.swift */,
 				F0364C9A2B07945B00401B45 /* ColorTemplate.swift */,
 			);
 			path = Models;
@@ -293,13 +305,17 @@
 				F0364C932B0757FD00401B45 /* CourseEditView.swift in Sources */,
 				F0364C192B06517B00401B45 /* Table.swift in Sources */,
 				F070ED112B0F3ACE006FA7A3 /* UsualView.swift in Sources */,
+				F06584572B1AD15F0092A37C /* TodoListView.swift in Sources */,
 				F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */,
 				F0364C9B2B07945B00401B45 /* ColorTemplate.swift in Sources */,
 				F070ED0F2B0D2352006FA7A3 /* AppearanceModeUtils.swift in Sources */,
 				F0364CA32B07E8D700401B45 /* WelcomeView.swift in Sources */,
+				F06584552B1ACC030092A37C /* Todo.swift in Sources */,
+				F025C8772B1CF1590085DCBD /* TodoEditView.swift in Sources */,
 				F0364C262B06550000401B45 /* WeeklyTableView.swift in Sources */,
 				F0364C242B06548800401B45 /* WeeklyCourseView.swift in Sources */,
 				F0364C992B076FF400401B45 /* AttendanceRecordView.swift in Sources */,
+				F06584592B1B68F60092A37C /* AddNewTodoView.swift in Sources */,
 				F0364C092B06512300401B45 /* Timetable_with_SwiftDataApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

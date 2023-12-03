@@ -27,16 +27,31 @@ struct MainView: View {
                     }
                     .tag(1)
                 
-                Text("Todo List")
+                TodoListView(table: table, selectedTableId: $selectedTableId)
                     .tabItem {
                         Image(systemName: "checkmark.circle")
                         Text("Todo")
                     }
                     .tag(2)
             }
-            .navigationBarItems(leading: menu)
-            .accentColor(colorScheme == .dark ? .white : .black)
             .navigationTitle(navigationTitle)
+            .navigationBarItems(leading: menu)
+            .navigationBarItems(trailing:
+                                    selectedTab == 2 ?
+                                NavigationLink(destination: {
+                AddNewTodoView(table: table)
+            }, label: {
+                Image(systemName: "plus")
+            }) : nil
+            )
+            .navigationBarItems(trailing:
+                                    selectedTab == 2 ?
+                                Button(action: {
+                table.todoList.removeAll(where: { $0.isCompleted == true })
+            }, label: {
+                Image(systemName: "arrow.circlepath")
+            }) : nil
+            )
             .onChange(of: selectedTab, initial: true) { oldTab, newTab in
                 switch newTab {
                 case 0:
@@ -49,20 +64,21 @@ struct MainView: View {
                     navigationTitle = String(localized: "Today's Lectures")
                 }
             }
-            .onAppear() {
-                table.initPeriods()
-                
-                if table.scheduledToBeDeleted {
-                    modelContext.delete(table)
-                    try? modelContext.save()
-                    selectedTableId = "unselected"
-                }
-            }
         }
-        .navigationViewStyle(.stack)
+        .accentColor(colorScheme == .dark ? .white : .black)
+        .onAppear() {
+            table.initPeriods()
+        }
         .onChange(of: selectedTableId) {
             if !tables.isEmpty {
                 table = getTable()
+            }
+        }
+        .onChange(of: table.scheduledToBeDeleted) {
+            if table.scheduledToBeDeleted {
+                modelContext.delete(table)
+                try? modelContext.save()
+                selectedTableId = "unselected"
             }
         }
     }
