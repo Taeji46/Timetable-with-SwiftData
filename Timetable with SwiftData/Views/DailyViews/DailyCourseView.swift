@@ -2,25 +2,25 @@ import SwiftUI
 import SwiftData
 
 struct DailyCourseView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     @State var course: Course
     @State var currentTime: Date
     var courseWidth: CGFloat
     let courseInfoHeight: CGFloat = 76
-    let insideFrameWidth: CGFloat = 12
+    let insideFrameWidth: CGFloat = 10
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         HStack {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .clear : .white)
+                    .fill(colorScheme == .dark ? .black : .white)
                 
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.25) : course.getSelectedColor().opacity(0.75))
                 
                 Text(String(course.period + 1))
-                    .foregroundColor(Color.white)
                     .font(.system(size: 12))
                     .bold()
             }
@@ -31,9 +31,10 @@ struct DailyCourseView: View {
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .clear : .white)
+                        .fill(colorScheme == .dark ? .black : .white)
+                    
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
+                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.25) : course.getSelectedColor().opacity(0.75))
                     
                     VStack(spacing: 0) {
                         Spacer().frame(height: insideFrameWidth)
@@ -41,7 +42,7 @@ struct DailyCourseView: View {
                         Spacer().frame(height: insideFrameWidth)
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white.opacity(0.75))
+                                .stroke(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .white.opacity(0.5) : .white, lineWidth: 1)
                             VStack {
                                 timeView()
                                 classroomView()
@@ -55,6 +56,7 @@ struct DailyCourseView: View {
                 .frame(width: courseWidth, height: courseInfoHeight + 18 + 3 * insideFrameWidth)
             })
         }
+        .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .white.opacity(0.5) : .white)
         .onAppear {
             currentTime = getCurrentTime()
         }
@@ -69,7 +71,6 @@ struct DailyCourseView: View {
                 .font(.system(size: 18))
                 .fontWeight(.heavy)
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
-                .foregroundColor(Color.white)
                 .lineLimit(nil)
                 .padding(.leading, 18)
         )
@@ -84,12 +85,11 @@ struct DailyCourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(startTimeText + " ~ " + endTimeText)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
+                    .bold()
             }
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
@@ -102,12 +102,11 @@ struct DailyCourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(course.classroom)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
+                    .bold()
             }
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
         )
@@ -120,12 +119,11 @@ struct DailyCourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.4) : course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(course.teacher)
-                    .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? Color.black.opacity(0.4) : Color.black)
                     .font(.system(size: 14))
+                    .bold()
             }
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
         )

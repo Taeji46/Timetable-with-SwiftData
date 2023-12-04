@@ -3,6 +3,7 @@ import SwiftData
 import Colorful
 
 struct WeeklyTableView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.modelContext) private var modelContext
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
@@ -14,15 +15,9 @@ struct WeeklyTableView: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient:
-                    Gradient(stops: [
-                        .init(color: table.getSelectedColor().opacity(0.25), location: 0.0),
-                        .init(color: table.getSelectedColor().opacity(0.25), location: 0.1),
-                        .init(color: table.getSelectedColor().opacity(0.1), location: 0.25),
-                        .init(color: table.getSelectedColor().opacity(0.1), location: 0.85),
-                        .init(color: table.getSelectedColor().opacity(0.0), location: 0.95),
-                        .init(color: table.getSelectedColor().opacity(0.0), location: 1.0)
-                    ]),
+                gradient: (colorScheme == .dark ?
+                           Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)]):
+                            Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)])),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -31,6 +26,7 @@ struct WeeklyTableView: View {
             VStack {
                 Spacer()
                 weekView()
+                    .padding(.top, 10)
                 ScrollView(showsIndicators: false) {
                     HStack() {
                         periodView()
@@ -64,9 +60,11 @@ struct WeeklyTableView: View {
                 
                 ForEach(daysOfWeek, id: \.self) { day in
                     ZStack {
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(colorScheme == .dark ? .black : .white)
+                        
+                        RoundedRectangle(cornerRadius: 12)
                             .fill(table.getSelectedColor().opacity(0.75))
-                            .cornerRadius(8)
                         
                         Text(day)
                             .foregroundColor(Color.white)
@@ -84,9 +82,11 @@ struct WeeklyTableView: View {
             VStack {
                 ForEach(1...table.numOfPeriods, id: \.self) { period in
                     ZStack {
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(colorScheme == .dark ? .black : .white)
+                        
+                        RoundedRectangle(cornerRadius: 12)
                             .fill(table.getSelectedColor().opacity(0.75))
-                            .cornerRadius(8)
                         
                         Text(String(period))
                             .foregroundColor(Color.white)

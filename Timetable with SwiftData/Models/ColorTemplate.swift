@@ -1,18 +1,21 @@
 import SwiftUI
 
+import UIKit
+
 enum ThemeColors: String, CaseIterable {
-    case blue = "blue"
     case red = "red"
     case orange = "orange"
     case green = "green"
     case mint = "mint"
+    case cyan = "cyan"
+    case teal = "teal"
+    case blue = "blue"
+    case indigo = "indigo"
     case purple = "purple"
     case pink = "pink"
     
     var colorData: Color {
         switch self {
-        case .blue:
-            return .blue
         case .red:
             return .red
         case .orange:
@@ -21,27 +24,37 @@ enum ThemeColors: String, CaseIterable {
             return .green
         case .mint:
             return .mint
+        case .teal:
+            return .teal
+        case .blue:
+            return .blue
+        case .indigo:
+            return .indigo
         case .purple:
             return .purple
         case .pink:
             return .pink
+        case .cyan:
+            return .cyan
         }
     }
 }
 
+
 enum CourseColors: String, CaseIterable {
-    case blue = "blue"
     case red = "red"
     case orange = "orange"
     case green = "green"
     case mint = "mint"
+    case cyan = "cyan"
+    case teal = "teal"
+    case blue = "blue"
+    case indigo = "indigo"
     case purple = "purple"
     case pink = "pink"
     
     var colorData: Color {
         switch self {
-        case .blue:
-            return .blue
         case .red:
             return .red
         case .orange:
@@ -50,10 +63,18 @@ enum CourseColors: String, CaseIterable {
             return .green
         case .mint:
             return .mint
+        case .teal:
+            return .teal
+        case .blue:
+            return .blue
+        case .indigo:
+            return .indigo
         case .purple:
             return .purple
         case .pink:
             return .pink
+        case .cyan:
+            return .cyan
         }
     }
 }

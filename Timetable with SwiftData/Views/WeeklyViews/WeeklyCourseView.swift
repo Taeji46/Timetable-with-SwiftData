@@ -2,19 +2,18 @@ import SwiftUI
 import SwiftData
 
 struct WeeklyCourseView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var course: Course
     var courseWidth: CGFloat
     var courseHeight: CGFloat
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(.white)
-                .frame(width: courseWidth, height: courseHeight).cornerRadius(12)
-            Rectangle()
-                .fill(course.getSelectedColor().opacity(0.4))
+            RoundedRectangle(cornerRadius: 12)
+                .fill(colorScheme == .dark ? .black : .white)
+            RoundedRectangle(cornerRadius: 12)
+                .fill(course.getSelectedColor().opacity(0.75))
                 .frame(width: courseWidth, height: courseHeight)
-                .cornerRadius(12)
             VStack {
                 titleView()
                 classroomView()
@@ -26,8 +25,9 @@ struct WeeklyCourseView: View {
     func titleView() -> some View {
         return (
             Text(course.name)
-                .foregroundColor(Color.black)
+                .foregroundColor(.white)
                 .font(.system(size: 12))
+                .bold()
                 .frame(width: courseWidth - 10, height: courseHeight * 0.45, alignment: .top)
                 .lineLimit(3)
                 .minimumScaleFactor(0.5)
@@ -37,13 +37,13 @@ struct WeeklyCourseView: View {
     func classroomView() -> some View {
         return (
             ZStack {
-                Rectangle()
-                    .fill(course.getSelectedColor())
-                    .cornerRadius(4)
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.white, lineWidth: 1)
                 
                 Text(course.classroom)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(.white)
                     .font(.system(size: 10))
+                    .bold()
             }
                 .frame(width: courseWidth - 10, height: 15)
         )

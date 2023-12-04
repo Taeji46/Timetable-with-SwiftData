@@ -13,7 +13,7 @@ struct CourseView: View {
     let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.925
     let courseInfoHeight: CGFloat = 76
     let attendanceInfoHeight: CGFloat = 50
-    let insideFrameWidth: CGFloat = 12
+    let insideFrameWidth: CGFloat = 10
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode

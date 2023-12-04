@@ -34,6 +34,9 @@ struct MainView: View {
                     }
                     .tag(2)
             }
+            .toolbarBackground(colorScheme == .dark ? table.getSelectedColor().opacity(0.75) : table.getSelectedColor().opacity(0.15), for: .navigationBar)
+            .toolbarBackground(selectedTab != -1 ? .visible : .hidden, for: .navigationBar)
+            .toolbarColorScheme(colorScheme == .dark ? .dark : .light)
             .navigationTitle(navigationTitle)
             .navigationBarItems(leading: menu)
             .navigationBarItems(trailing:
@@ -49,8 +52,12 @@ struct MainView: View {
                                 Button(action: {
                 table.todoList.removeAll(where: { $0.isCompleted == true })
             }, label: {
-                Image(systemName: "arrow.circlepath")
+                Image(systemName: "arrow.triangle.2.circlepath")
             }) : nil
+            )
+            .navigationBarItems(trailing:
+                                    selectedTab == 0 ?
+                                Text(getCurrentInfoText()) : nil
             )
             .onChange(of: selectedTab, initial: true) { oldTab, newTab in
                 switch newTab {

@@ -3,6 +3,7 @@ import SwiftData
 import Colorful
 
 struct DailyTableView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
@@ -13,19 +14,30 @@ struct DailyTableView: View {
     
     var body: some View {
         ZStack {
+//            LinearGradient(
+//                gradient: Gradient(colors: [table.getSelectedColor().opacity(0.1), table.getSelectedColor().opacity(0.1)]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            )
+//            .ignoresSafeArea()
+//            
+//            ColorfulView()
+//                .ignoresSafeArea()
+            
             LinearGradient(
-                gradient: Gradient(colors: [table.getSelectedColor().opacity(0.1), table.getSelectedColor().opacity(0.05)]),
+                gradient: (colorScheme == .dark ?
+                           Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)]):
+                            Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)])),
                 startPoint: .top,
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-            ColorfulView()
-                .ignoresSafeArea()
-            VStack {
-                Text(getCurrentInfoText())
+            
+            VStack(spacing: 0) {
                 ScrollView(showsIndicators: false) {
                     courseTableView()
                 }
+                    .padding(.top, 20)
             }
             .onAppear {
                 currentTime = getCurrentTime()
