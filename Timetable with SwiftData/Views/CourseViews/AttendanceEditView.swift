@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AttendanceEditView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode
     var course: Course
     @State var attendance: Attendance
@@ -23,6 +24,8 @@ struct AttendanceEditView: View {
                     .labelsHidden()
             }
         }
+        .background(colorScheme == .dark ? course.getSelectedColor().opacity(0.05) : course.getSelectedColor().opacity(0.15))
+        .scrollContentBackground(.hidden)
         .navigationBarItems(trailing: Button(action: {
             isShowingAlert = true
         }) {

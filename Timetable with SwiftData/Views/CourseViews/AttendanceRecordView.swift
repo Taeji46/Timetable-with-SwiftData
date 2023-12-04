@@ -8,51 +8,49 @@ struct AttendanceRecordView: View {
         ZStack {
             LinearGradient(
                 gradient: (colorScheme == .dark ?
-                           Gradient(stops: [
-                            .init(color: course.getSelectedColor().opacity(0.25), location: 0.0),
-                            .init(color: course.getSelectedColor().opacity(0.25), location: 0.1),
-                            .init(color: course.getSelectedColor().opacity(0.1), location: 0.25),
-                            .init(color: course.getSelectedColor().opacity(0.0), location: 1.0)
-                           ]):
-                            Gradient(colors: [course.getSelectedColor().opacity(0.1), course.getSelectedColor().opacity(0.1)])),
+                           Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)]):
+                            Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)])),
                 startPoint: .top,
                 endPoint: .bottom
             )
             .ignoresSafeArea()
             
             ScrollView(showsIndicators: true) {
-                ForEach(course.attendanceRecords.sorted { $0.date > $1.date }, id: \.id) { attendance in
-                    NavigationLink(destination: {
-                        AttendanceEditView(course: course, attendance: attendance)
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(colorScheme == .dark ? .black : .white)
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(course.getSelectedColor().opacity(0.75))
-                            
-                            HStack {
-                                Text(formattedDate(attendance.date))
-                                    .bold()
-                                    .padding()
-                                    .foregroundColor(Color.white)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    ForEach(course.attendanceRecords.sorted { $0.date > $1.date }, id: \.id) { attendance in
+                        NavigationLink(destination: {
+                            AttendanceEditView(course: course, attendance: attendance)
+                        }, label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(colorScheme == .dark ? .black : .white)
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(course.getSelectedColor().opacity(0.75))
                                 
-                                Spacer()
-                                
-                                Text(attendance.status.localizedString)
-                                    .bold()
-                                    .padding()
-                                    .foregroundColor(Color.white)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                HStack {
+                                    Text(formattedDate(attendance.date))
+                                        .bold()
+                                        .padding()
+                                        .foregroundColor(Color.white)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    Spacer()
+                                    
+                                    Text(attendance.status.localizedString)
+                                        .bold()
+                                        .padding()
+                                        .foregroundColor(Color.white)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                }
                             }
-                        }
-                        .frame(width: UIScreen.main.bounds.width * 0.90, height: 40)
-                        .padding(.bottom, 14)
-                    })
+                            .frame(width: UIScreen.main.bounds.width * 0.925)
+                        })
+                    }
+                    Spacer()
                 }
-                Spacer()
+                .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
             }
+           
         }
     }
     

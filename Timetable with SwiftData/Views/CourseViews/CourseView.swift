@@ -35,13 +35,8 @@ struct CourseView: View {
         ZStack {
             LinearGradient(
                 gradient: (colorScheme == .dark ?
-                           Gradient(stops: [
-                            .init(color: course.getSelectedColor().opacity(0.25), location: 0.0),
-                            .init(color: course.getSelectedColor().opacity(0.25), location: 0.1),
-                            .init(color: course.getSelectedColor().opacity(0.1), location: 0.25),
-                            .init(color: course.getSelectedColor().opacity(0.0), location: 1.0)
-                           ]):
-                            Gradient(colors: [course.getSelectedColor().opacity(0.1), course.getSelectedColor().opacity(0.1)])),
+                           Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)]):
+                            Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)])),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -51,7 +46,8 @@ struct CourseView: View {
                     isShowingEditView = true
                 }, label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10).fill(.white)
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(colorScheme == .dark ? .black : .white)
                         RoundedRectangle(cornerRadius: 10)
                             .fill(course.getSelectedColor().opacity(0.75))
                         
@@ -61,7 +57,7 @@ struct CourseView: View {
                             Spacer().frame(height: insideFrameWidth)
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white.opacity(0.75))
+                                    .stroke(.white, lineWidth: 1)
                                 VStack {
                                     timeView()
                                     classroomView()
@@ -80,7 +76,8 @@ struct CourseView: View {
                         isShowingAttendanceRecordView = true
                     }, label: {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 10).fill(.white)
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(colorScheme == .dark ? .black : .white)
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(course.getSelectedColor().opacity(0.75))
                         }
@@ -90,16 +87,14 @@ struct CourseView: View {
                         Spacer().frame(height: insideFrameWidth)
                         Text("Attendance Status")
                             .font(.system(size: 18))
-                            .fontWeight(.heavy)
+                            .bold()
                             .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
-                            .foregroundColor(Color.white)
                             .lineLimit(nil)
                             .padding(.leading, 18)
                         Spacer().frame(height: insideFrameWidth)
                         ZStack {
-                            Rectangle()
-                                .fill(Color.white.opacity(0.75))
-                                .cornerRadius(12)
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.white, lineWidth: 1)
                             HStack(spacing: 0) {
                                 Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .attend, date: Date()))
@@ -110,8 +105,8 @@ struct CourseView: View {
                                         Text(String(attendCount))
                                             .font(.system(size: 14))
                                     }
+                                    .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 })
-                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 Divider()
                                 Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .absent, date: Date()))
@@ -122,8 +117,8 @@ struct CourseView: View {
                                         Text(String(absentCount))
                                             .font(.system(size: 14))
                                     }
+                                    .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 })
-                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 Divider()
                                 Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .late, date: Date()))
@@ -134,8 +129,8 @@ struct CourseView: View {
                                         Text(String(lateCount))
                                             .font(.system(size: 14))
                                     }
+                                    .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 })
-                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 Divider()
                                 Button(action: {
                                     course.attendanceRecords.append(Attendance(status: .canceled, date: Date()))
@@ -146,10 +141,10 @@ struct CourseView: View {
                                         Text(String(canceledCount))
                                             .font(.system(size: 14))
                                     }
+                                    .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                                 })
-                                .frame(width: (courseWidth - 2 * insideFrameWidth) / 4.0)
                             }
-                            .foregroundColor(Color.black)
+                            .bold()
                         }
                         .frame(width: courseWidth - 2 * insideFrameWidth, height: attendanceInfoHeight)
                         Spacer().frame(height: insideFrameWidth)
@@ -159,6 +154,8 @@ struct CourseView: View {
                 
                 Spacer()
             }
+            .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
+            .foregroundColor(.white)
         }
         .navigationTitle(course.name)
         .navigationBarItems(trailing: Button(action: {
@@ -167,7 +164,7 @@ struct CourseView: View {
             Image(systemName: "trash")
         })
         .sheet(isPresented: $isShowingEditView) {
-            NavigationView {
+            NavigationStack {
                 CourseEditView(table: table, course: course, selectedColor: course.getSelectedColor())
                     .navigationBarTitle("Details", displayMode: .inline)
                     .navigationBarItems(
@@ -177,6 +174,7 @@ struct CourseView: View {
                             }
                     )
             }
+            .accentColor(colorScheme == .dark ? .white : .black)
         }
         .sheet(isPresented: $isShowingAttendanceRecordView, onDismiss: {
             attendCount = course.countAttendance(status: .attend)
@@ -184,7 +182,7 @@ struct CourseView: View {
             lateCount = course.countAttendance(status: .late)
             canceledCount = course.countAttendance(status: .canceled)
         }) {
-            NavigationView {
+            NavigationStack {
                 AttendanceRecordView(course: course)
                     .navigationBarTitle("Attendance Status", displayMode: .inline)
                     .navigationBarItems(
@@ -194,6 +192,7 @@ struct CourseView: View {
                             }
                     )
             }
+            .accentColor(colorScheme == .dark ? .white : .black)
         }
         .alert(isPresented: $isShowingAlert) {
             Alert(
@@ -220,9 +219,8 @@ struct CourseView: View {
         return (
             Text(course.name)
                 .font(.system(size: 18))
-                .fontWeight(.heavy)
+                .bold()
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
-                .foregroundColor(Color.white)
                 .lineLimit(nil)
                 .padding(.leading, 18)
         )
@@ -237,11 +235,11 @@ struct CourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
+                
                 Text(startTimeText + " ~ " + endTimeText)
-                    .foregroundColor(Color.black)
                     .font(.system(size: 14))
+                    .bold()
             }
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
@@ -254,14 +252,13 @@ struct CourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(course.classroom)
-                    .foregroundColor(Color.black)
                     .font(.system(size: 14))
+                    .bold()
             }
-                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
         )
     }
     
@@ -272,14 +269,13 @@ struct CourseView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 14, height: 14)
-                    .foregroundColor(course.getSelectedColor().opacity(0.75))
                     .padding(.leading, 14)
                 
                 Text(course.teacher)
-                    .foregroundColor(Color.black)
                     .font(.system(size: 14))
+                    .bold()
             }
-                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
         )
     }
 }

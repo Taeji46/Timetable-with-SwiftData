@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CourseEditView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
     @State var table: Table
@@ -55,6 +56,8 @@ struct CourseEditView: View {
                         }
                 }
             }
+            .background(colorScheme == .dark ? course.getSelectedColor().opacity(0.05) : course.getSelectedColor().opacity(0.15))
+            .scrollContentBackground(.hidden)
         }
     }
 }

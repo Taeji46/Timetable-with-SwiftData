@@ -18,7 +18,7 @@ struct DailyCourseView: View {
                     .fill(colorScheme == .dark ? .black : .white)
                 
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.25) : course.getSelectedColor().opacity(0.75))
+                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
                 
                 Text(String(course.period + 1))
                     .font(.system(size: 12))
@@ -34,7 +34,7 @@ struct DailyCourseView: View {
                         .fill(colorScheme == .dark ? .black : .white)
                     
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.25) : course.getSelectedColor().opacity(0.75))
+                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
                     
                     VStack(spacing: 0) {
                         Spacer().frame(height: insideFrameWidth)
@@ -69,7 +69,7 @@ struct DailyCourseView: View {
         return (
             Text(course.name)
                 .font(.system(size: 18))
-                .fontWeight(.heavy)
+                .bold()
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
                 .lineLimit(nil)
                 .padding(.leading, 18)

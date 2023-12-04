@@ -14,15 +14,8 @@ struct DailyTableView: View {
     
     var body: some View {
         ZStack {
-//            LinearGradient(
-//                gradient: Gradient(colors: [table.getSelectedColor().opacity(0.1), table.getSelectedColor().opacity(0.1)]),
-//                startPoint: .top,
-//                endPoint: .bottom
-//            )
-//            .ignoresSafeArea()
-//            
-//            ColorfulView()
-//                .ignoresSafeArea()
+            ColorfulView()
+                .ignoresSafeArea()
             
             LinearGradient(
                 gradient: (colorScheme == .dark ?
@@ -34,10 +27,15 @@ struct DailyTableView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 0) {
+                Text(getCurrentInfoText())
+                    .font(.title)
+                    .padding([.top, .leading], 14)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .bold()
                 ScrollView(showsIndicators: false) {
                     courseTableView()
                 }
-                    .padding(.top, 20)
+                    .padding(.top, 14)
             }
             .onAppear {
                 currentTime = getCurrentTime()

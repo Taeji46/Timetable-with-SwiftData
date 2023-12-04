@@ -1,6 +1,5 @@
 import SwiftUI
 import SwiftData
-import Colorful
 
 struct WeeklyTableView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -126,10 +125,15 @@ struct WeeklyTableView: View {
     }
     
     func getCourseHeight() -> CGFloat {
+//        if table.numOfPeriods < 7 {
+//            return UIScreen.main.bounds.height / CGFloat(Float(table.numOfPeriods)) * 0.6
+//        } else {
+//            return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.6
+//        }
         if table.numOfPeriods < 7 {
-            return UIScreen.main.bounds.height / CGFloat(Float(table.numOfPeriods)) * 0.6
+            return UIScreen.main.bounds.height / CGFloat(Float(table.numOfPeriods)) * 0.67
         } else {
-            return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.6
+            return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.65
         }
     }
     

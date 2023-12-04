@@ -19,87 +19,89 @@ struct TodoListView: View {
             .ignoresSafeArea()
             
             ScrollView {
-                ForEach(table.todoList) { todo in
-                    if let course = table.courses.first(where: { $0.id.uuidString == todo.courseId }) {
-                        ZStack {
-                            NavigationLink(destination: {
-                                TodoEditView(table: getTable(), todo: todo)
-                            }, label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(colorScheme == .dark ? .black : .white)
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(todo.isCompleted ? course.getSelectedColor().opacity(0.25) :course.getSelectedColor().opacity(0.75))
-                                }
-                            })
-                            
-                            HStack(spacing: 0) {
-                                if todo.isCompleted {
-                                    Button(action: {
-                                        todo.isCompleted = false
-                                    }, label: {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .font(.system(size: 25))
-                                    })
-                                    .padding([.leading, .trailing], 14)
-                                    .foregroundColor(Color.white)
-                                    .frame(alignment: .leading)
-                                } else {
-                                    Button(action: {
-                                        todo.isCompleted = true
-                                    }, label: {
-                                        Image(systemName: "circle")
-                                            .font(.system(size: 25))
-                                    })
-                                    .padding([.leading, .trailing], 14)
-                                    .foregroundColor(Color.white)
-                                    .frame(alignment: .leading)
-                                }
+                VStack {
+                    ForEach(table.todoList) { todo in
+                        if let course = table.courses.first(where: { $0.id.uuidString == todo.courseId }) {
+                            ZStack {
+                                NavigationLink(destination: {
+                                    TodoEditView(table: getTable(), todo: todo)
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(colorScheme == .dark ? .black : .white)
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(todo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
+                                    }
+                                })
                                 
-                                VStack(alignment: .leading) {
-                                    Text(course.name)
-                                        .bold()
-                                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
-                                        .font(.system(size: 12))
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
+                                HStack(spacing: 0) {
+                                    if todo.isCompleted {
+                                        Button(action: {
+                                            todo.isCompleted = false
+                                        }, label: {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .font(.system(size: 25))
+                                        })
+                                        .padding([.leading, .trailing], 14)
+                                        .foregroundColor(Color.white)
+                                        .frame(alignment: .leading)
+                                    } else {
+                                        Button(action: {
+                                            todo.isCompleted = true
+                                        }, label: {
+                                            Image(systemName: "circle")
+                                                .font(.system(size: 25))
+                                        })
+                                        .padding([.leading, .trailing], 14)
+                                        .foregroundColor(Color.white)
+                                        .frame(alignment: .leading)
+                                    }
                                     
-                                    Text(todo.task)
-                                        .bold()
-                                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
-                                        .font(.system(size: 18))
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
-                                }
-                                
-                                Spacer()
-                                
-                                VStack(alignment: .trailing) {
-                                    Text(formattedDate1(todo.date))
-                                        .padding(.trailing, 14)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
-                                        .bold()
-                                        .font(.system(size: 14))
-                                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                                    VStack(alignment: .leading) {
+                                        Text(course.name)
+                                            .bold()
+                                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                                            .font(.system(size: 12))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.5)
+                                        
+                                        Text(todo.task)
+                                            .bold()
+                                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                                            .font(.system(size: 18))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.5)
+                                    }
                                     
-                                    Text(formattedDate2(todo.date))
-                                        .padding(.trailing, 14)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
-                                        .bold()
-                                        .font(.system(size: 14))
-                                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                                    Spacer()
+                                    
+                                    VStack(alignment: .trailing) {
+                                        Text(formattedDate1(todo.date))
+                                            .padding(.trailing, 14)
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.5)
+                                            .bold()
+                                            .font(.system(size: 14))
+                                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                                        
+                                        Text(formattedDate2(todo.date))
+                                            .padding(.trailing, 14)
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.5)
+                                            .bold()
+                                            .font(.system(size: 14))
+                                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                                    }
                                 }
                             }
+                            .frame(width: UIScreen.main.bounds.width * 0.925, height: 60)
+                            .padding(.bottom, 0)
                         }
-                        .frame(width: UIScreen.main.bounds.width * 0.90, height: 60)
-                        .padding(.bottom, 0)
                     }
+                    Spacer()
                 }
-                Spacer()
+                .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
             }
-            .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.9) / 2.0)
         }
     }
     
