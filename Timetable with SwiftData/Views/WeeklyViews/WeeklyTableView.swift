@@ -13,24 +13,20 @@ struct WeeklyTableView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: (colorScheme == .dark ?
-                           Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)]):
-                            Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)])),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+                .ignoresSafeArea()
             
             VStack {
                 Spacer()
                 weekView()
                     .padding(.top, 10)
+                    .padding([.leading, .trailing], 8)
                 ScrollView(showsIndicators: false) {
                     HStack() {
                         periodView()
                         courseTableView()
                     }
+                    .padding([.leading, .trailing], 8)
                 }
                 Spacer()
             }
@@ -64,6 +60,7 @@ struct WeeklyTableView: View {
                         
                         RoundedRectangle(cornerRadius: 12)
                             .fill(table.getSelectedColor().opacity(0.75))
+                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                         
                         Text(day)
                             .foregroundColor(Color.white)
@@ -86,6 +83,7 @@ struct WeeklyTableView: View {
                         
                         RoundedRectangle(cornerRadius: 12)
                             .fill(table.getSelectedColor().opacity(0.75))
+                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                         
                         Text(String(period))
                             .foregroundColor(Color.white)

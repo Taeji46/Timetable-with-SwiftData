@@ -6,14 +6,8 @@ struct AttendanceRecordView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: (colorScheme == .dark ?
-                           Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)]):
-                            Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)])),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+                .ignoresSafeArea()
             
             ScrollView(showsIndicators: true) {
                 VStack {

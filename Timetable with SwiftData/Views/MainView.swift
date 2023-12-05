@@ -47,19 +47,19 @@ struct MainView: View {
 //                .toolbarColorScheme(colorScheme == .dark ? .dark : .light)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        selectedTab == 1 ? menu2 : nil
+                        selectedTab == 1 ? tableDropDown : nil
                     }
                 }
                 .navigationBarTitle(navigationTitle ,displayMode: .inline)
                 .navigationBarItems(leading: menu)
-                .navigationBarItems(trailing:
-                                        selectedTab == 2 ?
-                                    NavigationLink(destination: {
-                    AddNewTodoView(table: table)
-                }, label: {
-                    Image(systemName: "plus")
-                }) : nil
-                )
+//                .navigationBarItems(trailing:
+//                                        selectedTab == 2 ?
+//                                    NavigationLink(destination: {
+//                    AddNewTodoView(table: table)
+//                }, label: {
+//                    Image(systemName: "plus")
+//                }) : nil
+//                )
                 .navigationBarItems(trailing:
                                         selectedTab == 2 ?
                                     Button(action: {
@@ -73,7 +73,7 @@ struct MainView: View {
                     case 0:
                         navigationTitle = String(localized: "Today's Lectures")
                     case 1:
-                        navigationTitle = ""
+                        navigationTitle = table.title.isEmpty ? String(localized: "-") : table.title
                     case 2:
                         navigationTitle = String(localized: "Todo")
                     default:
@@ -82,7 +82,7 @@ struct MainView: View {
                 }
             }
         }
-        .accentColor(colorScheme == .dark ? .white : .black)
+        .accentColor(colorScheme == .dark ? .white : .indigo)
         .onAppear() {
             table.initPeriods()
         }
@@ -128,7 +128,7 @@ struct MainView: View {
         })
     }
     
-    var menu2: some View {
+    var tableDropDown: some View {
         Menu(content: {
             ForEach(tables) { table in
                 Button(action: {
@@ -151,6 +151,7 @@ struct MainView: View {
                 Image(systemName: "chevron.down")
             }
             .font(.body)
+            .foregroundColor(colorScheme == .dark ? .white : .black)
         })
     }
     

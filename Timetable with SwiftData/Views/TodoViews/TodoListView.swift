@@ -9,14 +9,8 @@ struct TodoListView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: (colorScheme == .dark ?
-                           Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)]):
-                            Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)])),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+                .ignoresSafeArea()
             
             ScrollView {
                 VStack {
@@ -31,6 +25,7 @@ struct TodoListView: View {
                                             .fill(colorScheme == .dark ? .black : .white)
                                         RoundedRectangle(cornerRadius: 10)
                                             .fill(todo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
+                                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                                     }
                                 })
                                 
@@ -101,6 +96,26 @@ struct TodoListView: View {
                     Spacer()
                 }
                 .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
+                .padding([.leading, .trailing], 8)
+            }
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: {
+                        AddNewTodoView(table: table)
+                    }, label: {
+                        Image(systemName: "plus")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24))
+                    })
+                    .frame(width: 60, height: 60)
+                    .background(colorScheme == .dark ? .indigo.opacity(0.75) : .indigo.opacity(0.75))
+                    .cornerRadius(30.0)
+                    .shadow(color: colorScheme == .dark ? .clear : .gray, radius: 3, x: 3, y: 3)
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0))
+                }
             }
         }
     }

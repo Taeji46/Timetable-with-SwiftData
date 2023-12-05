@@ -95,6 +95,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F025C8782B1E8C350085DCBD /* TodoViews */ = {
+			isa = PBXGroup;
+			children = (
+				F06584562B1AD15F0092A37C /* TodoListView.swift */,
+				F025C8762B1CF1590085DCBD /* TodoEditView.swift */,
+				F06584582B1B68F60092A37C /* AddNewTodoView.swift */,
+			);
+			path = TodoViews;
+			sourceTree = "<group>";
+		};
 		F0364BFC2B06512300401B45 = {
 			isa = PBXGroup;
 			children = (
@@ -144,9 +154,7 @@
 				F0364C942B0767C700401B45 /* MainView.swift */,
 				F0364CAE2B08E45100401B45 /* DailyViews */,
 				F0364CAD2B08E42E00401B45 /* WeeklyViews */,
-				F06584562B1AD15F0092A37C /* TodoListView.swift */,
-				F025C8762B1CF1590085DCBD /* TodoEditView.swift */,
-				F06584582B1B68F60092A37C /* AddNewTodoView.swift */,
+				F025C8782B1E8C350085DCBD /* TodoViews */,
 				F0CE650C2B17F6DF001A1662 /* CourseViews */,
 				F0364CA42B07EDE300401B45 /* SettingView.swift */,
 			);

@@ -13,7 +13,7 @@ struct WeeklyCourseView: View {
                 .fill(colorScheme == .dark ? .black : .white)
             RoundedRectangle(cornerRadius: 12)
                 .fill(course.getSelectedColor().opacity(0.75))
-                .frame(width: courseWidth, height: courseHeight)
+                .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
             VStack {
                 titleView()
                 classroomView()

@@ -14,17 +14,11 @@ struct DailyTableView: View {
     
     var body: some View {
         ZStack {
-            ColorfulView()
-                .ignoresSafeArea()
+//            ColorfulView()
+//                .ignoresSafeArea()
             
-            LinearGradient(
-                gradient: (colorScheme == .dark ?
-                           Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)]):
-                            Gradient(colors: [table.getSelectedColor().opacity(0.15), table.getSelectedColor().opacity(0.15)])),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+                .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 Text(getCurrentInfoText())
@@ -34,6 +28,7 @@ struct DailyTableView: View {
                     .bold()
                 ScrollView(showsIndicators: false) {
                     courseTableView()
+                        .padding([.leading, .trailing], 8)
                 }
                     .padding(.top, 14)
             }

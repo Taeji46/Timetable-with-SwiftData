@@ -24,7 +24,7 @@ struct AttendanceEditView: View {
                     .labelsHidden()
             }
         }
-        .background(colorScheme == .dark ? course.getSelectedColor().opacity(0.05) : course.getSelectedColor().opacity(0.15))
+        .background(colorScheme == .dark ? .indigo.opacity(0.05) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
         .navigationBarItems(trailing: Button(action: {
             isShowingAlert = true

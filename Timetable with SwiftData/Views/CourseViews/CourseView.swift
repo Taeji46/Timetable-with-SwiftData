@@ -33,14 +33,9 @@ struct CourseView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: (colorScheme == .dark ?
-                           Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)]):
-                            Gradient(colors: [course.getSelectedColor().opacity(0.15), course.getSelectedColor().opacity(0.15)])),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+                .ignoresSafeArea()
+            
             VStack {
                 Button(action: {
                     isShowingEditView = true
@@ -200,7 +195,8 @@ struct CourseView: View {
                 message: Text("Are you sure you want to delete this course?"),
                 primaryButton: .destructive(Text("Delete")) {
                     cancelScheduledNotification(course: course)
-                    table.courses.removeAll(where: {$0 == course})
+                    table.todoList.removeAll(where: { $0.courseId == course.id.uuidString })
+                    table.courses.removeAll(where: { $0 == course })
                     try? modelContext.save()
                     presentationMode.wrappedValue.dismiss()
                 },
@@ -258,7 +254,7 @@ struct CourseView: View {
                     .font(.system(size: 14))
                     .bold()
             }
-                .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
     }
     
@@ -275,7 +271,7 @@ struct CourseView: View {
                     .font(.system(size: 14))
                     .bold()
             }
-                .frame(width: courseWidth - 2 * insideFrameWidth, height: 15, alignment: .leading)
+                .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )
     }
 }
