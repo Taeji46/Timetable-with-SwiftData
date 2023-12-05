@@ -29,6 +29,16 @@ struct CourseEditView: View {
                             table.updateNotificationSetting()
                         }
                 }
+                Section(header: Text("Duration")) {
+                    Picker("Periods Count", selection: $course.duration) {
+                        ForEach(1..<11) { index in
+                            if (index <= getMaxAvailablePeriod() - course.period) {
+                                Text("\(index)").tag(index)
+                            }
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
                 Section(header: Text("Color")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
@@ -59,5 +69,9 @@ struct CourseEditView: View {
             .background(colorScheme == .dark ? .indigo.opacity(0.05) : .indigo.opacity(0.15))
             .scrollContentBackground(.hidden)
         }
+    }
+    
+    private func getMaxAvailablePeriod() -> Int { // durationの最大の決定に利用
+        return table.courses.filter { $0.day == course.day && $0.period > course.period }.map { $0.period }.min() ?? table.numOfPeriods
     }
 }

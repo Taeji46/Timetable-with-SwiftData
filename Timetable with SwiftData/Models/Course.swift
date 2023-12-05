@@ -11,16 +11,18 @@ final class Course {
     var teacher: String
     var day: Int
     var period: Int
+    var duration: Int
     @Relationship(deleteRule: .cascade, inverse: \Attendance.course) var attendanceRecords: [Attendance]
     var colorName: String
     var isNotificationScheduled: Bool
     
-    init(name: String, classroom: String, teacher: String, day: Int, period: Int, colorName: String) {
+    init(name: String, classroom: String, teacher: String, day: Int, period: Int, duration: Int, colorName: String) {
         self.name = name
         self.classroom = classroom
         self.teacher = teacher
         self.day = day
         self.period = period
+        self.duration = duration
         attendanceRecords = []
         self.colorName = colorName
         self.isNotificationScheduled = false

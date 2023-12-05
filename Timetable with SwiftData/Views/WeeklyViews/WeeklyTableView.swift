@@ -102,7 +102,7 @@ struct WeeklyTableView: View {
                 ForEach(0..<table.numOfDays, id: \.self) { day in
                     VStack {
                         ForEach(0..<table.numOfPeriods, id: \.self) { period in
-                            if let course = table.courses.first(where: { $0.day == day && $0.period == period }) {
+                            if let course = table.courses.first(where: { $0.day == day && $0.period <= period && period < $0.period + $0.duration }) {
                                 NavigationLink(destination: {
                                     CourseView(table: table, course: course)
                                 }, label: {
@@ -123,11 +123,6 @@ struct WeeklyTableView: View {
     }
     
     func getCourseHeight() -> CGFloat {
-//        if table.numOfPeriods < 7 {
-//            return UIScreen.main.bounds.height / CGFloat(Float(table.numOfPeriods)) * 0.6
-//        } else {
-//            return UIScreen.main.bounds.height / CGFloat(Float(6)) * 0.6
-//        }
         if table.numOfPeriods < 7 {
             return UIScreen.main.bounds.height / CGFloat(Float(table.numOfPeriods)) * 0.67
         } else {
@@ -137,15 +132,6 @@ struct WeeklyTableView: View {
     
     func getCourseWidth() -> CGFloat {
         return UIScreen.main.bounds.width / CGFloat(Float(table.numOfDays)) * 0.75
-    }
-    
-    private func addCourse(day: Int, period: Int) {
-        let newCourse = Course(name: "", classroom: "", teacher: "", day: day, period: period, colorName: "Blue")
-        table.courses.append(newCourse)
-    }
-    
-    private func saveContext() {
-        try? modelContext.save()
     }
     
     func getTable() -> Table {

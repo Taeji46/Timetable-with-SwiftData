@@ -10,6 +10,7 @@ struct AddNewCourseView: View {
     @State var selectedColor: Color
     @State var day: Int
     @State var period: Int
+    @State var duration: Int
     
     init(table: Table, day: Int, period: Int) {
         self._table = State(initialValue: table)
@@ -20,6 +21,7 @@ struct AddNewCourseView: View {
         self._selectedColor = State(initialValue: .blue)
         self._day = State(initialValue: day)
         self._period = State(initialValue: period)
+        self._duration = State(initialValue: 1)
     }
     
     var body: some View {
@@ -32,6 +34,16 @@ struct AddNewCourseView: View {
             }
             Section(header: Text("Teacher")) {
                 TextField("Teacher", text: $teacher)
+            }
+            Section(header: Text("Duration")) {
+                Picker("Periods Count", selection: $duration) {
+                    ForEach(1..<11) { index in
+                        if (index <= getMaxAvailablePeriod() - period) {
+                            Text("\(index)").tag(index)
+                        }
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
             Section(header: Text("Color")) {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -67,7 +79,11 @@ struct AddNewCourseView: View {
     }
     
     private func addCourse() {
-        let newCourse = Course(name: name, classroom: classroom, teacher: teacher, day: day, period: period, colorName: colorName)
+        let newCourse = Course(name: name, classroom: classroom, teacher: teacher, day: day, period: period, duration: duration, colorName: colorName)
         table.courses.append(newCourse)
+    }
+    
+    private func getMaxAvailablePeriod() -> Int { // durationの最大の決定に利用
+        return table.courses.filter { $0.day == day && $0.period > period }.map { $0.period }.min() ?? table.numOfPeriods
     }
 }
