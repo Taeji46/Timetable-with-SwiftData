@@ -44,6 +44,8 @@ struct WeeklyCourseView: View {
                     .foregroundColor(.white)
                     .font(.system(size: 10))
                     .bold()
+                    .minimumScaleFactor(0.5)
+                    .frame(width: courseWidth - 14, height: 15)
             }
                 .frame(width: courseWidth - 10, height: 15)
         )

@@ -14,7 +14,7 @@ struct TodoListView: View {
             
             ScrollView {
                 VStack {
-                    ForEach(table.todoList) { todo in
+                    ForEach(table.todoList.sorted { $0.date < $1.date }) { todo in
                         if let course = table.courses.first(where: { $0.id.uuidString == todo.courseId }) {
                             ZStack {
                                 NavigationLink(destination: {
@@ -89,7 +89,7 @@ struct TodoListView: View {
                                     }
                                 }
                             }
-                            .frame(width: UIScreen.main.bounds.width * 0.925, height: 60)
+                            .frame(width: UIScreen.main.bounds.width * 0.925, height: 55)
                             .padding(.bottom, 0)
                         }
                     }

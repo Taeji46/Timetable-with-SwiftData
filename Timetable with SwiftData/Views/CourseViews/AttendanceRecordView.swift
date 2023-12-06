@@ -11,7 +11,7 @@ struct AttendanceRecordView: View {
             
             ScrollView(showsIndicators: true) {
                 VStack {
-                    ForEach(course.attendanceRecords.sorted { $0.date > $1.date }, id: \.id) { attendance in
+                    ForEach(course.attendanceRecords.sorted { $0.date > $1.date }) { attendance in
                         NavigationLink(destination: {
                             AttendanceEditView(course: course, attendance: attendance)
                         }, label: {
@@ -20,6 +20,7 @@ struct AttendanceRecordView: View {
                                     .fill(colorScheme == .dark ? .black : .white)
                                 RoundedRectangle(cornerRadius: 10)
                                     .fill(course.getSelectedColor().opacity(0.75))
+                                    .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                                 
                                 HStack {
                                     Text(formattedDate(attendance.date))
@@ -43,6 +44,7 @@ struct AttendanceRecordView: View {
                     Spacer()
                 }
                 .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
+                .padding([.leading, .trailing], 8)
             }
            
         }

@@ -14,9 +14,6 @@ struct DailyTableView: View {
     
     var body: some View {
         ZStack {
-//            ColorfulView()
-//                .ignoresSafeArea()
-            
             Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
                 .ignoresSafeArea()
             

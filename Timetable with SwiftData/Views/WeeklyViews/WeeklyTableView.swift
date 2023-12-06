@@ -8,8 +8,6 @@ struct WeeklyTableView: View {
     @Query private var tables: [Table]
     @State var table: Table
     @State var isShowingAddNewCourseView: Bool = false
-    @State var newCourseDay: Int = -1
-    @State var newCoursePeriod: Int = -1
     
     var body: some View {
         ZStack {
