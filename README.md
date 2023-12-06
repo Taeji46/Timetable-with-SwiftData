@@ -8,9 +8,10 @@
 ・Todoリスト (実装予定)
 
 ## スクリーンショット
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/d72831ea-df11-40ca-8641-00d6780462f6" width="200px">
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/835053d7-2ecb-4e7c-b85f-7cc7089bea8f" width="200px">
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/e510aab0-d551-40d8-bf2b-e3931735afdb" width="200px">  
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/25c65b10-158b-4ff8-bcd7-009f17087e19" width="200px">
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/b4a5c28b-12ce-4e14-bfd8-c6d6ff6cd640" width="200px">
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/57ade305-a979-47a0-9873-63f9ad2c3152" width="200px">  
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/c798759c-ee90-4639-93b3-afa5c6fa585c" width="200px">  
 
 ## 利用方法
 Xcode 15がインストールされたMacで Code -> Open with Xcode でクローンしてください
