@@ -278,9 +278,7 @@ struct CourseView: View {
                 title: Text("Confirm Deletion"),
                 message: Text("Are you sure you want to delete this course?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    cancelScheduledNotification(course: course)
-                    table.todoList.removeAll(where: { $0.courseId == course.id.uuidString })
-                    table.courses.removeAll(where: { $0 == course })
+                    table.deleteCourse(course: course)
                     try? modelContext.save()
                     presentationMode.wrappedValue.dismiss()
                 },

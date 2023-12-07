@@ -23,7 +23,7 @@ struct AddNewTodoView: View {
                 } else {
                     Picker("Select a Course", selection: $courseId) {
                         Text("Unselected").tag("")
-                        ForEach(table.courses) { course in
+                        ForEach(table.courses.sorted { ($0.day, $0.period) < ($1.day, $1.period) }) { course in
                             Text(course.name).tag(course.id.uuidString)
                         }
                     }

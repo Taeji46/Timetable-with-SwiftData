@@ -96,4 +96,10 @@ final class Table {
     func setAllCoursesNotification(value: Bool) {
         courses.forEach { $0.isNotificationScheduled = value }
     }
+    
+    func deleteCourse(course: Course) {
+        cancelScheduledNotification(course: course)
+        todoList.removeAll(where: { $0.courseId == course.id.uuidString })
+        courses.removeAll(where: { $0 == course })
+    }
 }

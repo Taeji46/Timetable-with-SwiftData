@@ -52,24 +52,12 @@ struct SettingView: View {
                         .frame(height: 34)
                     }
                 }
-                Section(header: Text("Days of the Week")) {
-                    Picker("Days Count", selection: $table.numOfDays) {
-                        Text(String(localized: "MON") + " ~ " + String(localized: "FRI")).tag(5)
-                        Text(String(localized: "MON") + " ~ " + String(localized: "SAT")).tag(6)
-                        Text(String(localized: "MON") + " ~ " + String(localized: "SUN")).tag(7)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-                Section(header: Text("Number of periods")) {
-                    Picker("Periods Count", selection: $table.numOfPeriods) {
-                        Text("5").tag(5)
-                        Text("6").tag(6)
-                        Text("7").tag(7)
-                        Text("8").tag(8)
-                        Text("9").tag(9)
-                        Text("10").tag(10)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
+                Section {
+                    NavigationLink(destination: {
+                        TableSizeSettingView(table: table)
+                    }, label: {
+                        Text("Table Size Settings")
+                    })
                 }
                 Section(header: Text("Time range of periods")) {
                     List {

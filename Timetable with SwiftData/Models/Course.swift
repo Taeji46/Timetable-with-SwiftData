@@ -56,4 +56,8 @@ final class Course {
         let filteredAttendance = attendanceRecords.filter { $0.status == status }
         return filteredAttendance.count
     }
+    
+    func getLastPeriod() -> Int {
+        return period + duration - 1
+    }
 }

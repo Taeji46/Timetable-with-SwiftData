@@ -41,6 +41,7 @@
 		F070ED162B10BFA1006FA7A3 /* Liquid in Frameworks */ = {isa = PBXBuildFile; productRef = F070ED152B10BFA1006FA7A3 /* Liquid */; };
 		F08E1EF52B0940C8006F0D0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08E1EF72B0940C8006F0D0F /* Localizable.strings */; };
 		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
+		F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */; };
 		F0CE650E2B17F9B6001A1662 /* AttendanceEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		F08E1EF62B0940C8006F0D0F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF82B0940CA006F0D0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseNotificationUtils.swift; sourceTree = "<group>"; };
+		F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSizeSettingView.swift; sourceTree = "<group>"; };
 		F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +158,7 @@
 				F0364CAD2B08E42E00401B45 /* WeeklyViews */,
 				F025C8782B1E8C350085DCBD /* TodoViews */,
 				F0CE650C2B17F6DF001A1662 /* CourseViews */,
-				F0364CA42B07EDE300401B45 /* SettingView.swift */,
+				F0A774572B220AD400CBC3A7 /* SettingViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +204,15 @@
 				F0364CB12B08E49D00401B45 /* DailyTableView.swift */,
 			);
 			path = DailyViews;
+			sourceTree = "<group>";
+		};
+		F0A774572B220AD400CBC3A7 /* SettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0364CA42B07EDE300401B45 /* SettingView.swift */,
+				F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */,
+			);
+			path = SettingViews;
 			sourceTree = "<group>";
 		};
 		F0CE650C2B17F6DF001A1662 /* CourseViews */ = {
@@ -323,6 +334,7 @@
 				F0364C262B06550000401B45 /* WeeklyTableView.swift in Sources */,
 				F0364C242B06548800401B45 /* WeeklyCourseView.swift in Sources */,
 				F0364C992B076FF400401B45 /* AttendanceRecordView.swift in Sources */,
+				F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */,
 				F06584592B1B68F60092A37C /* AddNewTodoView.swift in Sources */,
 				F0364C092B06512300401B45 /* Timetable_with_SwiftDataApp.swift in Sources */,
 			);
