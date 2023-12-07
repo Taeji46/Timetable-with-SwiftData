@@ -99,7 +99,7 @@ struct WeeklyTableView: View {
             HStack {
                 ForEach(0..<table.numOfDays, id: \.self) { day in
                     VStack {
-                        ForEach(0..<table.numOfPeriods, id: \.self) { period in
+                        ForEach(1...table.numOfPeriods, id: \.self) { period in
                             if let course = table.courses.first(where: { $0.day == day && $0.period <= period && period < $0.period + $0.duration }) {
                                 NavigationLink(destination: {
                                     CourseView(table: table, course: course)

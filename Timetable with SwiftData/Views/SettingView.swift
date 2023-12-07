@@ -74,9 +74,9 @@ struct SettingView: View {
                 Section(header: Text("Time range of periods")) {
                     List {
                         ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
-                            if period.index < table.numOfPeriods {
+                            if period.index <= table.numOfPeriods {
                                 HStack {
-                                    Text("\(period.index + 1)")
+                                    Text("\(period.index)")
                                         .frame(width: 20)
                                     Divider()
                                     DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, in: getMinStartTime(period: period.index)..., displayedComponents: .hourAndMinute)

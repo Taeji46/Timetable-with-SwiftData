@@ -39,16 +39,15 @@ final class Course {
     
     func getPeriodInfoText() -> String { // 講義が何限目かをテキストで取得
         var periodInfoText: String
-        let periodNum = period + 1
-        switch(periodNum) {
+        switch(period) {
         case 1:
-            periodInfoText = String(periodNum) + String(localized: "st period")
+            periodInfoText = String(period) + String(localized: "st period")
         case 2:
-            periodInfoText = String(periodNum) + String(localized: "nd period")
+            periodInfoText = String(period) + String(localized: "nd period")
         case 3:
-            periodInfoText = String(periodNum) + String(localized: "rd period")
+            periodInfoText = String(period) + String(localized: "rd period")
         default:
-            periodInfoText = String(periodNum) + String(localized: "th period")
+            periodInfoText = String(period) + String(localized: "th period")
         }
         return periodInfoText
     }

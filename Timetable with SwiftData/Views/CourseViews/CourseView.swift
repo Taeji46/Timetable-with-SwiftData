@@ -308,7 +308,7 @@ struct CourseView: View {
     
     func timeView() -> some View {
         let startTimeText = table.getPeriod(index: course.period).getStartTimeText()
-        let endTimeText = table.getPeriod(index: course.period).getEndTimeText()
+        let endTimeText = table.getPeriod(index: course.period + course.duration - 1).getEndTimeText()
         return (
             HStack {
                 Image(systemName: "clock.fill")

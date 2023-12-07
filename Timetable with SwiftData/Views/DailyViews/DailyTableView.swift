@@ -46,10 +46,13 @@ struct DailyTableView: View {
     func courseTableView() -> some View {
         return (
             VStack {
-                ForEach(0..<table.numOfPeriods, id: \.self) { period in
+                ForEach(1...table.numOfPeriods, id: \.self) { period in
                     if let course = table.courses.first(where: { $0.day == getCurrentDayOfWeekIndex() && $0.period == period }) {
-                        if currentTime < table.getPeriod(index: course.period).endTime {
-                            DailyCourseView(table: table, course: course, currentTime: getCurrentTime(), courseWidth: courseWidth)
+                        ForEach(0..<course.duration, id: \.self) { i in
+                            let periodForDurationLoop = period + i
+                            if currentTime < table.getPeriod(index: periodForDurationLoop).endTime {
+                                DailyCourseView(table: table, course: course, currentTime: getCurrentTime(), periodForDurationLoop: periodForDurationLoop, courseWidth: courseWidth)
+                            }
                         }
                     }
                 }

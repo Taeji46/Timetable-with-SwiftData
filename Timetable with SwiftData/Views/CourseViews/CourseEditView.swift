@@ -72,6 +72,6 @@ struct CourseEditView: View {
     }
     
     private func getMaxAvailablePeriod() -> Int { // durationの最大の決定に利用
-        return table.courses.filter { $0.day == course.day && $0.period > course.period }.map { $0.period }.min() ?? table.numOfPeriods
+        return table.courses.filter { $0.day == course.day && $0.period > course.period }.map { $0.period }.min() ?? table.numOfPeriods + 1
     }
 }

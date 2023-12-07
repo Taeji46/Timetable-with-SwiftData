@@ -6,6 +6,7 @@ struct DailyCourseView: View {
     @State var table: Table
     @State var course: Course
     @State var currentTime: Date
+    var periodForDurationLoop: Int
     var courseWidth: CGFloat
     let courseInfoHeight: CGFloat = 76
     let insideFrameWidth: CGFloat = 10
@@ -18,12 +19,25 @@ struct DailyCourseView: View {
                     .fill(colorScheme == .dark ? .black : .white)
 
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
+                    .fill(table.isNowInLectureTime(index: periodForDurationLoop, currentTime: currentTime) ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
                     .shadow(color: colorScheme == .dark ? .clear : .gray, radius: 3, x: 3, y: 3)
-
-                Text(String(course.period + 1))
-                    .font(.system(size: 12))
-                    .bold()
+                
+                VStack(spacing: 0) {
+                    Text(String(periodForDurationLoop))
+                        .font(.system(size: 12))
+                        .bold()
+                        .frame(height: (courseInfoHeight + 18 + 3 * insideFrameWidth) / CGFloat(course.duration))
+                    
+//                    if course.duration > 1 {
+//                        ForEach(1..<course.duration) { i in
+//                            Divider()
+//                            Text(String(course.period + i))
+//                                .font(.system(size: 12))
+//                                .bold()
+//                                .frame(height: (courseInfoHeight + 18 + 3 * insideFrameWidth) / CGFloat(course.duration))
+//                        }
+//                    }
+                }
             }
             .frame(width: 20, height: courseInfoHeight + 18 + 3 * insideFrameWidth)
 
@@ -35,7 +49,7 @@ struct DailyCourseView: View {
                         .fill(colorScheme == .dark ? .black : .white)
 
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
+                        .fill(table.isNowInLectureTime(index: periodForDurationLoop, currentTime: currentTime) ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
                         .shadow(color: colorScheme == .dark ? .clear : .gray, radius: 3, x: 3, y: 3)
 
                     VStack(spacing: 0) {
@@ -44,7 +58,7 @@ struct DailyCourseView: View {
                         Spacer().frame(height: insideFrameWidth)
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .white.opacity(0.5) : .white, lineWidth: 1)
+                                .stroke(table.isNowInLectureTime(index: periodForDurationLoop, currentTime: currentTime) ? .white.opacity(0.5) : .white, lineWidth: 1)
                             VStack {
                                 timeView()
                                 classroomView()
@@ -58,7 +72,7 @@ struct DailyCourseView: View {
                 .frame(width: courseWidth, height: courseInfoHeight + 18 + 3 * insideFrameWidth)
             })
         }
-        .foregroundColor(table.isNowInLectureTime(index: course.period, currentTime: currentTime) ? .white.opacity(0.5) : .white)
+        .foregroundColor(table.isNowInLectureTime(index: periodForDurationLoop, currentTime: currentTime) ? .white.opacity(0.5) : .white)
         .onAppear {
             currentTime = getCurrentTime()
         }
@@ -79,8 +93,8 @@ struct DailyCourseView: View {
     }
 
     func timeView() -> some View {
-        let startTimeText = table.getPeriod(index: course.period).getStartTimeText()
-        let endTimeText = table.getPeriod(index: course.period).getEndTimeText()
+        let startTimeText = table.getPeriod(index: periodForDurationLoop).getStartTimeText()
+        let endTimeText = table.getPeriod(index: periodForDurationLoop).getEndTimeText()
         return (
             HStack {
                 Image(systemName: "clock.fill")
