@@ -97,7 +97,7 @@ struct MainView: View {
                     title: Text("Confirm Notifications Off"),
                     message: Text("Notifications for the current timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
-                        table.setAllCoursesNotification(value: false)
+                        table.isCourseNotificationScheduled = false
                         table.setAllTodosNotification(value: false)
                         table.updateNotificationSetting()
                         selectedTableId = nextTableId

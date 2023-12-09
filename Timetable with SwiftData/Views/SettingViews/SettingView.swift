@@ -21,6 +21,7 @@ struct SettingView: View {
                 Section(header: Text("Title of Timetable")) {
                     TextField("Title of Timetable", text: $table.title)
                 }
+                
                 Section(header: Text("Appearance mode")) {
                     Picker("Appearance Setting", selection: $appearanceMode) {
                         Text("System")
@@ -32,6 +33,7 @@ struct SettingView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
+                
                 Section(header: Text("Theme")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
@@ -52,6 +54,7 @@ struct SettingView: View {
                         .frame(height: 34)
                     }
                 }
+                
                 Section {
                     NavigationLink(destination: {
                         TableSizeSettingView(table: table)
@@ -59,6 +62,7 @@ struct SettingView: View {
                         Text("Table Size")
                     })
                 }
+                
                 Section(header: Text("Time range of periods")) {
                     List {
                         ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
@@ -81,39 +85,30 @@ struct SettingView: View {
                         }
                     }
                 }
-                Section(header: Text("Notification time (minutes before)")) {
-                    Picker("", selection: $table.notificationTime) {
-                        Text("5").tag(5)
-                        Text("10").tag(10)
-                        Text("15").tag(15)
-                        Text("20").tag(20)
-                        Text("30").tag(30)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .onChange(of: $table.notificationTime.wrappedValue) {
-                        table.updateNotificationSetting()
-                    }
-                }
+                
                 Section() {
-                    if !table.isAllCoursesNotificationScheduled(value: true) {
-                        Button(action: {
-                            table.setAllCoursesNotification(value: true)
+                    Toggle("Notification", isOn: $table.isCourseNotificationScheduled)
+                        .onChange(of: table.isCourseNotificationScheduled) {
                             table.updateNotificationSetting()
-                        }, label: {
-                            Text("Turn on notifications for all courses")
-                                .foregroundColor(.green)
-                        })
-                    }
-                    if !table.isAllCoursesNotificationScheduled(value: false) {
-                        Button(action: {
-                            table.setAllCoursesNotification(value: false)
+                        }
+                }
+                
+                if table.isCourseNotificationScheduled {
+                    Section(header: Text("Notification time (minutes before)")) {
+                        Picker("", selection: $table.notificationTime) {
+                            Text("5").tag(5)
+                            Text("10").tag(10)
+                            Text("15").tag(15)
+                            Text("20").tag(20)
+                            Text("30").tag(30)
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .onChange(of: $table.notificationTime.wrappedValue) {
                             table.updateNotificationSetting()
-                        }, label: {
-                            Text("Turn off notifications for all courses")
-                                .foregroundColor(.red)
-                        })
+                        }
                     }
                 }
+                
                 Section() {
                     Button(action: {
                         alertType = .showTableList
@@ -123,6 +118,7 @@ struct SettingView: View {
                             .foregroundColor(.blue)
                     }
                 }
+                
                 Section() {
                     Button(action: {
                         alertType = .deleteTable
@@ -141,7 +137,7 @@ struct SettingView: View {
                     title: Text("Confirm Notifications Off"),
                     message: Text("Notifications for the current timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
-                        table.setAllCoursesNotification(value: false)
+                        table.isCourseNotificationScheduled = false
                         table.setAllTodosNotification(value: false)
                         table.updateNotificationSetting()
                         selectedTableId = "unselected"
@@ -153,7 +149,7 @@ struct SettingView: View {
                     title: Text("Confirm Reset"),
                     message: Text("Are you sure you want to delete this timetable?"),
                     primaryButton: .destructive(Text("Reset")) {
-                        table.setAllCoursesNotification(value: false)
+                        table.isCourseNotificationScheduled = false
                         table.setAllTodosNotification(value: false)
                         table.updateNotificationSetting()
                         table.scheduledToBeDeleted = true

@@ -59,12 +59,6 @@ struct CourseEditView: View {
                         .frame(height: 34)
                     }
                 }
-                Section() {
-                    Toggle("Notification", isOn: $course.isNotificationScheduled)
-                        .onChange(of: course.isNotificationScheduled) {
-                            table.updateNotificationSetting()
-                        }
-                }
             }
             .background(colorScheme == .dark ? .indigo.opacity(0.05) : .indigo.opacity(0.15))
             .scrollContentBackground(.hidden)

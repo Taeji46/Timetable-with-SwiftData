@@ -14,7 +14,6 @@ final class Course {
     var duration: Int
     @Relationship(deleteRule: .cascade, inverse: \Attendance.course) var attendanceRecords: [Attendance]
     var colorName: String
-    var isNotificationScheduled: Bool
     
     init(name: String, classroom: String, teacher: String, day: Int, period: Int, duration: Int, colorName: String) {
         self.name = name
@@ -25,7 +24,6 @@ final class Course {
         self.duration = duration
         attendanceRecords = []
         self.colorName = colorName
-        self.isNotificationScheduled = false
     }
 
     func getSelectedColor() -> Color { // 講義の色を取得

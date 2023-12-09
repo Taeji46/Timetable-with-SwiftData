@@ -8,10 +8,10 @@ final class Table {
     var colorName: String
     var numOfDays: Int
     var numOfPeriods: Int
-//    @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
-    var courses: [Course]
+    @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
     @Relationship(deleteRule: .cascade, inverse: \Todo.table) var todoList: [Todo]
+    var isCourseNotificationScheduled: Bool
     var notificationTime: Int
     var scheduledToBeDeleted: Bool
     
@@ -23,6 +23,7 @@ final class Table {
         courses = []
         periods = []
         todoList = []
+        isCourseNotificationScheduled = false
         notificationTime = 5
         scheduledToBeDeleted = false
     }
@@ -76,11 +77,13 @@ final class Table {
         return isAllCourseFinished
     }
 
-    func updateNotificationSetting() { // isNotificationScheduledに応じて通知を設定
-        for course in courses {
-            if course.isNotificationScheduled {
+    func updateNotificationSetting() {
+        if isCourseNotificationScheduled {
+            for course in courses {
                 scheduleWeeklyCourseNotification(table: self, course: course)
-            } else {
+            }
+        } else {
+            for course in courses {
                 cancelScheduledCourseNotification(course: course)
             }
         }
@@ -92,18 +95,6 @@ final class Table {
                 cancelScheduledTodoNotification(todo: todo)
             }
         }
-    }
-    
-    func isAllCoursesNotificationScheduled(value: Bool) -> Bool { // courses[].isNotificationScheduledがすべてvalueかどうか
-        if value {
-            return courses.allSatisfy { $0.isNotificationScheduled }
-        } else {
-            return !courses.contains { $0.isNotificationScheduled }
-        }
-    }
-    
-    func setAllCoursesNotification(value: Bool) {
-        courses.forEach { $0.isNotificationScheduled = value }
     }
     
     func setAllTodosNotification(value: Bool) {
