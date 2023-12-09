@@ -52,10 +52,13 @@ struct MainView: View {
                 .navigationBarItems(trailing:
                                         selectedTab == 2 ?
                                     Button(action: {
-                    for todo in table.todoList.filter({$0.isCompleted == true}) {
-                        cancelScheduledTodoNotification(todo: todo)
+                    withAnimation(.easeInOut(duration: 0.75)) {
+                        for todo in table.todoList.filter({$0.isCompleted == true}) {
+                            cancelScheduledTodoNotification(todo: todo)
+                        }
+                        table.todoList.removeAll(where: { $0.isCompleted == true })
                     }
-                    table.todoList.removeAll(where: { $0.isCompleted == true })
+                    
                 }, label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
                 }) : nil
