@@ -77,7 +77,9 @@ struct DailyCourseView: View {
             currentTime = getCurrentTime()
         }
         .onReceive(timer) { _ in
-            currentTime = getCurrentTime()
+            withAnimation(.easeInOut(duration: 0.75)) {
+                currentTime = getCurrentTime()
+            }
         }
     }
 

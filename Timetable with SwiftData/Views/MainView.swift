@@ -125,7 +125,6 @@ struct MainView: View {
             }, label: {
                 Text("Table Size")
             })
-            
         }, label: {
             Image(systemName: "list.bullet")
         })

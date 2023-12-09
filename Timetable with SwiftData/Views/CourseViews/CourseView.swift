@@ -169,7 +169,9 @@ struct CourseView: View {
                             HStack(spacing: 0) {
                                 if todo.isCompleted {
                                     Button(action: {
-                                        todo.isCompleted = false
+                                        withAnimation(.easeInOut(duration: 0.75)) {
+                                            todo.isCompleted = false
+                                        }
                                     }, label: {
                                         Image(systemName: "checkmark.circle.fill")
                                             .font(.system(size: 25))
@@ -179,7 +181,9 @@ struct CourseView: View {
                                     .frame(alignment: .leading)
                                 } else {
                                     Button(action: {
-                                        todo.isCompleted = true
+                                        withAnimation(.easeInOut(duration: 0.75)) {
+                                            todo.isCompleted = true
+                                        }
                                     }, label: {
                                         Image(systemName: "circle")
                                             .font(.system(size: 25))
@@ -242,6 +246,19 @@ struct CourseView: View {
         }) {
             Image(systemName: "trash")
         })
+        .navigationBarItems(
+            trailing:
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.75)) {
+                        for todo in table.todoList.filter({ $0.courseId == course.id.uuidString && $0.isCompleted == true }) {
+                            cancelScheduledTodoNotification(todo: todo)
+                        }
+                        table.todoList.removeAll(where: { $0.courseId == course.id.uuidString && $0.isCompleted == true })
+                    }
+                }, label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                })
+        )
         .sheet(isPresented: $isShowingEditView) {
             NavigationStack {
                 CourseEditView(table: table, course: course, selectedColor: course.getSelectedColor())
