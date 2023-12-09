@@ -42,6 +42,7 @@
 		F08E1EF52B0940C8006F0D0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08E1EF72B0940C8006F0D0F /* Localizable.strings */; };
 		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
 		F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */; };
+		F0A774772B23CDC500CBC3A7 /* TodoNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A774762B23CDC500CBC3A7 /* TodoNotificationUtils.swift */; };
 		F0CE650E2B17F9B6001A1662 /* AttendanceEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		F08E1EF82B0940CA006F0D0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseNotificationUtils.swift; sourceTree = "<group>"; };
 		F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSizeSettingView.swift; sourceTree = "<group>"; };
+		F0A774762B23CDC500CBC3A7 /* TodoNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNotificationUtils.swift; sourceTree = "<group>"; };
 		F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 			children = (
 				F0364CAB2B08E3EA00401B45 /* DateUtils.swift */,
 				F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */,
+				F0A774762B23CDC500CBC3A7 /* TodoNotificationUtils.swift */,
 				F070ED0E2B0D2352006FA7A3 /* AppearanceModeUtils.swift */,
 			);
 			path = Utils;
@@ -310,6 +313,7 @@
 				F0364C0B2B06512300401B45 /* ContentView.swift in Sources */,
 				F0364CAC2B08E3EA00401B45 /* DateUtils.swift in Sources */,
 				F0364CB22B08E49D00401B45 /* DailyTableView.swift in Sources */,
+				F0A774772B23CDC500CBC3A7 /* TodoNotificationUtils.swift in Sources */,
 				F070ED132B0F9242006FA7A3 /* AddNewTableView.swift in Sources */,
 				F0364CB02B08E48600401B45 /* DailyCourseView.swift in Sources */,
 				F0364CA72B0814D400401B45 /* AddNewCourseView.swift in Sources */,

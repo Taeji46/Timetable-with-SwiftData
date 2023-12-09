@@ -15,7 +15,7 @@ struct TodoListView: View {
             ScrollView {
                 VStack {
                     ForEach(table.todoList.sorted { $0.date < $1.date }) { todo in
-                        if let course = table.courses.first(where: { $0.id.uuidString == todo.courseId }) {
+                        if let course = todo.getCourse() {
                             ZStack {
                                 NavigationLink(destination: {
                                     TodoEditView(table: getTable(), todo: todo)
@@ -116,6 +116,11 @@ struct TodoListView: View {
                     .shadow(color: colorScheme == .dark ? .clear : .gray, radius: 3, x: 3, y: 3)
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0))
                 }
+            }
+        }
+        .onChange(of: selectedTableId) {
+            if !tables.isEmpty {
+                table = getTable()
             }
         }
     }

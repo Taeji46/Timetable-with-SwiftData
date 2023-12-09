@@ -1,6 +1,6 @@
 import SwiftUI
 
-func scheduleWeeklyNotification(table: Table, course: Course) {
+func scheduleWeeklyCourseNotification(table: Table, course: Course) {
     var dateComponents = DateComponents()
     dateComponents.weekday = convertCourseDayToDCFormat(day: course.day)
     
@@ -16,13 +16,13 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.weekday, .hour, .minute], from: nextNotificationDate), repeats: true)
         
-        let request = UNNotificationRequest(identifier: createNotificationIdentifier(course: course), content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: createCourseNotificationIdentifier(course: course), content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Failed to schedule notification: \(error.localizedDescription)")
             } else {
-                print("Notification ON: " + createNotificationIdentifier(course: course) + ", " + String("Name") + ": " + course.name + ", " + String("Classroom") + ": " + course.classroom + ", " + String("Time") + ": " + table.getPeriod(index: course.period).getStartTimeText() + " ~ " + table.getPeriod(index: course.period).getEndTimeText() + ", " + String("Before") + ": " + String(table.notificationTime))
+                print("Notification ON: " + createCourseNotificationIdentifier(course: course) + ", " + String("Name") + ": " + course.name + ", " + String("Classroom") + ": " + course.classroom + ", " + String("Time") + ": " + table.getPeriod(index: course.period).getStartTimeText() + " ~ " + table.getPeriod(index: course.period).getEndTimeText() + ", " + String("Before") + ": " + String(table.notificationTime))
             }
         }
     } else {
@@ -30,13 +30,13 @@ func scheduleWeeklyNotification(table: Table, course: Course) {
     }
 }
 
-func cancelScheduledNotification(course: Course) {
+func cancelScheduledCourseNotification(course: Course) {
     let center = UNUserNotificationCenter.current()
-    center.removePendingNotificationRequests(withIdentifiers: [createNotificationIdentifier(course: course)])
-    print("Notification OFF: " + createNotificationIdentifier(course: course))
+    center.removePendingNotificationRequests(withIdentifiers: [createCourseNotificationIdentifier(course: course)])
+    print("Notification OFF: " + createCourseNotificationIdentifier(course: course))
 }
 
-func createNotificationIdentifier(course: Course) -> String {
+func createCourseNotificationIdentifier(course: Course) -> String {
     return "NI" + String(course.day) + "-" + String(course.period)
 }
 

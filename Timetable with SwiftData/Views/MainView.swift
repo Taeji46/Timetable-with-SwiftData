@@ -42,9 +42,6 @@ struct MainView: View {
                         }
                         .tag(2)
                 }
-//                .toolbarBackground(colorScheme == .dark ? table.getSelectedColor().opacity(0.15) : table.getSelectedColor().opacity(0.15), for: .navigationBar)
-//                .toolbarBackground(selectedTab != 0 ? .visible : .hidden, for: .navigationBar)
-//                .toolbarColorScheme(colorScheme == .dark ? .dark : .light)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         selectedTab == 1 ? tableDropDown : nil
@@ -52,17 +49,12 @@ struct MainView: View {
                 }
                 .navigationBarTitle(navigationTitle ,displayMode: .inline)
                 .navigationBarItems(leading: menu)
-//                .navigationBarItems(trailing:
-//                                        selectedTab == 2 ?
-//                                    NavigationLink(destination: {
-//                    AddNewTodoView(table: table)
-//                }, label: {
-//                    Image(systemName: "plus")
-//                }) : nil
-//                )
                 .navigationBarItems(trailing:
                                         selectedTab == 2 ?
                                     Button(action: {
+                    for todo in table.todoList.filter({$0.isCompleted == true}) {
+                        cancelScheduledTodoNotification(todo: todo)
+                    }
                     table.todoList.removeAll(where: { $0.isCompleted == true })
                 }, label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
@@ -106,6 +98,7 @@ struct MainView: View {
                     message: Text("Notifications for the current timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
                         table.setAllCoursesNotification(value: false)
+                        table.setAllTodosNotification(value: false)
                         table.updateNotificationSetting()
                         selectedTableId = nextTableId
                     },
@@ -123,6 +116,13 @@ struct MainView: View {
             }, label: {
                 Text("Settings")
             })
+            
+            NavigationLink(destination: {
+                TableSizeSettingView(table: table)
+            }, label: {
+                Text("Table Size")
+            })
+            
         }, label: {
             Image(systemName: "list.bullet")
         })

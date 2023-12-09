@@ -8,7 +8,8 @@ final class Table {
     var colorName: String
     var numOfDays: Int
     var numOfPeriods: Int
-    @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
+//    @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
+    var courses: [Course]
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
     @Relationship(deleteRule: .cascade, inverse: \Todo.table) var todoList: [Todo]
     var notificationTime: Int
@@ -78,9 +79,17 @@ final class Table {
     func updateNotificationSetting() { // isNotificationScheduledに応じて通知を設定
         for course in courses {
             if course.isNotificationScheduled {
-                scheduleWeeklyNotification(table: self, course: course)
+                scheduleWeeklyCourseNotification(table: self, course: course)
             } else {
-                cancelScheduledNotification(course: course)
+                cancelScheduledCourseNotification(course: course)
+            }
+        }
+        
+        for todo in todoList {
+            if todo.isNotificationScheduled {
+                scheduleTodoNotification(todo: todo)
+            } else {
+                cancelScheduledTodoNotification(todo: todo)
             }
         }
     }
@@ -97,8 +106,15 @@ final class Table {
         courses.forEach { $0.isNotificationScheduled = value }
     }
     
+    func setAllTodosNotification(value: Bool) {
+        todoList.forEach { $0.isNotificationScheduled = value }
+    }
+    
     func deleteCourse(course: Course) {
-        cancelScheduledNotification(course: course)
+        cancelScheduledCourseNotification(course: course)
+        for todo in todoList.filter({ $0.getCourse() == course }) {
+            cancelScheduledTodoNotification(todo: todo)
+        }
         todoList.removeAll(where: { $0.courseId == course.id.uuidString })
         courses.removeAll(where: { $0 == course })
     }
