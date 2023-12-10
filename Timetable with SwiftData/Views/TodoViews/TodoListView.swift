@@ -59,7 +59,7 @@ struct ToDoListView: View {
     var incompletedToDoListView: some View {
         VStack {
             Text(String.localizedStringWithFormat(
-                NSLocalizedString("Done: %d", comment: ""),
+                NSLocalizedString("Not Done: %d", comment: ""),
                 table.toDoList.filter { $0.isCompleted == false }.count
             ))
                 .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
@@ -128,7 +128,7 @@ struct ToDoListView: View {
     var completedToDoListView: some View {
         VStack {
             Text(String.localizedStringWithFormat(
-                NSLocalizedString("Not Done: %d", comment: ""),
+                NSLocalizedString("Done: %d", comment: ""),
                 table.toDoList.filter { $0.isCompleted == true }.count
             ))
                 .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)

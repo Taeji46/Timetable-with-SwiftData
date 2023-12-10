@@ -85,7 +85,7 @@ struct WelcomeView: View {
                     }).disabled(title.isEmpty)
                 }
             }
-            .navigationBarTitle("Welcome")
+            .navigationBarTitle("Welcome!")
             .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
             .scrollContentBackground(.hidden)
             .accentColor(colorScheme == .dark ? .indigo : .indigo)
