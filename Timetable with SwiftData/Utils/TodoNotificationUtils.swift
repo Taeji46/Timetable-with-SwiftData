@@ -1,34 +1,34 @@
 import SwiftUI
 
-func scheduleTodoNotification(todo: Todo) {
-    let notificationDate = Calendar.current.date(byAdding: .minute, value: -todo.notificationTime, to: todo.date) ?? Date()
+func scheduleToDoNotification(toDo: ToDo) {
+    let notificationDate = Calendar.current.date(byAdding: .minute, value: -toDo.notificationTime, to: toDo.dueDate) ?? Date()
     
     let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationDate)
     
     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
     
     let content = UNMutableNotificationContent()
-    content.title = String(localized: "Task") + ": " + todo.task
-    content.body = String(localized: "Course") + ": " + todo.getCourse()!.name + "\n" + String(localized: "Deadline") + ": " + todo.getDueDateText()
+    content.title = String(localized: "Task") + ": " + toDo.title
+    content.body = String(localized: "Course") + ": " + toDo.getCourse()!.name + "\n" + String(localized: "Deadline") + ": " + toDo.getDueDateText()
     content.sound = UNNotificationSound.default
     
-    let request = UNNotificationRequest(identifier: createTodoNotificationIdentifier(todo: todo), content: content, trigger: trigger)
+    let request = UNNotificationRequest(identifier: createToDoNotificationIdentifier(toDo: toDo), content: content, trigger: trigger)
     
     UNUserNotificationCenter.current().add(request) { error in
         if let error = error {
             print("Failed to schedule notification: \(error.localizedDescription)")
         } else {
-            print("Notification ON: " + createTodoNotificationIdentifier(todo: todo) + ", " + String("Task") + ": " + todo.task + ", " + String("Course") + ": " + todo.getCourse()!.name + ", " + String("Before") + ": " + String(todo.notificationTime))
+            print("Notification ON: " + createToDoNotificationIdentifier(toDo: toDo) + ", " + String("Task") + ": " + toDo.title + ", " + String("Course") + ": " + toDo.getCourse()!.name + ", " + String("Before") + ": " + String(toDo.notificationTime))
         }
     }
 }
 
-func cancelScheduledTodoNotification(todo: Todo) {
+func cancelScheduledToDoNotification(toDo: ToDo) {
     let center = UNUserNotificationCenter.current()
-    center.removePendingNotificationRequests(withIdentifiers: [createTodoNotificationIdentifier(todo: todo)])
-    print("Notification OFF: " + createTodoNotificationIdentifier(todo: todo))
+    center.removePendingNotificationRequests(withIdentifiers: [createToDoNotificationIdentifier(toDo: toDo)])
+    print("Notification OFF: " + createToDoNotificationIdentifier(toDo: toDo))
 }
 
-func createTodoNotificationIdentifier(todo: Todo) -> String {
-    return "NI-" + String(todo.id.uuidString)
+func createToDoNotificationIdentifier(toDo: ToDo) -> String {
+    return "NI-" + String(toDo.id.uuidString)
 }

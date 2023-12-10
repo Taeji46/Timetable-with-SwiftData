@@ -138,11 +138,11 @@ struct SettingView: View {
             switch alertType {
             case .showTableList:
                 return Alert(
-                    title: Text("Confirm Notifications Off"),
-                    message: Text("Notifications for the current timetable will be turned off"),
+                    title: Text("Confirm"),
+                    message: Text("All notifications for this timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
                         table.isCourseNotificationScheduled = false
-                        table.setAllTodosNotification(value: false)
+                        table.setAllToDosNotification(value: false)
                         table.updateNotificationSetting()
                         selectedTableId = "unselected"
                     },
@@ -154,7 +154,7 @@ struct SettingView: View {
                     message: Text("Are you sure you want to delete this timetable?"),
                     primaryButton: .destructive(Text("Reset")) {
                         table.isCourseNotificationScheduled = false
-                        table.setAllTodosNotification(value: false)
+                        table.setAllToDosNotification(value: false)
                         table.updateNotificationSetting()
                         table.scheduledToBeDeleted = true
                         presentationMode.wrappedValue.dismiss()

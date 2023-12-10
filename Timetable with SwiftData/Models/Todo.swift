@@ -2,21 +2,21 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class Todo {
+final class ToDo {
     var table: Table? // Parent
     
     var id = UUID()
-    var task: String
+    var title: String
     var courseId: String
-    var date: Date
+    var dueDate: Date
     var isCompleted: Bool
     var isNotificationScheduled: Bool
     var notificationTime: Int
     
-    init(table: Table, task: String, courseId: String, date: Date, isNotificationScheduled: Bool, notificationTime: Int) {
-        self.task = task
+    init(table: Table, title: String, courseId: String, dueDate: Date, isNotificationScheduled: Bool, notificationTime: Int) {
+        self.title = title
         self.courseId = courseId
-        self.date = date
+        self.dueDate = dueDate
         self.isCompleted = false
         self.isNotificationScheduled = isNotificationScheduled
         self.notificationTime = notificationTime
@@ -30,6 +30,6 @@ final class Todo {
     func getDueDateText() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd H:mm"
-        return dateFormatter.string(from: date)
+        return dateFormatter.string(from: dueDate)
     }
 }

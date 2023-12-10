@@ -39,7 +39,7 @@ struct CourseView: View {
                     Divider()
                     noteListView
                     Divider()
-                    todoListView
+                    toDoListView
                     Spacer()
                 }
                 .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
@@ -57,10 +57,10 @@ struct CourseView: View {
             trailing:
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.75)) {
-                        for todo in table.todoList.filter({ $0.courseId == course.id.uuidString && $0.isCompleted == true }) {
-                            cancelScheduledTodoNotification(todo: todo)
+                        for toDo in table.toDoList.filter({ $0.courseId == course.id.uuidString && $0.isCompleted == true }) {
+                            cancelScheduledToDoNotification(toDo: toDo)
                         }
-                        table.todoList.removeAll(where: { $0.courseId == course.id.uuidString && $0.isCompleted == true })
+                        table.toDoList.removeAll(where: { $0.courseId == course.id.uuidString && $0.isCompleted == true })
                     }
                 }, label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
@@ -90,7 +90,7 @@ struct CourseView: View {
     var courseInfoView: some View {
         NavigationLink(destination: {
             CourseEditView(table: table, course: course, selectedColor: course.getSelectedColor())
-                .navigationBarTitle("Details", displayMode: .inline)
+                .navigationBarTitle("Course Information", displayMode: .inline)
                 .accentColor(colorScheme == .dark ? .white : .indigo)
         }, label: {
             ZStack {
@@ -207,26 +207,26 @@ struct CourseView: View {
         .frame(width: courseWidth, height: attendanceInfoHeight + 18 + 3 * insideFrameWidth)
     }
     
-    var todoListView: some View {
-        ForEach(table.todoList.filter { $0.courseId == course.id.uuidString }.sorted { $0.date < $1.date }) { todo in
+    var toDoListView: some View {
+        ForEach(table.toDoList.filter { $0.courseId == course.id.uuidString }.sorted { $0.dueDate < $1.dueDate }) { toDo in
             ZStack {
                 NavigationLink(destination: {
-                    TodoEditView(table: table, todo: todo)
+                    ToDoEditView(table: table, toDo: toDo)
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(colorScheme == .dark ? .black : .white)
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(todo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
+                            .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
                             .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                     }
                 })
                 
                 HStack(spacing: 0) {
-                    if todo.isCompleted {
+                    if toDo.isCompleted {
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.75)) {
-                                todo.isCompleted = false
+                                toDo.isCompleted = false
                             }
                         }, label: {
                             Image(systemName: "checkmark.circle.fill")
@@ -238,7 +238,7 @@ struct CourseView: View {
                     } else {
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.75)) {
-                                todo.isCompleted = true
+                                toDo.isCompleted = true
                             }
                         }, label: {
                             Image(systemName: "circle")
@@ -250,16 +250,16 @@ struct CourseView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Todo")
+                        Text("ToDo")
                             .bold()
-                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                            .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                             .font(.system(size: 12))
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                         
-                        Text(todo.task)
+                        Text(toDo.title)
                             .bold()
-                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                            .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                             .font(.system(size: 18))
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
@@ -268,20 +268,20 @@ struct CourseView: View {
                     Spacer()
                     
                     VStack(alignment: .trailing) {
-                        Text(formattedDate1(todo.date))
+                        Text(formattedDate1(toDo.dueDate))
                             .padding(.trailing, 14)
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .bold()
                             .font(.system(size: 14))
-                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
-                        Text(formattedDate2(todo.date))
+                            .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                        Text(formattedDate2(toDo.dueDate))
                             .padding(.trailing, 14)
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .bold()
                             .font(.system(size: 14))
-                            .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                            .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                     }
                 }
             }
@@ -307,7 +307,7 @@ struct CourseView: View {
                 
                 HStack(spacing: 0) {
                     VStack(alignment: .leading) {
-                        Text(note.content)
+                        Text(note.title)
                             .bold()
                             .foregroundColor(.white)
                             .font(.system(size: 18))
@@ -337,9 +337,9 @@ struct CourseView: View {
         VStack {
             Menu(content: {
                 NavigationLink(destination: {
-                    AddNewTodoView(table: table, course: course)
+                    AddNewToDoView(table: table, course: course)
                 }, label: {
-                    Text("Todo")
+                    Text("ToDo")
                 })
                 NavigationLink(destination: {
                     AddNewNoteView(course: course)

@@ -15,6 +15,9 @@
 "Details" = "詳細";
 
 "Time" = "時間";
+"Note" = "メモ";
+
+"Apply Changes" = "変更を保存";
 
 /* TableView */
 "Today's Lectures" = "今日の講義";
@@ -27,9 +30,11 @@
 "All lectures of today were finished." = "今日の講義は全て終了しました";
 
 /* CourseEditView */
+"Course Information" = "講義情報";
 "Course Name" = "講義名";
 "Classroom" = "教室";
 "Teacher" = "講師";
+"Duration" = "コマ数";
 "Color" = "色";
 "Notification" = "通知";
 "Delete the course" = "講義情報を削除";
@@ -38,27 +43,28 @@
 "Delete" = "はい";
 
 /* SettingView */
-"Title of Timetable" = "時間割表のタイトル";
+"Title of Timetable" = "時間割のタイトル";
 "Appearance mode" = "外観モード";
 "System" = "システム";
 "Light" = "ライト";
 "Dark" = "ダーク";
 "Theme" = "テーマ";
+"Table Size" = "時間割のサイズ";
 "Days of the Week" = "曜日";
 "Number of periods" = "時限の数";
 "Time range of periods" = "時限の開始・終了時間";
 "Start" = "開始";
 "End" = "終了";
-"Notification time (minutes before)" = "通知のタイミング（分前）";
+"Notification time (minutes before)" = "通知時間（分前）";
 "Turn on notifications for all courses" = "すべての講義の通知をオン";
 "Turn off notifications for all courses" = "すべての講義の通知をオフ";
 "Reset the Timetable" = "時間割を削除";
 "Confirm Reset" = "確認";
 "Are you sure you want to delete this timetable?" = "本当に時間割を削除しますか？";
 "Reset" = "はい";
-"List of Timetables" = "時間割表の変更・追加";
-"Confirm Notifications Off" = "時間割表一覧の表示";
-"Notifications for the current timetable will be turned off" = "現在の時間割表の通知がオフになります";
+"List of Timetables" = "時間割の変更・作成";
+"Confirm" = "確認";
+"All notifications for this timetable will be turned off" = "現在の時間割の通知が全てオフになります";
 "OK" = "はい";
 
 /* Attendance */
@@ -69,17 +75,50 @@
 "Canceled" = "休講";
 "Status" = "出席状況";
 "Date" = "日付";
-"Are you sure you want to delete this Attendance Record?" = "本当に出席情報を削除しますか？";
+"Are you sure you want to delete this attendance record?" = "本当に出席情報を削除しますか？";
 
 /* AddNewCourseView */
-"Add a New Course" = "講義を追加";
-"Add to Timetable" = "追加";
+"New Course" = "講義を作成";
 
 /* WelcomeView */
 "Create a New Timetable" = "作成";
 
 /* SelectTableView */
-"Timetable List" = "時間割表の一覧";
+"Timetable List" = "時間割の一覧";
 
 /* AddNewTableView */
-"Add a New Timetable" = "時間割を新規作成";
+"New Timetable" = "時間割の新規作成";
+
+/* ToDoListView */
+"Done2" = "完了済み";
+"Not done" = "未完了";
+"Not Done: %d" = "未完了：%d件";
+"Done: %d" = "完了済み：%d件";
+"Overdue" = "期限超過";
+"This Week" = "今週";
+"Later" = "来週以降";
+
+/* AddNewToDoViewView */
+"Title" = "タイトル";
+"Course" = "講義";
+"No courses on the timetable" = "講義が登録されていません";
+"Unselected" = "未選択";
+"Due" = "期限";
+"Notification time" = "通知時間";
+"At the due time" = "期限の時間";
+"15 mins before" = "15分前";
+"30 mins before" = "30分前";
+"1 hour before" = "1時間前";
+"3 hours before" = "3時間前";
+"12 hours before" = "12時間前";
+"1 day before" = "1日前";
+"3 days before" = "3日前";
+"1 week before" = "1週間前";
+"Create" = "作成";
+"New ToDo" = "ToDoを作成";
+
+/* AddNewNoteView */
+"Content" = "内容";
+"Detail" = "詳細";
+"New Note"= "メモを作成";
+"Are you sure you want to delete this note?" = "本当にメモを削除しますか？";

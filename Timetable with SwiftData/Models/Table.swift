@@ -10,7 +10,7 @@ final class Table {
     var numOfPeriods: Int
     @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
-    @Relationship(deleteRule: .cascade, inverse: \Todo.table) var todoList: [Todo]
+    @Relationship(deleteRule: .cascade, inverse: \ToDo.table) var toDoList: [ToDo]
     var isCourseNotificationScheduled: Bool
     var notificationTime: Int
     var scheduledToBeDeleted: Bool
@@ -22,7 +22,7 @@ final class Table {
         self.numOfPeriods = numOfPeriods
         courses = []
         periods = []
-        todoList = []
+        toDoList = []
         isCourseNotificationScheduled = false
         notificationTime = 5
         scheduledToBeDeleted = false
@@ -88,25 +88,25 @@ final class Table {
             }
         }
         
-        for todo in todoList {
-            if todo.isNotificationScheduled {
-                scheduleTodoNotification(todo: todo)
+        for toDo in toDoList {
+            if toDo.isNotificationScheduled {
+                scheduleToDoNotification(toDo: toDo)
             } else {
-                cancelScheduledTodoNotification(todo: todo)
+                cancelScheduledToDoNotification(toDo: toDo)
             }
         }
     }
     
-    func setAllTodosNotification(value: Bool) {
-        todoList.forEach { $0.isNotificationScheduled = value }
+    func setAllToDosNotification(value: Bool) {
+        toDoList.forEach { $0.isNotificationScheduled = value }
     }
     
     func deleteCourse(course: Course) {
         cancelScheduledCourseNotification(course: course)
-        for todo in todoList.filter({ $0.getCourse() == course }) {
-            cancelScheduledTodoNotification(todo: todo)
+        for toDo in toDoList.filter({ $0.getCourse() == course }) {
+            cancelScheduledToDoNotification(toDo: toDo)
         }
-        todoList.removeAll(where: { $0.courseId == course.id.uuidString })
+        toDoList.removeAll(where: { $0.courseId == course.id.uuidString })
         courses.removeAll(where: { $0 == course })
     }
 }

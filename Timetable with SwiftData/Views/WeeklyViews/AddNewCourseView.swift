@@ -72,14 +72,14 @@ struct AddNewCourseView: View {
                     addCourse()
                     dismiss()
                 }, label: {
-                    Text("Add to Timetable")
+                    Text("Create")
                 }).disabled(name.isEmpty)
             }
         }
         .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
         .accentColor(colorScheme == .dark ? .indigo : .indigo)
-        .navigationBarTitle("Add a New Course")
+        .navigationBarTitle("New Course")
     }
     
     private func addCourse() {

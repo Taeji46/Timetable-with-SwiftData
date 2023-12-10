@@ -10,9 +10,9 @@ struct NoteEditView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Content")) {
-                TextField("Content", text: $note.content)
-                    .onChange(of: note.content) {
+            Section(header: Text("Title")) {
+                TextField("Title", text: $note.title)
+                    .onChange(of: note.title) {
                         note.timestamp = Date()
                     }
             }
@@ -31,7 +31,7 @@ struct NoteEditView: View {
                 }
             }
         }
-        .navigationBarTitle("Edit the Note")
+        .navigationBarTitle(note.title)
         .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
         .accentColor(colorScheme == .dark ? .indigo : .indigo)
@@ -45,7 +45,7 @@ struct NoteEditView: View {
                 title: Text("Confirm Deletion"),
                 message: Text("Are you sure you want to delete this note?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    deleteTodo()
+                    deleteToDo()
                     presentationMode.wrappedValue.dismiss()
                 },
                 secondaryButton: .cancel()
@@ -53,7 +53,7 @@ struct NoteEditView: View {
         }
     }
     
-    func deleteTodo() {
+    func deleteToDo() {
         course.notes.removeAll(where: { $0 == note })
     }
 }

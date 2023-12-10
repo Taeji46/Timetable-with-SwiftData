@@ -6,12 +6,12 @@ final class Note {
     var course: Course? // Parent
     
     var id = UUID()
-    var content: String
+    var title: String
     var detail: String
     var timestamp: Date
     
-    init(course: Course, content: String, detail: String) {
-        self.content = content
+    init(course: Course, title: String, detail: String) {
+        self.title = title
         self.detail = detail
         self.timestamp = Date()
         

@@ -35,10 +35,10 @@ struct MainView: View {
                         }
                         .tag(1)
                     
-                    TodoListView(table: table, selectedTableId: $selectedTableId)
+                    ToDoListView(table: table, selectedTableId: $selectedTableId)
                         .tabItem {
                             Image(systemName: "checkmark.circle")
-                            Text("Todo")
+                            Text("ToDo")
                         }
                         .tag(2)
                 }
@@ -53,10 +53,10 @@ struct MainView: View {
                                         selectedTab == 2 ?
                                     Button(action: {
                     withAnimation(.easeInOut(duration: 0.75)) {
-                        for todo in table.todoList.filter({$0.isCompleted == true}) {
-                            cancelScheduledTodoNotification(todo: todo)
+                        for toDo in table.toDoList.filter({$0.isCompleted == true}) {
+                            cancelScheduledToDoNotification(toDo: toDo)
                         }
-                        table.todoList.removeAll(where: { $0.isCompleted == true })
+                        table.toDoList.removeAll(where: { $0.isCompleted == true })
                     }
                     
                 }, label: {
@@ -70,7 +70,7 @@ struct MainView: View {
                     case 1:
                         navigationTitle = table.title.isEmpty ? String(localized: "-") : table.title
                     case 2:
-                        navigationTitle = String(localized: "Todo")
+                        navigationTitle = String(localized: "ToDo")
                     default:
                         navigationTitle = String(localized: "Today's Lectures")
                     }
@@ -81,8 +81,8 @@ struct MainView: View {
         .onAppear() {
             table.initPeriods()
             
-            for todo in table.todoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.date) ?? Date() < Date() }) {
-                todo.isNotificationScheduled = false
+            for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
+                toDo.isNotificationScheduled = false
             }
             table.updateNotificationSetting()
         }
@@ -102,11 +102,11 @@ struct MainView: View {
             switch alertType {
             case .showTableList:
                 return Alert(
-                    title: Text("Confirm Notifications Off"),
-                    message: Text("Notifications for the current timetable will be turned off"),
+                    title: Text("Confirm"),
+                    message: Text("All notifications for this timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
                         table.isCourseNotificationScheduled = false
-                        table.setAllTodosNotification(value: false)
+                        table.setAllToDosNotification(value: false)
                         table.updateNotificationSetting()
                         selectedTableId = nextTableId
                     },
@@ -149,7 +149,7 @@ struct MainView: View {
                 nextTableId = "unselected"
                 isShowingAlert = true
             }, label: {
-                Text("Add a New Timetable")
+                Text("New Timetable")
             })
         }, label: {
             HStack {

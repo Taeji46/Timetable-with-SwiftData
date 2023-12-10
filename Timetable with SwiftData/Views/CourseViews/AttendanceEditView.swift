@@ -35,7 +35,7 @@ struct AttendanceEditView: View {
         .alert(isPresented: $isShowingAlert) {
             Alert(
                 title: Text("Confirm Deletion"),
-                message: Text("Are you sure you want to delete this Attendance Record?"),
+                message: Text("Are you sure you want to delete this attendance record?"),
                 primaryButton: .destructive(Text("Delete")) {
                     course.attendanceRecords.removeAll(where: { $0 == attendance })
                     presentationMode.wrappedValue.dismiss()

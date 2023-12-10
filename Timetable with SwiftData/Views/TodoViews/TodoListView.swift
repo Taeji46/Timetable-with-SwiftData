@@ -1,11 +1,11 @@
 import SwiftUI
 import SwiftData
 
-struct TodoListView: View {
+struct ToDoListView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     @Binding var selectedTableId: String
-    @State var selectedTodoListView: Int = 0
+    @State var selectedToDoListView: Int = 0
     @Query private var tables: [Table]
     @State private var currentDate = Date()
     @State private var today = Calendar.current.startOfDay(for: Date())
@@ -18,19 +18,19 @@ struct TodoListView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                Picker("", selection: $selectedTodoListView) {
-                    Text("Unfinished").tag(0)
-                    Text("Done").tag(1)
+                Picker("", selection: $selectedToDoListView) {
+                    Text("Not done").tag(0)
+                    Text("Done2").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: UIScreen.main.bounds.width * 0.625)
                 .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
                 
                 ScrollView {
-                    if selectedTodoListView == 0 {
-                        incompletedTodoListView
+                    if selectedToDoListView == 0 {
+                        incompletedToDoListView
                     } else {
-                        completedTodoListView
+                        completedToDoListView
                     }
                 }
             }
@@ -56,62 +56,65 @@ struct TodoListView: View {
         }
     }
     
-    var incompletedTodoListView: some View {
+    var incompletedToDoListView: some View {
         VStack {
-            Text("Unfinished: \(table.todoList.filter({ $0.isCompleted == false }).count)")
+            Text(String.localizedStringWithFormat(
+                NSLocalizedString("Done: %d", comment: ""),
+                table.toDoList.filter { $0.isCompleted == false }.count
+            ))
                 .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                 .font(.system(size: 12))
                 .bold()
             
             Divider()
             
-            if table.todoList.contains(where: { $0.isCompleted == false && $0.date <= currentDate }) {
+            if table.toDoList.contains(where: { $0.isCompleted == false && $0.dueDate <= currentDate }) {
                 Text("Overdue")
                     .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                     .font(.system(size: 12))
                     .bold()
-                ForEach(table.todoList.filter({ $0.isCompleted == false && $0.date < currentDate }).sorted { $0.date < $1.date }) { todo in
-                    if let course = todo.getCourse() {
-                        todoItemView(course: course, todo: todo)
+                ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate < currentDate }).sorted { $0.dueDate < $1.dueDate }) { toDo in
+                    if let course = toDo.getCourse() {
+                        toDoItemView(course: course, toDo: toDo)
                     }
                 }
                 Divider()
             }
             
-            if table.todoList.contains(where: { $0.isCompleted == false && $0.date > currentDate && Calendar.current.isDate($0.date, inSameDayAs: currentDate) }) {
+            if table.toDoList.contains(where: { $0.isCompleted == false && $0.dueDate > currentDate && Calendar.current.isDate($0.dueDate, inSameDayAs: currentDate) }) {
                 Text("Today")
                     .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                     .font(.system(size: 12))
                     .bold()
-                ForEach(table.todoList.filter({ $0.isCompleted == false && $0.date >= currentDate && Calendar.current.isDate($0.date, inSameDayAs: currentDate) }).sorted { $0.date < $1.date }) { todo in
-                    if let course = todo.getCourse() {
-                        todoItemView(course: course, todo: todo)
+                ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate >= currentDate && Calendar.current.isDate($0.dueDate, inSameDayAs: currentDate) }).sorted { $0.dueDate < $1.dueDate}) { toDo in
+                    if let course = toDo.getCourse() {
+                        toDoItemView(course: course, toDo: toDo)
                     }
                 }
                 Divider()
             }
             
-            if table.todoList.contains(where: { $0.isCompleted == false && !Calendar.current.isDate($0.date, inSameDayAs: currentDate) && $0.date > currentDate && $0.date < oneWeekLater }) {
+            if table.toDoList.contains(where: { $0.isCompleted == false && !Calendar.current.isDate($0.dueDate, inSameDayAs: currentDate) && $0.dueDate > currentDate && $0.dueDate < oneWeekLater }) {
                 Text("This Week")
                     .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                     .font(.system(size: 12))
                     .bold()
-                ForEach(table.todoList.filter({ $0.isCompleted == false && !Calendar.current.isDate($0.date, inSameDayAs: currentDate) && $0.date > today && $0.date < oneWeekLater }).sorted { $0.date < $1.date }) { todo in
-                    if let course = todo.getCourse() {
-                        todoItemView(course: course, todo: todo)
+                ForEach(table.toDoList.filter({ $0.isCompleted == false && !Calendar.current.isDate($0.dueDate, inSameDayAs: currentDate) && $0.dueDate > today && $0.dueDate < oneWeekLater }).sorted { $0.dueDate < $1.dueDate }) { toDo in
+                    if let course = toDo.getCourse() {
+                        toDoItemView(course: course, toDo: toDo)
                     }
                 }
                 Divider()
             }
             
-            if table.todoList.contains(where: { $0.isCompleted == false && $0.date >= oneWeekLater }) {
+            if table.toDoList.contains(where: { $0.isCompleted == false && $0.dueDate >= oneWeekLater }) {
                 Text("Later")
                     .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                     .font(.system(size: 12))
                     .bold()
-                ForEach(table.todoList.filter({ $0.isCompleted == false && $0.date >= oneWeekLater }).sorted { $0.date < $1.date }) { todo in
-                    if let course = todo.getCourse() {
-                        todoItemView(course: course, todo: todo)
+                ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate >= oneWeekLater }).sorted { $0.dueDate < $1.dueDate }) { toDo in
+                    if let course = toDo.getCourse() {
+                        toDoItemView(course: course, toDo: toDo)
                     }
                 }
                 Divider()
@@ -122,18 +125,21 @@ struct TodoListView: View {
         .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
     }
     
-    var completedTodoListView: some View {
+    var completedToDoListView: some View {
         VStack {
-            Text("Completed: \(table.todoList.filter({ $0.isCompleted == true }).count)")
+            Text(String.localizedStringWithFormat(
+                NSLocalizedString("Not Done: %d", comment: ""),
+                table.toDoList.filter { $0.isCompleted == true }.count
+            ))
                 .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                 .font(.system(size: 12))
                 .bold()
             
             Divider()
             
-            ForEach(table.todoList.filter({ $0.isCompleted == true }).sorted { $0.date < $1.date }) { todo in
-                if let course = todo.getCourse() {
-                    todoItemView(course: course, todo: todo)
+            ForEach(table.toDoList.filter({ $0.isCompleted == true }).sorted { $0.dueDate < $1.dueDate }) { toDo in
+                if let course = toDo.getCourse() {
+                    toDoItemView(course: course, toDo: toDo)
                 }
             }
             Spacer()
@@ -142,25 +148,25 @@ struct TodoListView: View {
         .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
     }
     
-    func todoItemView(course: Course, todo: Todo) -> some View {
+    func toDoItemView(course: Course, toDo: ToDo) -> some View {
         ZStack {
             NavigationLink(destination: {
-                TodoEditView(table: getTable(), todo: todo)
+                ToDoEditView(table: getTable(), toDo: toDo)
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(colorScheme == .dark ? .black : .white)
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(todo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
+                        .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
                         .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                 }
             })
             
             HStack(spacing: 0) {
-                if todo.isCompleted {
+                if toDo.isCompleted {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
-                            todo.isCompleted = false
+                            toDo.isCompleted = false
                         }
                     }, label: {
                         Image(systemName: "checkmark.circle.fill")
@@ -172,7 +178,7 @@ struct TodoListView: View {
                 } else {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
-                            todo.isCompleted = true
+                            toDo.isCompleted = true
                         }
                     }, label: {
                         Image(systemName: "circle")
@@ -186,14 +192,14 @@ struct TodoListView: View {
                 VStack(alignment: .leading) {
                     Text(course.name)
                         .bold()
-                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                         .font(.system(size: 12))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     
-                    Text(todo.task)
+                    Text(toDo.title)
                         .bold()
-                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                         .font(.system(size: 18))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
@@ -202,21 +208,21 @@ struct TodoListView: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text(formattedDate1(todo.date))
+                    Text(formattedDate1(toDo.dueDate))
                         .padding(.trailing, 14)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                         .bold()
                         .font(.system(size: 14))
-                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                     
-                    Text(formattedDate2(todo.date))
+                    Text(formattedDate2(toDo.dueDate))
                         .padding(.trailing, 14)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                         .bold()
                         .font(.system(size: 14))
-                        .foregroundColor(todo.isCompleted ? .white.opacity(0.7) : .white)
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                 }
             }
         }
@@ -231,7 +237,7 @@ struct TodoListView: View {
             HStack {
                 Spacer()
                 NavigationLink(destination: {
-                    AddNewTodoView(table: table)
+                    AddNewToDoView(table: table)
                 }, label: {
                     Image(systemName: "plus")
                         .foregroundColor(.white)

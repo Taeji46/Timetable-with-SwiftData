@@ -17,8 +17,8 @@ struct AddNewTableView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Title of Timetable")) {
-                    TextField("Title of Timetable", text: $title)
+                Section(header: Text("Title")) {
+                    TextField("Title", text: $title)
                 }
                 
                 Section(header: Text("Theme")) {
@@ -73,7 +73,7 @@ struct AddNewTableView: View {
                     }).disabled(title.isEmpty)
                 }
             }
-            .navigationBarTitle("Add a New Timetable")
+            .navigationBarTitle("New Timetable")
             .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
             .scrollContentBackground(.hidden)
             .accentColor(colorScheme == .dark ? .indigo : .indigo)

@@ -5,14 +5,14 @@ struct AddNewNoteView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @FocusState private var focusedField: Bool
     @State var course: Course
-    @State var content: String = ""
+    @State var title: String = ""
     @State var detail: String = ""
 
     
     var body: some View {
         Form {
-            Section(header: Text("Content")) {
-                TextField("Content", text: $content)
+            Section(header: Text("Title")) {
+                TextField("Title", text: $title)
             }
             
             Section(header: Text("Detail")) {
@@ -28,21 +28,21 @@ struct AddNewNoteView: View {
 
             Section {
                 Button(action: {
-                    addTodo()
+                    addToDo()
                     dismiss()
                 }, label: {
-                    Text("Add to Note List")
-                }).disabled(content.isEmpty)
+                    Text("Create")
+                }).disabled(title.isEmpty)
             }
         }
         .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
         .accentColor(colorScheme == .dark ? .indigo : .indigo)
-        .navigationBarTitle("Add a new Note")
+        .navigationBarTitle("New Note")
     }
     
-    func addTodo() {
-        let newMemo = Note(course: course, content: content, detail: detail)
+    func addToDo() {
+        let newMemo = Note(course: course, title: title, detail: detail)
         course.notes.append(newMemo)
     }
 }

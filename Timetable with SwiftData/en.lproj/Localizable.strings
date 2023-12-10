@@ -15,6 +15,9 @@
 "Details" = "Details";
 
 "Time" = "Time";
+"Note" = "Note";
+
+"Apply Changes" = "Apply Changes";
 
 /* TableView */
 "Today's Lectures" = "Today's Lectures";
@@ -27,9 +30,11 @@
 "All lectures of today were finished." = "All lectures of today were finished.";
 
 /* CourseEditView */
+"Course Information" = "Course Information";
 "Course Name" = "Course Name";
 "Classroom" = "Classroom";
 "Teacher" = "Teacher";
+"Duration" = "Duration";
 "Color" = "Color";
 "Notification" = "Notification";
 "Delete the course" = "Notification";
@@ -44,6 +49,7 @@
 "Light" = "Light";
 "Dark" = "Dark";
 "Theme" = "Theme";
+"Table Size" = "Table Size";
 "Days of the Week" = "Days of the Week";
 "Number of periods" = "Number of periods";
 "Time range of periods" = "Time range of periods";
@@ -57,8 +63,8 @@
 "Are you sure you want to reset this timetable?" = "Are you sure you want to reset this timetable?";
 "Reset" = "Reset";
 "List of Timetables" = "List of Timetables";
-"Confirm Notifications Off" = "Confirm Notifications Off";
-"Notifications for the current timetable will be turned off" = "Notifications for the current timetable will be turned off";
+"Confirm" = "Confirm";
+"All notifications for this timetable will be turned off" = "All notifications for this timetable will be turned off";
 "OK" = "OK";
 
 /* Attendance */
@@ -69,10 +75,10 @@
 "Canceled" = "Canceled";
 "Status" = "Status";
 "Date" = "Date";
-"Are you sure you want to delete this Attendance Record?" = "Are you sure you want to delete this Attendance Record?";
+"Are you sure you want to delete this attendance record?" = "Are you sure you want to delete this attendance record?";
 
 /* AddNewCourseView */
-"Add a New Course" = "Add a New Course";
+"New Course" = "New Course";
 "Add to Timetable" = "Add to Timetable";
 
 /* WelcomeView */
@@ -82,4 +88,38 @@
 "Timetable List" = "Timetable List";
 
 /* AddNewTableView */
-"Add a New Timetable" = "Add a New Timetable";
+"New Timetable" = "New Timetable";
+
+/* ToDoListView */
+"Done2" = "Done";
+"Not done" = "Not done";
+"Not Done: %d" = "Not Done: %d";
+"Done: %d" = "Done: %d";
+"Overdue" = "Overdue";
+"This Week" = "This Week";
+"Later" = "Later";
+
+/* AddNewToDoViewView */
+"Title" = "Title";
+"Course" = "Course";
+"No courses on the timetable" = "No courses on the timetable";
+"Unselected" = "Unselected";
+"Due" = "Due";
+"Notification time" = "Notification time";
+"At the due time" = "At the due time";
+"15 mins before" = "15 mins before";
+"30 mins before" = "30 mins before";
+"1 hour before" = "1 hour before";
+"3 hours before" = "3 hours before";
+"12 hours before" = "12 hours before";
+"1 day before" = "1 day before";
+"3 days before" = "3 days before";
+"1 week before" = "1 week before";
+"Create" = "Create";
+"New ToDo" = "New ToDo";
+
+/* AddNewNoteView */
+"Content" = "Content";
+"Detail" = "Detail";
+"New Note"= "New Note";
+"Are you sure you want to delete this note?" = "Are you sure you want to delete this note?";
