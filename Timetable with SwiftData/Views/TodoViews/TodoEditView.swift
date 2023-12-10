@@ -2,8 +2,10 @@ import SwiftUI
 
 struct ToDoEditView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.presentationMode) var presentationMode
     @State var table: Table
     @State var toDo: ToDo
+    @State private var isShowingAlert = false
     
     var body: some View {
         Form {
@@ -68,5 +70,22 @@ struct ToDoEditView: View {
         .scrollContentBackground(.hidden)
         .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .navigationBarTitle(toDo.title)
+        .navigationBarItems(trailing: Button(action: {
+            isShowingAlert = true
+        }) {
+            Image(systemName: "trash")
+        })
+        .alert(isPresented: $isShowingAlert) {
+            Alert(
+                title: Text("Confirm Deletion"),
+                message: Text("Are you sure you want to delete this ToDo?"),
+                primaryButton: .destructive(Text("Delete")) {
+                    cancelScheduledToDoNotification(toDo: toDo)
+                    table.toDoList.removeAll(where: { $0 == toDo })
+                    presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
+        }
     }
 }
