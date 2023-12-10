@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AddNewCourseView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     @State var name: String
     @State var classroom: String
@@ -75,6 +76,9 @@ struct AddNewCourseView: View {
                 }).disabled(name.isEmpty)
             }
         }
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+        .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .navigationBarTitle("Add a New Course")
     }
     

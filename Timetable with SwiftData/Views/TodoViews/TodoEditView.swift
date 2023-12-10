@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TodoEditView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     @State var todo: Todo
     
@@ -63,6 +64,9 @@ struct TodoEditView: View {
                 }
             }
         }
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+        .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .navigationBarTitle(todo.task)
     }
 }

@@ -32,8 +32,9 @@ struct NoteEditView: View {
             }
         }
         .navigationBarTitle("Edit the Note")
-        .background(colorScheme == .dark ? .indigo.opacity(0.05) : .indigo.opacity(0.15))
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .navigationBarItems(trailing: Button(action: {
             isShowingAlert = true
         }) {

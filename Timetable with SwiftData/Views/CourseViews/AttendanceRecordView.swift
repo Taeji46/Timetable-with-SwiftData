@@ -14,6 +14,7 @@ struct AttendanceRecordView: View {
                     ForEach(course.attendanceRecords.sorted { $0.date > $1.date }) { attendance in
                         NavigationLink(destination: {
                             AttendanceEditView(course: course, attendance: attendance)
+                                .accentColor(colorScheme == .dark ? .white : .indigo)
                         }, label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)

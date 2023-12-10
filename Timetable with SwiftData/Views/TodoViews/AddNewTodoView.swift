@@ -3,6 +3,7 @@ import SwiftData
 
 struct AddNewTodoView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     
     @State var task: String
@@ -92,6 +93,9 @@ struct AddNewTodoView: View {
                 }).disabled(task.isEmpty || courseId.isEmpty)
             }
         }
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+        .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .navigationBarTitle("Add a New Todo")
     }
     

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TableSizeSettingView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var table: Table
     @State var numOfDays: Int
     @State var numOfPeriods: Int
@@ -56,10 +57,12 @@ struct TableSizeSettingView: View {
                     }
                 }) {
                     Text("Apply Changes")
-                        .foregroundColor(.blue)
                 }
             }
         }
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+        .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .alert(isPresented: $isShowingAlert) {
             return Alert(
                 title: Text("Caution"),

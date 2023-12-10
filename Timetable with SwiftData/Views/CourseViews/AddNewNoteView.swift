@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AddNewNoteView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @FocusState private var focusedField: Bool
     @State var course: Course
     @State var content: String = ""
@@ -34,6 +35,9 @@ struct AddNewNoteView: View {
                 }).disabled(content.isEmpty)
             }
         }
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+        .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .navigationBarTitle("Add a new Note")
     }
     

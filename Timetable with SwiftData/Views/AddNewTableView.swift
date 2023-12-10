@@ -4,6 +4,7 @@ import SwiftData
 struct AddNewTableView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     
@@ -73,6 +74,9 @@ struct AddNewTableView: View {
                 }
             }
             .navigationBarTitle("Add a New Timetable")
+            .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+            .scrollContentBackground(.hidden)
+            .accentColor(colorScheme == .dark ? .indigo : .indigo)
         }
     }
     

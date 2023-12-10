@@ -47,7 +47,7 @@ struct MainView: View {
                         selectedTab == 1 ? tableDropDown : nil
                     }
                 }
-                .navigationBarTitle(navigationTitle ,displayMode: .inline)
+                .navigationBarTitle(navigationTitle, displayMode: .inline)
                 .navigationBarItems(leading: menu)
                 .navigationBarItems(trailing:
                                         selectedTab == 2 ?

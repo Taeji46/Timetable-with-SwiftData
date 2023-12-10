@@ -3,8 +3,6 @@ import SwiftUI
 struct CourseView: View {
     @State var table: Table
     @State var course: Course
-    @State var isShowingEditView: Bool
-    @State var isShowingAttendanceRecordView: Bool
     @State var isShowingAlert: Bool
     @State var attendCount: Int
     @State var absentCount: Int
@@ -22,8 +20,6 @@ struct CourseView: View {
     init(table: Table, course: Course) {
         self._table = State(initialValue: table)
         self._course = State(initialValue: course)
-        _isShowingEditView = State(initialValue: false)
-        _isShowingAttendanceRecordView = State(initialValue: false)
         _isShowingAlert = State(initialValue: false)
         _attendCount = State(initialValue: course.countAttendance(status: .attend))
         _absentCount = State(initialValue: course.countAttendance(status: .absent))
@@ -71,37 +67,6 @@ struct CourseView: View {
                 })
         )
         .navigationBarItems(trailing: menu)
-        .sheet(isPresented: $isShowingEditView) {
-            NavigationStack {
-                CourseEditView(table: table, course: course, selectedColor: course.getSelectedColor())
-                    .navigationBarTitle("Details", displayMode: .inline)
-                    .navigationBarItems(
-                        trailing:
-                            Button("Done") {
-                                isShowingEditView = false
-                            }
-                    )
-            }
-            .accentColor(colorScheme == .dark ? .white : .black)
-        }
-        .sheet(isPresented: $isShowingAttendanceRecordView, onDismiss: {
-            attendCount = course.countAttendance(status: .attend)
-            absentCount = course.countAttendance(status: .absent)
-            lateCount = course.countAttendance(status: .late)
-            canceledCount = course.countAttendance(status: .canceled)
-        }) {
-            NavigationStack {
-                AttendanceRecordView(course: course)
-                    .navigationBarTitle("Attendance Status", displayMode: .inline)
-                    .navigationBarItems(
-                        trailing:
-                            Button("Done") {
-                                isShowingAttendanceRecordView = false
-                            }
-                    )
-            }
-            .accentColor(colorScheme == .dark ? .white : .black)
-        }
         .alert(isPresented: $isShowingAlert) {
             Alert(
                 title: Text("Confirm Deletion"),
@@ -123,8 +88,10 @@ struct CourseView: View {
     }
     
     var courseInfoView: some View {
-        Button(action: {
-            isShowingEditView = true
+        NavigationLink(destination: {
+            CourseEditView(table: table, course: course, selectedColor: course.getSelectedColor())
+                .navigationBarTitle("Details", displayMode: .inline)
+                .accentColor(colorScheme == .dark ? .white : .indigo)
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -156,8 +123,10 @@ struct CourseView: View {
     
     var attendanceInfoView: some View {
         ZStack {
-            Button(action: {
-                isShowingAttendanceRecordView = true
+            NavigationLink(destination: {
+                AttendanceRecordView(course: course)
+                    .navigationBarTitle("Attendance Status", displayMode: .inline)
+                    .accentColor(colorScheme == .dark ? .white : .indigo)
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)

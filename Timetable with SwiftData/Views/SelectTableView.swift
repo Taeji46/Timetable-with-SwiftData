@@ -1,6 +1,5 @@
 import SwiftUI
 import SwiftData
-import Colorful
 
 struct SelectTableView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -10,10 +9,11 @@ struct SelectTableView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                ColorfulView()
+                Color(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
                     .ignoresSafeArea()
+                
                 ScrollView(showsIndicators: true) {
-                    Group {
+                    VStack {
                         ForEach(tables) { table in
                             Button(action: {
                                 selectedTableId = table.id.uuidString
@@ -23,6 +23,7 @@ struct SelectTableView: View {
                                         .fill(colorScheme == .dark ? .black : .white)
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(table.getSelectedColor().opacity(0.75))
+                                        .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                                     
                                     Text(table.title)
                                         .bold()
@@ -30,11 +31,13 @@ struct SelectTableView: View {
                                         .foregroundColor(Color.white)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .frame(width: UIScreen.main.bounds.width * 0.90, height: 50)
+                                .frame(width: UIScreen.main.bounds.width * 0.925, height: 50)
+                                .padding(.bottom, 4)
                             })
                         }
                     }
-//                    .padding(.top, 12)
+                    .padding(.top, UIScreen.main.bounds.width * (1.0 - 0.925) / 2.0)
+                    .padding([.leading, .trailing], 8)
                 }
             }
             .toolbar {
@@ -46,8 +49,9 @@ struct SelectTableView: View {
                     })
                 }
             }
-            .navigationBarTitle("Timetable List")
+            .navigationBarTitle("Timetable List", displayMode: .inline)
         }
+        .accentColor(colorScheme == .dark ? .white : .indigo)
     }
     
     func getTable() -> Table {

@@ -4,6 +4,7 @@ import SwiftData
 struct WelcomeView: View {
     @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     
@@ -85,6 +86,9 @@ struct WelcomeView: View {
                 }
             }
             .navigationBarTitle("Welcome")
+            .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+            .scrollContentBackground(.hidden)
+            .accentColor(colorScheme == .dark ? .indigo : .indigo)
         }
     }
     

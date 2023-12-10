@@ -9,6 +9,7 @@ struct SettingView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @AppStorage(wrappedValue: 0, "appearanceMode") var appearanceMode
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Query private var tables: [Table]
     @Binding var selectedTableId: String
     @State var table: Table
@@ -130,6 +131,9 @@ struct SettingView: View {
                 }
             }
         }
+        .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
+        .scrollContentBackground(.hidden)
+        .accentColor(colorScheme == .dark ? .indigo : .indigo)
         .alert(isPresented: $isShowingAlert) {
             switch alertType {
             case .showTableList:
