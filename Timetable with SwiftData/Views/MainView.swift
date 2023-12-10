@@ -80,6 +80,11 @@ struct MainView: View {
         .accentColor(colorScheme == .dark ? .white : .indigo)
         .onAppear() {
             table.initPeriods()
+            
+            for todo in table.todoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.date) ?? Date() < Date() }) {
+                todo.isNotificationScheduled = false
+            }
+            table.updateNotificationSetting()
         }
         .onChange(of: selectedTableId) {
             if !tables.isEmpty {

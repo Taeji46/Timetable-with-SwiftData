@@ -27,16 +27,6 @@ struct DailyCourseView: View {
                         .font(.system(size: 12))
                         .bold()
                         .frame(height: (courseInfoHeight + 18 + 3 * insideFrameWidth) / CGFloat(course.duration))
-                    
-//                    if course.duration > 1 {
-//                        ForEach(1..<course.duration) { i in
-//                            Divider()
-//                            Text(String(course.period + i))
-//                                .font(.system(size: 12))
-//                                .bold()
-//                                .frame(height: (courseInfoHeight + 18 + 3 * insideFrameWidth) / CGFloat(course.duration))
-//                        }
-//                    }
                 }
             }
             .frame(width: 20, height: courseInfoHeight + 18 + 3 * insideFrameWidth)

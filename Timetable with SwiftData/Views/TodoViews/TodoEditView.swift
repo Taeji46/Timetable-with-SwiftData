@@ -27,7 +27,8 @@ struct TodoEditView: View {
             }
             
             Section(header: Text("Date")) {
-                DatePicker("Date", selection: $todo.date)
+//                DatePicker("Date", selection: $todo.date, in: Date()...) // 実装用
+                DatePicker("Date", selection: $todo.date) //テスト用
                     .labelsHidden()
                     .onChange(of: todo.date) {
                         table.updateNotificationSetting()
