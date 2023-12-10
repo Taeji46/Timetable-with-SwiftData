@@ -103,7 +103,7 @@
 "Course" = "講義";
 "No courses on the timetable" = "講義が登録されていません";
 "Unselected" = "未選択";
-"Due" = "期限";
+"Due Date" = "期限";
 "Notification time" = "通知時間";
 "At the due time" = "期限の時間";
 "15 mins before" = "15分前";
@@ -122,3 +122,11 @@
 "Detail" = "詳細";
 "New Note"= "メモを作成";
 "Are you sure you want to delete this note?" = "本当にメモを削除しますか？";
+
+/* Notification */
+"Classroom: " = "教室：";
+"Time: " = "時間：";
+" ~ " = "〜";
+"ToDo: " = "ToDo : ";
+"Course: " = "講義：";
+"Due Date: " = "期限：";

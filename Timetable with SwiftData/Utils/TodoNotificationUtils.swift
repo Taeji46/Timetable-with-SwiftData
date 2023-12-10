@@ -8,8 +8,8 @@ func scheduleToDoNotification(toDo: ToDo) {
     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
     
     let content = UNMutableNotificationContent()
-    content.title = String(localized: "Task") + ": " + toDo.title
-    content.body = String(localized: "Course") + ": " + toDo.getCourse()!.name + "\n" + String(localized: "Deadline") + ": " + toDo.getDueDateText()
+    content.title = String(localized: "ToDo: ") + toDo.title
+    content.body = String(localized: "Course: ") + toDo.getCourse()!.name + "\n" + String(localized: "Due Date: ") + toDo.getDueDateText()
     content.sound = UNNotificationSound.default
     
     let request = UNNotificationRequest(identifier: createToDoNotificationIdentifier(toDo: toDo), content: content, trigger: trigger)

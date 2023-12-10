@@ -13,7 +13,7 @@ func scheduleWeeklyCourseNotification(table: Table, course: Course) {
     
     let content = UNMutableNotificationContent()
     content.title = course.getPeriodInfoText() + ": " + course.name
-    content.body = String(localized: "Classroom") + ": " + course.classroom + "\n" + String(localized: "Time") + ": " + table.getPeriod(index: course.period).getStartTimeText() + " ~ " + table.getPeriod(index: course.period).getEndTimeText()
+    content.body = String(localized: "Classroom: ") + course.classroom + "\n" + String(localized: "Time: ") + table.getPeriod(index: course.period).getStartTimeText() + String(localized: " ~ ") + table.getPeriod(index: course.period).getEndTimeText()
     
     let request = UNNotificationRequest(identifier: createCourseNotificationIdentifier(course: course), content: content, trigger: trigger)
     

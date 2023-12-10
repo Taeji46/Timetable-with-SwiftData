@@ -56,9 +56,9 @@ struct AddNewToDoView: View {
                 }
             }
             
-            Section(header: Text("Due")) {
+            Section(header: Text("Due Date")) {
 //                DatePicker("Date", selection: $dueDate, in: Date()...) // 実装
-                DatePicker("Due", selection: $dueDate) // テスト用
+                DatePicker("Due Date", selection: $dueDate) // テスト用
                     .labelsHidden()
             }
             

@@ -29,7 +29,7 @@ final class ToDo {
     
     func getDueDateText() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd H:mm"
+        dateFormatter.dateFormat = "MM/dd H:mm"
         return dateFormatter.string(from: dueDate)
     }
 }
