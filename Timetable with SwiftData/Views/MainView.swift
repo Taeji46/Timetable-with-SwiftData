@@ -84,12 +84,15 @@ struct MainView: View {
             for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
                 toDo.isNotificationScheduled = false
             }
+            
             table.updateNotificationSetting()
         }
         .onChange(of: selectedTableId) {
             if !tables.isEmpty {
                 table = getTable()
             }
+            
+            table.updateNotificationSetting()
         }
         .onChange(of: table.scheduledToBeDeleted) {
             if table.scheduledToBeDeleted {
@@ -105,9 +108,7 @@ struct MainView: View {
                     title: Text("Confirm"),
                     message: Text("All notifications for this timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
-                        table.isCourseNotificationScheduled = false
-                        table.setAllToDosNotification(value: false)
-                        table.updateNotificationSetting()
+                        table.cancelAllScheduledNotification()
                         selectedTableId = nextTableId
                     },
                     secondaryButton: .cancel()

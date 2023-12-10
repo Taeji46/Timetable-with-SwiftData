@@ -239,6 +239,8 @@ struct CourseView: View {
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.75)) {
                                 toDo.isCompleted = true
+                                toDo.isNotificationScheduled = false
+                                cancelScheduledToDoNotification(toDo: toDo)
                             }
                         }, label: {
                             Image(systemName: "circle")

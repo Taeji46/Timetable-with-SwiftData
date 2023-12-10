@@ -97,8 +97,9 @@ final class Table {
         }
     }
     
-    func setAllToDosNotification(value: Bool) {
-        toDoList.forEach { $0.isNotificationScheduled = value }
+    func cancelAllScheduledNotification() {
+        courses.forEach(cancelScheduledCourseNotification)
+        toDoList.forEach(cancelScheduledToDoNotification)
     }
     
     func deleteCourse(course: Course) {
