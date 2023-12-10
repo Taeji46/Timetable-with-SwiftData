@@ -5,11 +5,32 @@ struct AddNewTodoView: View {
     @Environment(\.dismiss) var dismiss
     @State var table: Table
     
-    @State var task: String = ""
-    @State var courseId: String = ""
-    @State var date: Date = Date()
-    @State var isNotificationScheduled: Bool = false
-    @State var notificationTime: Int = 0
+    @State var task: String
+    @State var courseId: String
+    @State var date: Date
+    @State var isNotificationScheduled: Bool
+    @State var notificationTime: Int
+    @State private var cameFromCourseView: Bool
+    
+    init(table: Table) {
+        _table = State(initialValue: table)
+        _task = State(initialValue: "")
+        _courseId = State(initialValue: "")
+        _date = State(initialValue: Date())
+        _isNotificationScheduled = State(initialValue: false)
+        _notificationTime = State(initialValue: 0)
+        _cameFromCourseView = State(initialValue: false)
+    }
+    
+    init(table: Table, course: Course) {
+        _table = State(initialValue: table)
+        _task = State(initialValue: "")
+        _courseId = State(initialValue: course.id.uuidString)
+        _date = State(initialValue: Date())
+        _isNotificationScheduled = State(initialValue: false)
+        _notificationTime = State(initialValue: 0)
+        _cameFromCourseView = State(initialValue: true)
+    }
     
     var body: some View {
         Form {
@@ -30,6 +51,7 @@ struct AddNewTodoView: View {
                     }
                     .pickerStyle(.menu)
                     .labelsHidden()
+                    .disabled(cameFromCourseView)
                 }
             }
             

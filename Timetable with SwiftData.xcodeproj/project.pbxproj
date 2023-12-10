@@ -43,6 +43,9 @@
 		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
 		F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */; };
 		F0A774772B23CDC500CBC3A7 /* TodoNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A774762B23CDC500CBC3A7 /* TodoNotificationUtils.swift */; };
+		F0A774792B250EB000CBC3A7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A774782B250EB000CBC3A7 /* Note.swift */; };
+		F0A7747B2B25108000CBC3A7 /* AddNewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7747A2B25108000CBC3A7 /* AddNewNoteView.swift */; };
+		F0A7747D2B25109600CBC3A7 /* NoteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7747C2B25109600CBC3A7 /* NoteEditView.swift */; };
 		F0CE650E2B17F9B6001A1662 /* AttendanceEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +86,9 @@
 		F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseNotificationUtils.swift; sourceTree = "<group>"; };
 		F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSizeSettingView.swift; sourceTree = "<group>"; };
 		F0A774762B23CDC500CBC3A7 /* TodoNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNotificationUtils.swift; sourceTree = "<group>"; };
+		F0A774782B250EB000CBC3A7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		F0A7747A2B25108000CBC3A7 /* AddNewNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteView.swift; sourceTree = "<group>"; };
+		F0A7747C2B25109600CBC3A7 /* NoteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditView.swift; sourceTree = "<group>"; };
 		F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +180,7 @@
 				F0364C962B076D1200401B45 /* Attendance.swift */,
 				F06584542B1ACC030092A37C /* Todo.swift */,
 				F0364C9A2B07945B00401B45 /* ColorTemplate.swift */,
+				F0A774782B250EB000CBC3A7 /* Note.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +232,8 @@
 				F0364C922B0757FD00401B45 /* CourseEditView.swift */,
 				F0364C982B076FF400401B45 /* AttendanceRecordView.swift */,
 				F0CE650D2B17F9B6001A1662 /* AttendanceEditView.swift */,
+				F0A7747A2B25108000CBC3A7 /* AddNewNoteView.swift */,
+				F0A7747C2B25109600CBC3A7 /* NoteEditView.swift */,
 			);
 			path = CourseViews;
 			sourceTree = "<group>";
@@ -320,8 +329,10 @@
 				F0364C912B07579F00401B45 /* CourseView.swift in Sources */,
 				F0364CA92B08CC8000401B45 /* Period.swift in Sources */,
 				F0364CA12B07E67100401B45 /* SelectTableView.swift in Sources */,
+				F0A7747B2B25108000CBC3A7 /* AddNewNoteView.swift in Sources */,
 				F0364C8F2B0755D200401B45 /* WeeklyEmptyCourseView.swift in Sources */,
 				F0364CA52B07EDE300401B45 /* SettingView.swift in Sources */,
+				F0A7747D2B25109600CBC3A7 /* NoteEditView.swift in Sources */,
 				F0364C952B0767C700401B45 /* MainView.swift in Sources */,
 				F0CE650E2B17F9B6001A1662 /* AttendanceEditView.swift in Sources */,
 				F0364C1C2B06528E00401B45 /* Course.swift in Sources */,
@@ -338,6 +349,7 @@
 				F0364C262B06550000401B45 /* WeeklyTableView.swift in Sources */,
 				F0364C242B06548800401B45 /* WeeklyCourseView.swift in Sources */,
 				F0364C992B076FF400401B45 /* AttendanceRecordView.swift in Sources */,
+				F0A774792B250EB000CBC3A7 /* Note.swift in Sources */,
 				F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */,
 				F06584592B1B68F60092A37C /* AddNewTodoView.swift in Sources */,
 				F0364C092B06512300401B45 /* Timetable_with_SwiftDataApp.swift in Sources */,
