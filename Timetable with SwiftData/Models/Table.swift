@@ -76,6 +76,14 @@ final class Table {
         }
         return isAllCourseFinished
     }
+    
+    func getTotalCredits() -> Int {
+        var total = 0
+        for course in courses {
+            total += course.credits
+        }
+        return total
+    }
 
     func updateNotificationSetting() {
         if isCourseNotificationScheduled {

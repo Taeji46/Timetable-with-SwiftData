@@ -4,6 +4,7 @@ struct CourseEditView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
+    @FocusState private var focusedField: Bool
     @State var table: Table
     @State var course: Course
     @State var selectedColor: Color
@@ -28,6 +29,18 @@ struct CourseEditView: View {
                         .onChange(of: course.teacher) {
                             table.updateNotificationSetting()
                         }
+                }
+                Section(header: Text("Credits")) {
+                    HStack {
+                        TextField("Credits", value: $course.credits, formatter: NumberFormatter())
+                            .keyboardType(.numberPad)
+                            .focused($focusedField)
+                        if focusedField {
+                            Button("Done") {
+                                self.focusedField = false
+                            }
+                        }
+                    }
                 }
                 Section(header: Text("Duration")) {
                     Picker("Periods Count", selection: $course.duration) {
@@ -62,6 +75,7 @@ struct CourseEditView: View {
             }
             .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
             .scrollContentBackground(.hidden)
+            .accentColor(colorScheme == .dark ? .indigo : .indigo)
         }
     }
     

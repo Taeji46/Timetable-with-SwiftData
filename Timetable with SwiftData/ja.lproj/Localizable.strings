@@ -19,6 +19,8 @@
 
 "Apply Changes" = "変更を保存";
 
+"Total Credits: %d" = "総単位数：%d";
+
 /* TableView */
 "Today's Lectures" = "今日の講義";
 "Today" = "今日";
@@ -35,6 +37,7 @@
 "Classroom" = "教室";
 "Teacher" = "講師";
 "Duration" = "コマ数";
+"Credits" = "単位数";
 "Color" = "色";
 "Notification" = "通知";
 "Delete the course" = "講義情報を削除";

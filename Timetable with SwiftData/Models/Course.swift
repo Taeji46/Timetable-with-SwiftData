@@ -12,17 +12,19 @@ final class Course {
     var day: Int
     var period: Int
     var duration: Int
+    var credits: Int
     @Relationship(deleteRule: .cascade, inverse: \Attendance.course) var attendanceRecords: [Attendance]
     @Relationship(deleteRule: .cascade, inverse: \Note.course) var notes: [Note]
     var colorName: String
     
-    init(name: String, classroom: String, teacher: String, day: Int, period: Int, duration: Int, colorName: String) {
+    init(name: String, classroom: String, teacher: String, day: Int, period: Int, duration: Int, credits: Int,colorName: String) {
         self.name = name
         self.classroom = classroom
         self.teacher = teacher
         self.day = day
         self.period = period
         self.duration = duration
+        self.credits = credits
         attendanceRecords = []
         notes = []
         self.colorName = colorName

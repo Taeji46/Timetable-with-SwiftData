@@ -3,6 +3,7 @@ import SwiftUI
 struct AddNewCourseView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @FocusState private var focusedField: Bool
     @State var table: Table
     @State var name: String
     @State var classroom: String
@@ -12,6 +13,7 @@ struct AddNewCourseView: View {
     @State var day: Int
     @State var period: Int
     @State var duration: Int
+    @State var credits: Int
     
     init(table: Table, day: Int, period: Int) {
         self._table = State(initialValue: table)
@@ -23,6 +25,7 @@ struct AddNewCourseView: View {
         self._day = State(initialValue: day)
         self._period = State(initialValue: period)
         self._duration = State(initialValue: 1)
+        self._credits = State(initialValue: 0)
     }
     
     var body: some View {
@@ -35,6 +38,18 @@ struct AddNewCourseView: View {
             }
             Section(header: Text("Teacher")) {
                 TextField("Teacher", text: $teacher)
+            }
+            Section(header: Text("Credits")) {
+                HStack {
+                    TextField("Credits", value: $credits, formatter: NumberFormatter())
+                        .keyboardType(.numberPad)
+                        .focused($focusedField)
+                    if focusedField {
+                        Button("Done") {
+                            self.focusedField = false
+                        }
+                    }
+                }
             }
             Section(header: Text("Duration")) {
                 Picker("Periods Count", selection: $duration) {
@@ -83,7 +98,7 @@ struct AddNewCourseView: View {
     }
     
     private func addCourse() {
-        let newCourse = Course(name: name, classroom: classroom, teacher: teacher, day: day, period: period, duration: duration, colorName: colorName)
+        let newCourse = Course(name: name, classroom: classroom, teacher: teacher, day: day, period: period, duration: duration, credits: credits, colorName: colorName)
         table.courses.append(newCourse)
     }
     

@@ -49,6 +49,7 @@ struct MainView: View {
                 }
                 .navigationBarTitle(navigationTitle, displayMode: .inline)
                 .navigationBarItems(leading: menu)
+                .navigationBarItems(trailing: selectedTab == 1 ? info : nil)
                 .navigationBarItems(trailing:
                                         selectedTab == 2 ?
                                     Button(action: {
@@ -136,9 +137,20 @@ struct MainView: View {
         })
     }
     
+    var info: some View {
+        Menu(content: {
+            Text(String.localizedStringWithFormat(
+                NSLocalizedString("Total Credits: %d", comment: ""),
+                table.getTotalCredits()
+            ))
+        }, label: {
+            Image(systemName: "info.circle")
+        })
+    }
+    
     var tableDropDown: some View {
         Menu(content: {
-            ForEach(tables) { table in
+            ForEach(tables.filter({ $0.id.uuidString != selectedTableId })) { table in
                 Button(action: {
                     nextTableId = table.id.uuidString
                     isShowingAlert = true
@@ -159,7 +171,6 @@ struct MainView: View {
                 Image(systemName: "chevron.down")
             }
             .font(.body)
-            .foregroundColor(colorScheme == .dark ? .white : .black)
         })
     }
     

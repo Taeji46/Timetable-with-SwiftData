@@ -19,6 +19,8 @@
 
 "Apply Changes" = "Apply Changes";
 
+"Total Credits: %d" = "Total Credits: %d";
+
 /* TableView */
 "Today's Lectures" = "Today's Lectures";
 "Today" = "Today";
@@ -35,6 +37,7 @@
 "Classroom" = "Classroom";
 "Teacher" = "Teacher";
 "Duration" = "Duration";
+"Credits" = "Credits";
 "Color" = "Color";
 "Notification" = "Notification";
 "Delete the course" = "Notification";
