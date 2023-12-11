@@ -66,6 +66,9 @@
 "Confirm" = "Confirm";
 "All notifications for this timetable will be turned off" = "All notifications for this timetable will be turned off";
 "OK" = "OK";
+"These courses will be deleted" = "These courses will be deleted";
+"Caution" = "Caution";
+"Courses outside the range of the table will be deleted" = "Courses outside the range of the table will be deleted";
 
 /* Attendance */
 "Attendance Status" = "Attendance Status";
