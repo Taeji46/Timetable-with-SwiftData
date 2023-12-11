@@ -21,6 +21,8 @@
 
 "Total Credits: %d" = "Total Credits: %d";
 
+": " = ": ";
+
 /* TableView */
 "Today's Lectures" = "Today's Lectures";
 "Today" = "Today";
