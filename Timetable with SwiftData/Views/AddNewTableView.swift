@@ -69,7 +69,7 @@ struct AddNewTableView: View {
                         addTable()
                         dismiss()
                     }, label: {
-                        Text("Create a New Timetable")
+                        Text("Create")
                     }).disabled(title.isEmpty)
                 }
             }
