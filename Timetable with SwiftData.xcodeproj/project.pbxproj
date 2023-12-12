@@ -39,6 +39,7 @@
 		F070ED112B0F3ACE006FA7A3 /* UsualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F070ED102B0F3ACE006FA7A3 /* UsualView.swift */; };
 		F070ED132B0F9242006FA7A3 /* AddNewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F070ED122B0F9242006FA7A3 /* AddNewTableView.swift */; };
 		F070ED162B10BFA1006FA7A3 /* Liquid in Frameworks */ = {isa = PBXBuildFile; productRef = F070ED152B10BFA1006FA7A3 /* Liquid */; };
+		F0875F3F2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0875F3E2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift */; };
 		F08E1EF52B0940C8006F0D0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08E1EF72B0940C8006F0D0F /* Localizable.strings */; };
 		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
 		F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */; };
@@ -81,6 +82,7 @@
 		F070ED0E2B0D2352006FA7A3 /* AppearanceModeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceModeUtils.swift; sourceTree = "<group>"; };
 		F070ED102B0F3ACE006FA7A3 /* UsualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsualView.swift; sourceTree = "<group>"; };
 		F070ED122B0F9242006FA7A3 /* AddNewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTableView.swift; sourceTree = "<group>"; };
+		F0875F3E2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodsRangeSettingView.swift; sourceTree = "<group>"; };
 		F08E1EF62B0940C8006F0D0F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF82B0940CA006F0D0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseNotificationUtils.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				F0364CA42B07EDE300401B45 /* SettingView.swift */,
+				F0875F3E2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift */,
 				F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */,
 			);
 			path = SettingViews;
@@ -342,6 +345,7 @@
 				F06584572B1AD15F0092A37C /* TodoListView.swift in Sources */,
 				F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */,
 				F0364C9B2B07945B00401B45 /* ColorTemplate.swift in Sources */,
+				F0875F3F2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift in Sources */,
 				F070ED0F2B0D2352006FA7A3 /* AppearanceModeUtils.swift in Sources */,
 				F0364CA32B07E8D700401B45 /* WelcomeView.swift in Sources */,
 				F06584552B1ACC030092A37C /* Todo.swift in Sources */,

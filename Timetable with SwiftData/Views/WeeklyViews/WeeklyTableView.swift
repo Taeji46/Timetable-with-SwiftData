@@ -110,6 +110,7 @@ struct WeeklyTableView: View {
                             }
                         }
                     }
+                    .padding(.top, 2)
                 }
             }
         )

@@ -132,6 +132,12 @@ struct MainView: View {
             }, label: {
                 Text("Table Size")
             })
+            
+            NavigationLink(destination: {
+                PeriodsRangeSettingView(table: table)
+            }, label: {
+                Text("Time Range of Periods")
+            })
         }, label: {
             Image(systemName: "list.bullet")
         })

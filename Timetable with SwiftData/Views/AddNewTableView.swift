@@ -12,7 +12,6 @@ struct AddNewTableView: View {
     @State var colorName: String = "blue"
     @State var selectedColor: Color = .blue
     @State var selectedDays: [Int] = [0, 1, 2, 3, 4]
-    @State var selectedNumOfDays: Int = 5
     @State var selectedNumOfPeriods: Int = 5
     
     var body: some View {
@@ -42,15 +41,6 @@ struct AddNewTableView: View {
                         }
                         .frame(height: 34)
                     }
-                }
-                
-                Section(header: Text("Days of the Week")) {
-                    Picker("Days Count", selection: $selectedNumOfDays) {
-                        Text(String(localized: "MON") + " ~ " + String(localized: "FRI")).tag(5)
-                        Text(String(localized: "MON") + " ~ " + String(localized: "SAT")).tag(6)
-                        Text(String(localized: "MON") + " ~ " + String(localized: "SUN")).tag(7)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
                 }
                 
                 Section(header: Text("Days of the Week")) {

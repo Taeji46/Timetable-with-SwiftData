@@ -62,29 +62,11 @@ struct SettingView: View {
                     }, label: {
                         Text("Table Size")
                     })
-                }
-                
-                Section(header: Text("Time range of periods")) {
-                    List {
-                        ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
-                            if period.index <= table.numOfPeriods {
-                                HStack {
-                                    Text("\(period.index)")
-                                        .frame(width: 20)
-                                    Divider()
-                                    DatePicker("Start", selection: $table.periods[table.periods.firstIndex(of: period)!].startTime, in: getMinStartTime(period: period.index)..., displayedComponents: .hourAndMinute)
-                                        .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].startTime.wrappedValue) {
-                                            table.updateNotificationSetting()
-                                        }
-                                    Divider()
-                                    DatePicker("End", selection: $table.periods[table.periods.firstIndex(of: period)!].endTime, in: getMinEndTime(period: period.index)..., displayedComponents: .hourAndMinute)
-                                        .onChange(of: $table.periods[table.periods.firstIndex(of: period)!].endTime.wrappedValue) {
-                                            table.updateNotificationSetting()
-                                        }
-                                }
-                            }
-                        }
-                    }
+                    NavigationLink(destination: {
+                        PeriodsRangeSettingView(table: table)
+                    }, label: {
+                        Text("Time Range of Periods")
+                    })
                 }
                 
                 Section() {
@@ -170,18 +152,6 @@ struct SettingView: View {
                 print("Pending requests :", $0)
             }
         }
-    }
-    
-    func getMinStartTime(period: Int) -> Date { // 設定できる開始時間の最小値
-        var minStartTime = Calendar.current.date(from: DateComponents(hour: 0, minute: 0)) ?? Date()
-        if period > 0 {
-            minStartTime = table.getPeriod(index: period - 1).endTime
-        }
-        return minStartTime
-    }
-    
-    func getMinEndTime(period: Int) -> Date { // 設定できる終了時間の最小値
-        return table.getPeriod(index: period).startTime
     }
     
     func getTable() -> Table {

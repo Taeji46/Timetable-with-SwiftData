@@ -63,10 +63,10 @@
 "Light" = "ライト";
 "Dark" = "ダーク";
 "Theme" = "テーマ";
-"Table Size" = "時間割のサイズ";
+"Table Size" = "曜日・時限の数";
 "Days of the Week" = "曜日";
 "Number of periods" = "時限の数";
-"Time range of periods" = "時限の開始・終了時間";
+"Time Range of Periods" = "時限の開始・終了時間";
 "Start" = "開始";
 "End" = "終了";
 "Notification time (minutes before)" = "通知時間（分前）";
