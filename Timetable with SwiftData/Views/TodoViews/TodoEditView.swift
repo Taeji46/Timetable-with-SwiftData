@@ -38,11 +38,13 @@ struct ToDoEditView: View {
                     }
             }
             
+            
             Section() {
                 Toggle("Notification", isOn: $toDo.isNotificationScheduled)
                     .onChange(of: toDo.isNotificationScheduled) {
                         table.updateNotificationSetting()
                     }
+                    .disabled(toDo.isCompleted)
             }
             
             if toDo.isNotificationScheduled {

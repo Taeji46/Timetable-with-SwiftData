@@ -5,6 +5,15 @@
 "FRI" = "金";
 "SAT" = "土";
 "SUN" = "日";
+"OTHER" = "他";
+"Monday" = "月曜日";
+"Tuesday" = "火曜日";
+"Wednesday" = "水曜日";
+"Thursday" = "木曜日";
+"Friday" = "金曜日";
+"Saturday" = "土曜日";
+"Sunday" = "日曜日";
+"Other (for On-Demand)" = "その他 (オンデマンド授業用)";
 "currentInfoText" = "MMMd日 EEEE";
 "st period" = "限";
 "nd period" = "限";
@@ -63,7 +72,7 @@
 "Notification time (minutes before)" = "通知時間（分前）";
 "Turn on notifications for all courses" = "すべての講義の通知をオン";
 "Turn off notifications for all courses" = "すべての講義の通知をオフ";
-"Reset the Timetable" = "時間割を削除";
+"Delete the Timetable" = "時間割を削除";
 "Confirm Reset" = "確認";
 "Are you sure you want to delete this timetable?" = "本当に時間割を削除しますか？";
 "Reset" = "はい";

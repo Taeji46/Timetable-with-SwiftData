@@ -3,6 +3,7 @@ import SwiftData
 
 struct WeeklyCourseView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var table: Table
     @State var course: Course
     var courseWidth: CGFloat
     var courseHeight: CGFloat
@@ -14,6 +15,19 @@ struct WeeklyCourseView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(course.getSelectedColor().opacity(0.75))
                 .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
+                .overlay(
+                    table.toDoList.filter({ $0.isCompleted == false && $0.courseId == course.id.uuidString }).count > 0
+                    ? Text(String(table.toDoList.filter({ $0.isCompleted == false && $0.courseId == course.id.uuidString }).count))
+                        .font(.system(size: 12))
+                        .bold()
+                        .foregroundColor(.white)
+                        .padding(6)
+                        .background(Color.red)
+                        .clipShape(Circle())
+                        .offset(x: 6, y: -6)
+                    : nil,
+                    alignment: .topTrailing
+                )
             VStack {
                 titleView()
                 classroomView()

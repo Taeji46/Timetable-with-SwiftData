@@ -219,6 +219,18 @@ struct CourseView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
                             .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
+                            .overlay(
+                                toDo.isNotificationScheduled
+                                ? Image(systemName: "bell.fill")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                                    .padding(4)
+                                    .background(Color.red)
+                                    .clipShape(Circle())
+                                    .offset(x: -4, y: -4)
+                                : nil,
+                                alignment: .topLeading
+                            )
                     }
                 })
                 
@@ -232,7 +244,8 @@ struct CourseView: View {
                             Image(systemName: "checkmark.circle.fill")
                                 .font(.system(size: 25))
                         })
-                        .padding([.leading, .trailing], 14)
+                        .padding(.leading, 14)
+                        .padding(.trailing, 14)
                         .foregroundColor(Color.white)
                         .frame(alignment: .leading)
                     } else {
@@ -246,7 +259,8 @@ struct CourseView: View {
                             Image(systemName: "circle")
                                 .font(.system(size: 25))
                         })
-                        .padding([.leading, .trailing], 14)
+                        .padding(.leading, 14)
+                        .padding(.trailing, 14)
                         .foregroundColor(Color.white)
                         .frame(alignment: .leading)
                     }
@@ -324,7 +338,7 @@ struct CourseView: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .padding(.leading, 18)
-
+                        
                     }
                     
                     Spacer()
@@ -376,9 +390,13 @@ struct CourseView: View {
                     .frame(width: 14, height: 14)
                     .padding(.leading, 14)
                 
-                Text(startTimeText + " ~ " + endTimeText)
-                    .font(.system(size: 14))
-                    .bold()
+                if course.day != 7 {
+                    Text(startTimeText + " ~ " + endTimeText)
+                        .font(.system(size: 14))
+                        .bold()
+                } else {
+                    Text("-")
+                }
             }
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 14, alignment: .leading)
         )

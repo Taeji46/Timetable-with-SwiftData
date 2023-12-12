@@ -15,7 +15,7 @@ struct SettingView: View {
     @State var table: Table
     @State var isShowingAlert: Bool = false
     @State var alertType: AlertType = .showTableList
-    
+
     var body: some View {
         VStack {
             Form {
@@ -125,7 +125,7 @@ struct SettingView: View {
                         alertType = .deleteTable
                         isShowingAlert.toggle()
                     }) {
-                        Text("Reset the Timetable")
+                        Text("Delete the Timetable")
                             .foregroundColor(.red)
                     }
                 }

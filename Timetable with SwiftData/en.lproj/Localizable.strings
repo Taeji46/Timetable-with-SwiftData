@@ -5,6 +5,15 @@
 "FRI" = "FRI";
 "SAT" = "SAT";
 "SUN" = "SUN";
+"OTHER" = "OTHER";
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+"Other (for On-Demand)" = "Other (for On-Demand)";
 "currentInfoText" = "EEEE, d MMMM";
 "st period" = "st period";
 "nd period" = "nd period";
@@ -63,7 +72,7 @@
 "Notification time (minutes before)" = "Notification time (minutes before)";
 "Turn on notifications for all courses" = "Turn on notifications for all courses";
 "Turn off notifications for all courses" = "Turn off notifications for all courses";
-"Reset the Timetable" = "Reset the Timetable";
+"Delete the Timetable" = "Delete the Timetable";
 "Confirm Reset" = "Confirm Reset";
 "Are you sure you want to reset this timetable?" = "Are you sure you want to reset this timetable?";
 "Reset" = "Reset";

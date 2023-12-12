@@ -1,5 +1,24 @@
 import SwiftUI
 
+let daysOfWeek = [String(localized: "MON"),
+                  String(localized: "TUE"),
+                  String(localized: "WED"),
+                  String(localized: "THU"),
+                  String(localized: "FRI"),
+                  String(localized: "SAT"),
+                  String(localized: "SUN"),
+                  String(localized: "OTHER")]
+
+let daysOfWeekForSetting = [String(localized: "Monday"),
+                            String(localized: "Tuesday"),
+                            String(localized: "Wednesday"),
+                            String(localized: "Thursday"),
+                            String(localized: "Friday"),
+                            String(localized: "Saturday"),
+                            String(localized: "Sunday"),
+                            String(localized: "Other (for On-Demand)")]
+
+
 func getCurrentTime() -> Date {
     var calendar = Calendar.current
     calendar.timeZone = TimeZone.current

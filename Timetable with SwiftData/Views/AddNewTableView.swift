@@ -11,6 +11,7 @@ struct AddNewTableView: View {
     @State var title: String = ""
     @State var colorName: String = "blue"
     @State var selectedColor: Color = .blue
+    @State var selectedDays: [Int] = [0, 1, 2, 3, 4]
     @State var selectedNumOfDays: Int = 5
     @State var selectedNumOfPeriods: Int = 5
     
@@ -52,6 +53,30 @@ struct AddNewTableView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 
+                Section(header: Text("Days of the Week")) {
+                    ForEach(0..<8, id: \.self) { index in
+                        Button(action: {
+                            if selectedDays.contains(index) {
+                                selectedDays.removeAll { $0 == index }
+                            } else {
+                                selectedDays.append(index)
+                            }
+                        }) {
+                            HStack {
+                                if selectedDays.contains(index) {
+                                    Image(systemName: "checkmark")
+                                } else {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.clear)
+                                }
+
+                                Text(daysOfWeekForSetting[index])
+                                    .foregroundColor(selectedDays.contains(index) ? (colorScheme == .dark ? .white : .black) : .gray)
+                            }
+                        }
+                    }
+                }
+                
                 Section(header: Text("Number of periods")) {
                     Picker("Periods Count", selection: $selectedNumOfPeriods) {
                         Text("5").tag(5)
@@ -70,7 +95,7 @@ struct AddNewTableView: View {
                         dismiss()
                     }, label: {
                         Text("Create")
-                    }).disabled(title.isEmpty)
+                    }).disabled(title.isEmpty || selectedDays.isEmpty)
                 }
             }
             .navigationBarTitle("New Timetable")
@@ -81,7 +106,9 @@ struct AddNewTableView: View {
     }
     
     private func addTable() {
-        let newTable = Table(title: title, colorName: colorName, numOfDays: selectedNumOfDays, numOfPeriods: selectedNumOfPeriods)
+        let newTable = Table(title: title, colorName: colorName, numOfPeriods: selectedNumOfPeriods)
+        newTable.periods = (1...10).map { Period(index: $0) }
+        newTable.selectedDays = selectedDays
         modelContext.insert(newTable)
     }
 }

@@ -41,6 +41,8 @@ struct MainView: View {
                             Text("ToDo")
                         }
                         .tag(2)
+//                        .badge(table.toDoList.filter { $0.isCompleted == false && ($0.dueDate < Date() || Calendar.current.isDate($0.dueDate, inSameDayAs: Date()))}.count) // Overdue & Today
+                        .badge(table.toDoList.filter({ $0.isCompleted == false }).count) // All
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
@@ -80,8 +82,6 @@ struct MainView: View {
         }
         .accentColor(colorScheme == .dark ? .white : .indigo)
         .onAppear() {
-            table.initPeriods()
-            
             for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
                 toDo.isNotificationScheduled = false
             }

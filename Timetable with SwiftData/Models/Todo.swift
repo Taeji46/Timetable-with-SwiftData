@@ -9,6 +9,7 @@ final class ToDo {
     var title: String
     var courseId: String
     var dueDate: Date
+    var priority: Int
     var isCompleted: Bool
     var isNotificationScheduled: Bool
     var notificationTime: Int
@@ -17,6 +18,7 @@ final class ToDo {
         self.title = title
         self.courseId = courseId
         self.dueDate = dueDate
+        self.priority = 0
         self.isCompleted = false
         self.isNotificationScheduled = isNotificationScheduled
         self.notificationTime = notificationTime

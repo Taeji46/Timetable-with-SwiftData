@@ -37,21 +37,13 @@ struct WeeklyTableView: View {
     }
     
     func weekView() -> some View {
-        let daysOfWeek = [String(localized: "MON"),
-                          String(localized: "TUE"),
-                          String(localized: "WED"),
-                          String(localized: "THU"),
-                          String(localized: "FRI"),
-                          String(localized: "SAT"),
-                          String(localized: "SUN")].prefix(upTo: table.numOfDays)
-        
         return (
             HStack {
                 Rectangle()
                     .fill(Color.clear)
                     .frame(width: 20, height: 20)
                 
-                ForEach(daysOfWeek, id: \.self) { day in
+                ForEach(table.selectedDays.sorted(by: { $0 < $1 }), id: \.self) { day in
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(colorScheme == .dark ? .black : .white)
@@ -60,10 +52,13 @@ struct WeeklyTableView: View {
                             .fill(table.getSelectedColor().opacity(0.75))
                             .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                         
-                        Text(day)
+                        Text(daysOfWeek[day])
                             .foregroundColor(Color.white)
                             .font(.system(size: 12))
                             .bold()
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .frame(width: getCourseWidth() - 10, height: 20)
                     }
                     .frame(width: getCourseWidth(), height: 20)
                 }
@@ -97,14 +92,14 @@ struct WeeklyTableView: View {
     func courseTableView() -> some View {
         return (
             HStack {
-                ForEach(0..<table.numOfDays, id: \.self) { day in
+                ForEach(table.selectedDays.sorted(by: { $0 < $1 }), id: \.self) { day in
                     VStack {
                         ForEach(1...table.numOfPeriods, id: \.self) { period in
                             if let course = table.courses.first(where: { $0.day == day && $0.period <= period && period < $0.period + $0.duration }) {
                                 NavigationLink(destination: {
                                     CourseView(table: table, course: course)
                                 }, label: {
-                                    WeeklyCourseView(course: course, courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
+                                    WeeklyCourseView(table: table, course: course, courseWidth: getCourseWidth(), courseHeight: getCourseHeight())
                                 })
                             } else {
                                 NavigationLink(destination: {
@@ -129,7 +124,7 @@ struct WeeklyTableView: View {
     }
     
     func getCourseWidth() -> CGFloat {
-        return UIScreen.main.bounds.width / CGFloat(Float(table.numOfDays)) * 0.75
+        return UIScreen.main.bounds.width / CGFloat(Float(table.selectedDays.count)) * 0.75
     }
     
     func getTable() -> Table {

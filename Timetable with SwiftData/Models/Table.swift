@@ -6,7 +6,7 @@ final class Table {
     var id = UUID()
     var title: String
     var colorName: String
-    var numOfDays: Int
+    var selectedDays: [Int]
     var numOfPeriods: Int
     @Relationship(deleteRule: .cascade, inverse: \Course.table) var courses: [Course]
     @Relationship(deleteRule: .cascade, inverse: \Period.table) var periods: [Period]
@@ -15,23 +15,17 @@ final class Table {
     var notificationTime: Int
     var scheduledToBeDeleted: Bool
     
-    init(title: String, colorName: String, numOfDays: Int, numOfPeriods: Int) {
+    init(title: String, colorName: String, numOfPeriods: Int) {
         self.title = title
         self.colorName = colorName
-        self.numOfDays = numOfDays
         self.numOfPeriods = numOfPeriods
+        selectedDays = []
         courses = []
         periods = []
         toDoList = []
         isCourseNotificationScheduled = false
         notificationTime = 5
         scheduledToBeDeleted = false
-    }
-    
-    func initPeriods() {
-        if periods.count == 0 {
-            periods = (1...10).map { Period(index: $0) }
-        }
     }
     
     func getSelectedColor() -> Color {
@@ -87,11 +81,11 @@ final class Table {
 
     func updateNotificationSetting() {
         if isCourseNotificationScheduled {
-            for course in courses {
+            for course in courses.filter({ $0.day != 7}) {
                 scheduleWeeklyCourseNotification(table: self, course: course)
             }
         } else {
-            for course in courses {
+            for course in courses.filter({ $0.day != 7}) {
                 cancelScheduledCourseNotification(course: course)
             }
         }

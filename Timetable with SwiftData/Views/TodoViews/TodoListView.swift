@@ -62,9 +62,9 @@ struct ToDoListView: View {
                 NSLocalizedString("Not Done: %d", comment: ""),
                 table.toDoList.filter { $0.isCompleted == false }.count
             ))
-                .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
-                .font(.system(size: 12))
-                .bold()
+            .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
+            .font(.system(size: 12))
+            .bold()
             
             Divider()
             
@@ -73,6 +73,7 @@ struct ToDoListView: View {
                     .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
                     .font(.system(size: 12))
                     .bold()
+                    .foregroundColor(.red)
                 ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate < currentDate }).sorted { $0.dueDate < $1.dueDate }) { toDo in
                     if let course = toDo.getCourse() {
                         toDoItemView(course: course, toDo: toDo)
@@ -131,9 +132,9 @@ struct ToDoListView: View {
                 NSLocalizedString("Done: %d", comment: ""),
                 table.toDoList.filter { $0.isCompleted == true }.count
             ))
-                .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
-                .font(.system(size: 12))
-                .bold()
+            .frame(width: UIScreen.main.bounds.width * 0.925, alignment: .leading)
+            .font(.system(size: 12))
+            .bold()
             
             Divider()
             
@@ -159,6 +160,18 @@ struct ToDoListView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
                         .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
+                        .overlay(
+                            toDo.isNotificationScheduled
+                            ? Image(systemName: "bell.fill")
+                                .font(.system(size: 12))
+                                .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                                .padding(4)
+                                .background(Color.red)
+                                .clipShape(Circle())
+                                .offset(x: -4, y: -4)
+                            : nil,
+                            alignment: .topLeading
+                        )
                 }
             })
             
@@ -172,7 +185,8 @@ struct ToDoListView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 25))
                     })
-                    .padding([.leading, .trailing], 14)
+                    .padding(.leading, 14)
+                    .padding(.trailing, 14)
                     .foregroundColor(Color.white)
                     .frame(alignment: .leading)
                 } else {
@@ -186,7 +200,8 @@ struct ToDoListView: View {
                         Image(systemName: "circle")
                             .font(.system(size: 25))
                     })
-                    .padding([.leading, .trailing], 14)
+                    .padding(.leading, 14)
+                    .padding(.trailing, 14)
                     .foregroundColor(Color.white)
                     .frame(alignment: .leading)
                 }
@@ -241,12 +256,15 @@ struct ToDoListView: View {
                 NavigationLink(destination: {
                     AddNewToDoView(table: table)
                 }, label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(.white)
-                        .font(.system(size: 24))
+                    ZStack {
+                        Color(colorScheme == .dark ? .black : .white)
+                        Color(colorScheme == .dark ? .indigo.opacity(0.75) : .indigo.opacity(0.75))
+                        Image(systemName: "plus")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24))
+                    }
                 })
                 .frame(width: 60, height: 60)
-                .background(colorScheme == .dark ? .indigo.opacity(0.75) : .indigo.opacity(0.75))
                 .cornerRadius(30.0)
                 .shadow(color: colorScheme == .dark ? .clear : .gray, radius: 3, x: 3, y: 3)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0))
