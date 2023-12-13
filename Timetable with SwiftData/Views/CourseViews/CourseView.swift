@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUIImageViewer
 
 struct CourseView: View {
     @State var table: Table
@@ -11,7 +12,10 @@ struct CourseView: View {
     let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.925
     let courseInfoHeight: CGFloat = 76
     let attendanceInfoHeight: CGFloat = 50
+    let imageHeight: CGFloat = 50
     let insideFrameWidth: CGFloat = 10
+    
+    @State private var isImagePresented = false
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode
@@ -342,6 +346,38 @@ struct CourseView: View {
                     }
                     
                     Spacer()
+                    
+                    if let imageData = note.image, let uiImage = UIImage(data: imageData) {
+                        Button(action: {
+                            isImagePresented = true
+                        }, label: {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 40, height: 40)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .padding(.trailing, 18)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.white, lineWidth: 1)
+                                        .padding(.trailing, 18)
+                                )
+                            
+                        })
+                        .sheet(isPresented: $isImagePresented) {
+                            SwiftUIImageViewer(image: Image(uiImage: uiImage))
+                                .overlay(alignment: .topTrailing) {
+                                    Button(action: {
+                                        isImagePresented = false
+                                    }, label: {
+                                        Image(systemName: "xmark")
+                                            .font(.headline)
+                                            .foregroundColor(.indigo)
+                                    })
+                                    .padding()
+                                }
+                        }
+                    }
                 }
             }
             .frame(width: UIScreen.main.bounds.width * 0.925, height: 55)

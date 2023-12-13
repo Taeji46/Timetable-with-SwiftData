@@ -40,6 +40,7 @@
 		F070ED132B0F9242006FA7A3 /* AddNewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F070ED122B0F9242006FA7A3 /* AddNewTableView.swift */; };
 		F070ED162B10BFA1006FA7A3 /* Liquid in Frameworks */ = {isa = PBXBuildFile; productRef = F070ED152B10BFA1006FA7A3 /* Liquid */; };
 		F0875F3F2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0875F3E2B28BD3D00AFC774 /* PeriodsRangeSettingView.swift */; };
+		F0875F422B2977C700AFC774 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = F0875F412B2977C700AFC774 /* SwiftUIImageViewer */; };
 		F08E1EF52B0940C8006F0D0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08E1EF72B0940C8006F0D0F /* Localizable.strings */; };
 		F08E1EFA2B0A4D71006F0D0F /* CourseNotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08E1EF92B0A4D71006F0D0F /* CourseNotificationUtils.swift */; };
 		F0A7745B2B220E2F00CBC3A7 /* TableSizeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A7745A2B220E2F00CBC3A7 /* TableSizeSettingView.swift */; };
@@ -101,6 +102,7 @@
 			files = (
 				F070ED162B10BFA1006FA7A3 /* Liquid in Frameworks */,
 				F0364CB52B08E4C500401B45 /* Colorful in Frameworks */,
+				F0875F422B2977C700AFC774 /* SwiftUIImageViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +262,7 @@
 			packageProductDependencies = (
 				F0364CB42B08E4C500401B45 /* Colorful */,
 				F070ED152B10BFA1006FA7A3 /* Liquid */,
+				F0875F412B2977C700AFC774 /* SwiftUIImageViewer */,
 			);
 			productName = "Timetable with SwiftData";
 			productReference = F0364C052B06512300401B45 /* Timetable with SwiftData.app */;
@@ -293,6 +296,7 @@
 			packageReferences = (
 				F0364CB32B08E4C500401B45 /* XCRemoteSwiftPackageReference "Colorful" */,
 				F070ED142B10BFA1006FA7A3 /* XCRemoteSwiftPackageReference "liquid" */,
+				F0875F402B2977C700AFC774 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = F0364C062B06512300401B45 /* Products */;
 			projectDirPath = "";
@@ -594,6 +598,14 @@
 				kind = branch;
 			};
 		};
+		F0875F402B2977C700AFC774 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer?ref=iosexample.com";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -606,6 +618,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F070ED142B10BFA1006FA7A3 /* XCRemoteSwiftPackageReference "liquid" */;
 			productName = Liquid;
+		};
+		F0875F412B2977C700AFC774 /* SwiftUIImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0875F402B2977C700AFC774 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = SwiftUIImageViewer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

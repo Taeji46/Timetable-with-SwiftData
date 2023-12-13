@@ -17,6 +17,15 @@
         "branch" : "master",
         "revision" : "067aecd19425b3d37d1bca176aca9a0dc5ff6ed0"
       }
+    },
+    {
+      "identity" : "swiftui-image-viewer?ref=iosexample.com",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fuzzzlove/swiftui-image-viewer?ref=iosexample.com",
+      "state" : {
+        "revision" : "ca77123064ae046eac2be01654ee756085c2b182",
+        "version" : "1.0.0"
+      }
     }
   ],
   "version" : 2

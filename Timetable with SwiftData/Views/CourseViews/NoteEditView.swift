@@ -1,4 +1,6 @@
 import SwiftUI
+import PhotosUI
+import SwiftUIImageViewer
 
 struct NoteEditView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -6,7 +8,9 @@ struct NoteEditView: View {
     @FocusState private var focusedField: Bool
     @State var course: Course
     @State var note: Note
+    @State var selectedPhoto: PhotosPickerItem?
     @State private var isShowingAlert = false
+    @State private var isImagePresented = false
     
     var body: some View {
         Form {
@@ -29,6 +33,53 @@ struct NoteEditView: View {
                         self.focusedField = false
                     }
                 }
+            }
+            
+            Section(header: Text("Image")) {
+                if let imageData = note.image, let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity, maxHeight: 300)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .onTapGesture {
+                            isImagePresented = true
+                        }
+                        .sheet(isPresented: $isImagePresented) {
+                            SwiftUIImageViewer(image: Image(uiImage: uiImage))
+                                .overlay(alignment: .topTrailing) {
+                                    Button(action: {
+                                        isImagePresented = false
+                                    }, label: {
+                                        Image(systemName: "xmark")
+                                            .font(.headline)
+                                    })
+                                    .clipShape(Circle())
+                                    .tint(.indigo)
+                                    .padding()
+                                }
+                        }
+                }
+                
+                if note.image == nil {
+                    PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                        Label("Add Image", systemImage: "photo")
+                    }
+                } else {
+                    Button(action: {
+                        withAnimation {
+                            selectedPhoto = nil
+                            note.image = nil
+                        }
+                    }, label: {
+                        Label("Remove Image", systemImage: "xmark")
+                    })
+                }
+            }
+        }
+        .task(id: selectedPhoto) {
+            if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
+                note.image = data
             }
         }
         .navigationBarTitle(note.title)

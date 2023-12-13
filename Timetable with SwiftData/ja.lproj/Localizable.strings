@@ -140,6 +140,9 @@
 "Detail" = "詳細";
 "New Note"= "メモを作成";
 "Are you sure you want to delete this note?" = "本当にメモを削除しますか？";
+"Image" = "画像";
+"Add Image" = "画像を追加";
+"Remove Image" = "画像を消去";
 
 /* Notification */
 "Classroom: " = "教室：";
