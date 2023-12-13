@@ -347,37 +347,39 @@ struct CourseView: View {
                     
                     Spacer()
                     
-                    if let imageData = note.image, let uiImage = UIImage(data: imageData) {
-                        Button(action: {
-                            isImagePresented = true
-                        }, label: {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 40, height: 40)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .padding(.trailing, 18)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.white, lineWidth: 1)
-                                        .padding(.trailing, 18)
-                                )
-                            
-                        })
-                        .sheet(isPresented: $isImagePresented) {
-                            SwiftUIImageViewer(image: Image(uiImage: uiImage))
-                                .overlay(alignment: .topTrailing) {
-                                    Button(action: {
-                                        isImagePresented = false
-                                    }, label: {
-                                        Image(systemName: "xmark")
-                                            .font(.headline)
-                                            .foregroundColor(.indigo)
-                                    })
-                                    .padding()
+                    HStack {
+                        ForEach(note.images, id: \.self) { imageData in
+                            if let uiImage = UIImage(data: imageData) {
+                                Button(action: {
+                                    isImagePresented = true
+                                }, label: {
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.white, lineWidth: 1)
+                                        )
+                                })
+                                .sheet(isPresented: $isImagePresented) {
+                                    SwiftUIImageViewer(image: Image(uiImage: uiImage))
+                                        .overlay(alignment: .topTrailing) {
+                                            Button(action: {
+                                                isImagePresented = false
+                                            }, label: {
+                                                Image(systemName: "xmark")
+                                                    .font(.headline)
+                                                    .foregroundColor(.indigo)
+                                            })
+                                            .padding()
+                                        }
                                 }
+                            }
                         }
                     }
+                    .padding(.trailing, 14)
                 }
             }
             .frame(width: UIScreen.main.bounds.width * 0.925, height: 55)

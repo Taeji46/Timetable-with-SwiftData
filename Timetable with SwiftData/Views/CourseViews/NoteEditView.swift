@@ -5,6 +5,7 @@ import SwiftUIImageViewer
 struct NoteEditView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) private var modelContext
     @FocusState private var focusedField: Bool
     @State var course: Course
     @State var note: Note
@@ -36,50 +37,57 @@ struct NoteEditView: View {
             }
             
             Section(header: Text("Image")) {
-                if let imageData = note.image, let uiImage = UIImage(data: imageData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: 300)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .onTapGesture {
-                            isImagePresented = true
+                if !note.images.isEmpty {
+                    ForEach(note.images, id: \.self) { imageData in
+                        if let uiImage = UIImage(data: imageData) {
+                            HStack {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: .infinity, maxHeight: 300)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .onTapGesture {
+                                        isImagePresented = true
+                                    }
+                                    .sheet(isPresented: $isImagePresented) {
+                                        SwiftUIImageViewer(image: Image(uiImage: uiImage))
+                                            .overlay(alignment: .topTrailing) {
+                                                Button(action: {
+                                                    isImagePresented = false
+                                                }, label: {
+                                                    Image(systemName: "xmark")
+                                                })
+                                                .tint(.indigo)
+                                                .padding()
+                                            }
+                                            .overlay(alignment: .topLeading) {
+                                                Button(action: {
+                                                    note.images.removeAll(where: { $0 == imageData })
+                                                    isImagePresented = false
+                                                }, label: {
+                                                    Image(systemName: "trash")
+                                                })
+                                                .tint(.indigo)
+                                                .padding()
+                                            }
+                                    }
+                            }
                         }
-                        .sheet(isPresented: $isImagePresented) {
-                            SwiftUIImageViewer(image: Image(uiImage: uiImage))
-                                .overlay(alignment: .topTrailing) {
-                                    Button(action: {
-                                        isImagePresented = false
-                                    }, label: {
-                                        Image(systemName: "xmark")
-                                            .font(.headline)
-                                    })
-                                    .clipShape(Circle())
-                                    .tint(.indigo)
-                                    .padding()
-                                }
-                        }
+                    }
                 }
                 
-                if note.image == nil {
-                    PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
-                        Label("Add Image", systemImage: "photo")
-                    }
-                } else {
-                    Button(action: {
-                        withAnimation {
+                PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                    Label("Add Image", systemImage: "photo")
+                }.disabled(note.images.count > 3)
+                .onChange(of: selectedPhoto) { oldPhoto, newPhoto in
+                    Task {
+                        if let data = try? await newPhoto?.loadTransferable(type: Data.self) {
+                            note.images.append(data)
+                            try? modelContext.save()
                             selectedPhoto = nil
-                            note.image = nil
                         }
-                    }, label: {
-                        Label("Remove Image", systemImage: "xmark")
-                    })
+                    }
                 }
-            }
-        }
-        .task(id: selectedPhoto) {
-            if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
-                note.image = data
             }
         }
         .navigationBarTitle(note.title)
@@ -108,3 +116,4 @@ struct NoteEditView: View {
         course.notes.removeAll(where: { $0 == note })
     }
 }
+

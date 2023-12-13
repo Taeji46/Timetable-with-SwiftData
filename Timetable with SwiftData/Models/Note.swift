@@ -9,13 +9,13 @@ final class Note {
     var title: String
     var detail: String
     var timestamp: Date
-    var image: Data?
+    var images: [Data]
     
-    init(course: Course, title: String, detail: String, image: Data?) {
+    init(course: Course, title: String, detail: String) {
         self.title = title
         self.detail = detail
         self.timestamp = Date()
-        self.image = image
+        self.images = []
         
         self.course = course
     }
