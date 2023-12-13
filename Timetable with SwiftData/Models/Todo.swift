@@ -9,8 +9,10 @@ final class ToDo {
     var title: String
     var courseId: String
     var dueDate: Date
-    var priority: Int
+    var priority: Int // Unimplemented
     var isCompleted: Bool
+    var repeating: Bool // Unimplemented
+    var repeatInterval: Int // Unimplemented
     var isNotificationScheduled: Bool
     var notificationTime: Int
     
@@ -20,6 +22,8 @@ final class ToDo {
         self.dueDate = dueDate
         self.priority = 0
         self.isCompleted = false
+        self.repeating = false
+        self.repeatInterval = 0
         self.isNotificationScheduled = isNotificationScheduled
         self.notificationTime = notificationTime
         self.table = table // Relationは最後に書かないとエラー
