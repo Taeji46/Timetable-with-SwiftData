@@ -63,6 +63,7 @@ struct NoteEditView: View {
                                             .overlay(alignment: .topLeading) {
                                                 Button(action: {
                                                     note.images.removeAll(where: { $0 == imageData })
+                                                    try? modelContext.save()
                                                     isImagePresented = false
                                                 }, label: {
                                                     Image(systemName: "trash")
@@ -104,7 +105,7 @@ struct NoteEditView: View {
                 title: Text("Confirm Deletion"),
                 message: Text("Are you sure you want to delete this note?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    deleteToDo()
+                    deleteNote()
                     presentationMode.wrappedValue.dismiss()
                 },
                 secondaryButton: .cancel()
@@ -112,7 +113,7 @@ struct NoteEditView: View {
         }
     }
     
-    func deleteToDo() {
+    func deleteNote() {
         course.notes.removeAll(where: { $0 == note })
     }
 }
