@@ -8,6 +8,7 @@ struct DailyTableView: View {
     @Binding var selectedTableId: String
     @Query private var tables: [Table]
     @State var currentTime: Date
+    @State private var curretnInfoText: String = ""
     @State private var counter = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.85
@@ -18,7 +19,7 @@ struct DailyTableView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                Text(getCurrentInfoText())
+                Text(curretnInfoText)
                     .font(.title)
                     .padding([.top, .leading], 14)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -31,10 +32,12 @@ struct DailyTableView: View {
             }
             .onAppear {
                 currentTime = getCurrentTime()
+                curretnInfoText = getCurrentInfoText()
             }
             .onReceive(timer) { _ in
                 withAnimation(.easeInOut(duration: 0.75)) {
                     currentTime = getCurrentTime()
+                    curretnInfoText = getCurrentInfoText()
                 }
             }
         }

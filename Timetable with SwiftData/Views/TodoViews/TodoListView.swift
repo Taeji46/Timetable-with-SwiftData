@@ -46,6 +46,12 @@ struct ToDoListView: View {
             currentDate = Date()
             today = Calendar.current.startOfDay(for: Date())
             oneWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: Date()))!
+            
+            for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
+                toDo.isNotificationScheduled = false
+            }
+            
+            table.updateNotificationSetting()
         }
         .onReceive(timer) { _ in
             withAnimation(.easeInOut(duration: 0.75)) {
