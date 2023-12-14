@@ -83,6 +83,7 @@
 "These courses will be deleted" = "These courses will be deleted";
 "Caution" = "Caution";
 "Courses outside the range of the table will be deleted" = "Courses outside the range of the table will be deleted";
+"Notification of Lectures" = "Notification of Lectures";
 
 /* Attendance */
 "Attendance Status" = "Attendance Status";
@@ -109,7 +110,7 @@
 
 /* ToDoListView */
 "Done2" = "Done";
-"Not done" = "Not done";
+"Not Done" = "Not Done";
 "Not Done: %d" = "Not Done: %d";
 "Done: %d" = "Done: %d";
 "Overdue" = "Overdue";

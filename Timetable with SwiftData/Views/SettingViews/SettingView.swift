@@ -70,7 +70,7 @@ struct SettingView: View {
                 }
                 
                 Section() {
-                    Toggle("Notification", isOn: $table.isCourseNotificationScheduled)
+                    Toggle("Notification of Lectures", isOn: $table.isCourseNotificationScheduled)
                         .onChange(of: table.isCourseNotificationScheduled) {
                             table.updateNotificationSetting()
                         }

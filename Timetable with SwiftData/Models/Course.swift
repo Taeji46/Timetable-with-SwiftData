@@ -17,7 +17,7 @@ final class Course {
     @Relationship(deleteRule: .cascade, inverse: \Note.course) var notes: [Note]
     var colorName: String
     
-    init(name: String, classroom: String, teacher: String, day: Int, period: Int, duration: Int, credits: Int,colorName: String) {
+    init(name: String, classroom: String, teacher: String, day: Int, period: Int, duration: Int, credits: Int, colorName: String) {
         self.name = name
         self.classroom = classroom
         self.teacher = teacher

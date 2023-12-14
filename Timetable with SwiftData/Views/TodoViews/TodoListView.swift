@@ -19,7 +19,7 @@ struct ToDoListView: View {
             
             VStack(spacing: 0) {
                 Picker("", selection: $selectedToDoListView) {
-                    Text("Not done").tag(0)
+                    Text("Not Done").tag(0)
                     Text("Done2").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())

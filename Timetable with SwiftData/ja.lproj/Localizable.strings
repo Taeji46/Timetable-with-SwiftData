@@ -83,6 +83,7 @@
 "These courses will be deleted" = "以下の講義情報は削除されます";
 "Caution" = "注意";
 "Courses outside the range of the table will be deleted" = "時間割の範囲外の講義情報は削除されます";
+"Notification of Lectures" = "講義の通知";
 
 /* Attendance */
 "Attendance Status" = "出席状況";
@@ -108,7 +109,7 @@
 
 /* ToDoListView */
 "Done2" = "完了済み";
-"Not done" = "未完了";
+"Not Done" = "未完了";
 "Not Done: %d" = "未完了：%d件";
 "Done: %d" = "完了済み：%d件";
 "Overdue" = "期限超過";
