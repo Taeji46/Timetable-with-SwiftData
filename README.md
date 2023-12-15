@@ -14,7 +14,8 @@
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/c798759c-ee90-4639-93b3-afa5c6fa585c" width="200px">  
 
 ## 利用方法
-Xcode 15がインストールされたMacで Code -> Open with Xcode でクローンしてください
+以下のリンクからダウンロード  
+App Store : [Noti2me - 時間割](https://apps.apple.com/jp/app/noti2me-%E6%99%82%E9%96%93%E5%89%B2/id6474107092)
 
 ## 動作環境
 iOS 17.0 以上
