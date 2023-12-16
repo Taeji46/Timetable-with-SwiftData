@@ -13,6 +13,7 @@
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/0c17bb72-9561-4e60-96e5-a12de0f7da00" width="200px">
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/0d05a96f-13ac-4c42-9eaf-bcca9326fcd2" width="200px">  
 <img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/6c56d178-f32c-4cdf-a8a2-3b98f65f2167" width="200px">  
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/5bc5d2aa-7855-45cc-bbe9-c8491c70ee5c" width="200px"> 
 
 ## 利用方法
 以下のリンクからダウンロード  
