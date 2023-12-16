@@ -1,17 +1,18 @@
-# Noti2me
+# Noti2me - 時間割
 スケジュール管理アプリ風のタイムラインを表示できる時間割アプリです。
 
 ## 機能
 ・今日これからある講義情報のタイムライン表示  
 ・講義開始前の講義情報の通知  
 ・出席状況の記録  
-・Todoリスト
+・講義ごとのTodoリスト  
+・講義のメモ (画像添付可)
 
 ## スクリーンショット
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/25c65b10-158b-4ff8-bcd7-009f17087e19" width="200px">
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/b4a5c28b-12ce-4e14-bfd8-c6d6ff6cd640" width="200px">
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/57ade305-a979-47a0-9873-63f9ad2c3152" width="200px">  
-<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/c798759c-ee90-4639-93b3-afa5c6fa585c" width="200px">  
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/3b89fc03-3080-4a7d-98f1-a2f8839221ed" width="200px">
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/0c17bb72-9561-4e60-96e5-a12de0f7da00" width="200px">
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/0d05a96f-13ac-4c42-9eaf-bcca9326fcd2" width="200px">  
+<img src="https://github.com/Taeji46/Timetable-with-SwiftData/assets/107469797/6c56d178-f32c-4cdf-a8a2-3b98f65f2167" width="200px">  
 
 ## 利用方法
 以下のリンクからダウンロード  
