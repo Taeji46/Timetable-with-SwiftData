@@ -38,7 +38,7 @@ struct WeeklyCourseView: View {
     
     func titleView() -> some View {
         return (
-            Text(course.name)
+            Text(!course.name.isEmpty ? course.name : "-")
                 .foregroundColor(.white)
                 .font(.system(size: 12))
                 .bold()
@@ -54,7 +54,7 @@ struct WeeklyCourseView: View {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(.white, lineWidth: 1)
                 
-                Text(course.classroom)
+                Text(!course.classroom.isEmpty ? course.classroom : "-")
                     .foregroundColor(.white)
                     .font(.system(size: 10))
                     .bold()

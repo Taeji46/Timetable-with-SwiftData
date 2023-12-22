@@ -51,7 +51,7 @@ struct CourseView: View {
                 .foregroundColor(.white)
             }
         }
-        .navigationTitle(course.name)
+        .navigationTitle(!course.name.isEmpty ? course.name : "-")
         .navigationBarItems(trailing: Button(action: {
             isShowingAlert = true
         }) {
@@ -277,7 +277,7 @@ struct CourseView: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                         
-                        Text(toDo.title)
+                        Text(!toDo.title.isEmpty ? toDo.title : "-")
                             .bold()
                             .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                             .font(.system(size: 18))
@@ -327,7 +327,7 @@ struct CourseView: View {
                 
                 HStack(spacing: 0) {
                     VStack(alignment: .leading) {
-                        Text(note.title)
+                        Text(!note.title.isEmpty ? note.title : "-")
                             .bold()
                             .foregroundColor(.white)
                             .font(.system(size: 18))
@@ -335,7 +335,7 @@ struct CourseView: View {
                             .minimumScaleFactor(0.5)
                             .padding(.leading, 18)
                         
-                        Text(note.detail.replacingOccurrences(of: "\n", with: " "))
+                        Text(!note.detail.isEmpty ? note.detail.replacingOccurrences(of: "\n", with: " ") : "-")
                             .bold()
                             .foregroundColor(.white)
                             .font(.system(size: 12))
@@ -408,7 +408,7 @@ struct CourseView: View {
     
     func titleView() -> some View {
         return (
-            Text(course.name)
+            Text(!course.name.isEmpty ? course.name : "-")
                 .font(.system(size: 18))
                 .bold()
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
@@ -449,7 +449,7 @@ struct CourseView: View {
                     .frame(width: 14, height: 14)
                     .padding(.leading, 14)
                 
-                Text(course.classroom)
+                Text(!course.classroom.isEmpty ? course.classroom : "-")
                     .font(.system(size: 14))
                     .bold()
             }
@@ -466,7 +466,7 @@ struct CourseView: View {
                     .frame(width: 14, height: 14)
                     .padding(.leading, 14)
                 
-                Text(course.teacher)
+                Text(!course.teacher.isEmpty ? course.teacher : "-")
                     .font(.system(size: 14))
                     .bold()
             }

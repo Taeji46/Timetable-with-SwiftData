@@ -91,7 +91,7 @@ struct NoteEditView: View {
                 }
             }
         }
-        .navigationBarTitle(note.title)
+        .navigationBarTitle(!note.title.isEmpty ? note.title : "-")
         .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
         .accentColor(colorScheme == .dark ? .indigo : .indigo)

@@ -213,14 +213,14 @@ struct ToDoListView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text(course.name)
+                    Text(!course.name.isEmpty ? course.name : "-")
                         .bold()
                         .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                         .font(.system(size: 12))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     
-                    Text(toDo.title)
+                    Text(!toDo.title.isEmpty ? toDo.title : "-")
                         .bold()
                         .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                         .font(.system(size: 18))

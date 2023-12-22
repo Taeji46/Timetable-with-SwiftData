@@ -75,7 +75,7 @@ struct DailyCourseView: View {
 
     func titleView() -> some View {
         return (
-            Text(course.name)
+            Text(!course.name.isEmpty ? course.name : "-")
                 .font(.system(size: 18))
                 .bold()
                 .frame(width: courseWidth - 2 * insideFrameWidth, height: 18, alignment: .leading)
@@ -112,7 +112,7 @@ struct DailyCourseView: View {
                     .frame(width: 14, height: 14)
                     .padding(.leading, 14)
 
-                Text(course.classroom)
+                Text(!course.classroom.isEmpty ? course.classroom : "-")
                     .font(.system(size: 14))
                     .bold()
             }
@@ -129,7 +129,7 @@ struct DailyCourseView: View {
                     .frame(width: 14, height: 14)
                     .padding(.leading, 14)
 
-                Text(course.teacher)
+                Text(!course.teacher.isEmpty ? course.teacher : "-")
                     .font(.system(size: 14))
                     .bold()
             }

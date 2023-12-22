@@ -71,7 +71,7 @@ struct ToDoEditView: View {
         .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
         .scrollContentBackground(.hidden)
         .accentColor(colorScheme == .dark ? .indigo : .indigo)
-        .navigationBarTitle(toDo.title)
+        .navigationBarTitle(!toDo.title.isEmpty ? toDo.title : "-")
         .navigationBarItems(trailing: Button(action: {
             isShowingAlert = true
         }) {
