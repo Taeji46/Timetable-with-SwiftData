@@ -34,6 +34,11 @@ struct WeeklyTableView: View {
                 table = getTable()
             }
         }
+        .onChange(of: table.toDoList) {
+            if !tables.isEmpty {
+                table = getTable()
+            }
+        }
     }
     
     func weekView() -> some View {
