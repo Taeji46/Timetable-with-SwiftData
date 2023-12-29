@@ -9,7 +9,13 @@ func scheduleToDoNotification(toDo: ToDo) {
     
     let content = UNMutableNotificationContent()
     content.title = String(localized: "ToDo: ") + toDo.title
-    content.body = String(localized: "Course: ") + toDo.getCourse()!.name + "\n" + String(localized: "Due Date: ") + toDo.getDueDateText()
+    
+    if let course = toDo.getCourse() {
+        content.body = String(localized: "Course: ") + course.name + "\n" + String(localized: "Due Date: ") + toDo.getDueDateText()
+    } else {
+        content.body = String(localized: "Course: ") + String(localized: "Unselected2") + "\n" + String(localized: "Due Date: ") + toDo.getDueDateText()
+    }
+    
     content.sound = UNNotificationSound.default
     
     let request = UNNotificationRequest(identifier: createToDoNotificationIdentifier(toDo: toDo), content: content, trigger: trigger)
@@ -18,7 +24,12 @@ func scheduleToDoNotification(toDo: ToDo) {
         if let error = error {
             print("Failed to schedule notification: \(error.localizedDescription)")
         } else {
-            print("Notification ON: " + createToDoNotificationIdentifier(toDo: toDo) + ", " + String("Task") + ": " + toDo.title + ", " + String("Course") + ": " + toDo.getCourse()!.name + ", " + String("Before") + ": " + String(toDo.notificationTime))
+            if let course = toDo.getCourse() {
+                print("Notification ON: " + createToDoNotificationIdentifier(toDo: toDo) + ", " + String("Task") + ": " + toDo.title + ", " + String("Course") + ": " + course.name + ", " + String("Before") + ": " + String(toDo.notificationTime))
+            } else {
+                print("Notification ON: " + createToDoNotificationIdentifier(toDo: toDo) + ", " + String("Task") + ": " + toDo.title + ", " + String("Course") + ": " + String("Unselected") + ", " + String("Before") + ": " + String(toDo.notificationTime))
+            }
+            
         }
     }
 }

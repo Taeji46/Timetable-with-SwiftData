@@ -120,7 +120,9 @@
 "Title" = "タイトル";
 "Course" = "講義";
 "No courses on the timetable" = "講義が登録されていません";
-"Unselected" = "未選択";
+"Unselected" = "講義未選択";
+"Unselected2" = "未選択";
+"Lecture Not Selected" = "講義未選択";
 "Due Date" = "期限";
 "Notification time" = "通知時間";
 "At the due time" = "期限の時間";

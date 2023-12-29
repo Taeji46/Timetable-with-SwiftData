@@ -18,8 +18,9 @@ struct ToDoEditView: View {
             
             Section(header: Text("Course")) {
                 Picker("Select a Course", selection: $toDo.courseId) {
+                    Text("Unselected2").tag("")
                     ForEach(table.courses.sorted { ($0.day, $0.period) < ($1.day, $1.period) }) { course in
-                        Text(course.name).tag(course.id.uuidString)
+                        Text(!course.name.isEmpty ? course.name : "-").tag(course.id.uuidString)
                     }
                 }
                 .pickerStyle(.menu)

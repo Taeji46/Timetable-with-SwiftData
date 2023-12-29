@@ -83,6 +83,8 @@ struct ToDoListView: View {
                 ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate < currentDate }).sorted { $0.dueDate < $1.dueDate }) { toDo in
                     if let course = toDo.getCourse() {
                         toDoItemView(course: course, toDo: toDo)
+                    } else {
+                        NoCourseToDoItemView(toDo: toDo)
                     }
                 }
                 Divider()
@@ -96,6 +98,8 @@ struct ToDoListView: View {
                 ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate >= currentDate && Calendar.current.isDate($0.dueDate, inSameDayAs: currentDate) }).sorted { $0.dueDate < $1.dueDate}) { toDo in
                     if let course = toDo.getCourse() {
                         toDoItemView(course: course, toDo: toDo)
+                    } else {
+                        NoCourseToDoItemView(toDo: toDo)
                     }
                 }
                 Divider()
@@ -109,6 +113,8 @@ struct ToDoListView: View {
                 ForEach(table.toDoList.filter({ $0.isCompleted == false && !Calendar.current.isDate($0.dueDate, inSameDayAs: currentDate) && $0.dueDate > today && $0.dueDate < oneWeekLater }).sorted { $0.dueDate < $1.dueDate }) { toDo in
                     if let course = toDo.getCourse() {
                         toDoItemView(course: course, toDo: toDo)
+                    } else {
+                        NoCourseToDoItemView(toDo: toDo)
                     }
                 }
                 Divider()
@@ -122,6 +128,8 @@ struct ToDoListView: View {
                 ForEach(table.toDoList.filter({ $0.isCompleted == false && $0.dueDate >= oneWeekLater }).sorted { $0.dueDate < $1.dueDate }) { toDo in
                     if let course = toDo.getCourse() {
                         toDoItemView(course: course, toDo: toDo)
+                    } else {
+                        NoCourseToDoItemView(toDo: toDo)
                     }
                 }
                 Divider()
@@ -147,6 +155,8 @@ struct ToDoListView: View {
             ForEach(table.toDoList.filter({ $0.isCompleted == true }).sorted { $0.dueDate < $1.dueDate }) { toDo in
                 if let course = toDo.getCourse() {
                     toDoItemView(course: course, toDo: toDo)
+                } else {
+                    NoCourseToDoItemView(toDo: toDo)
                 }
             }
             Spacer()
@@ -216,6 +226,107 @@ struct ToDoListView: View {
                 
                 VStack(alignment: .leading) {
                     Text(!course.name.isEmpty ? course.name : "-")
+                        .bold()
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                        .font(.system(size: 12))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    
+                    Text(!toDo.title.isEmpty ? toDo.title : "-")
+                        .bold()
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                        .font(.system(size: 18))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing) {
+                    Text(formattedDate1(toDo.dueDate))
+                        .padding(.trailing, 14)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .bold()
+                        .font(.system(size: 14))
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                    
+                    Text(formattedDate2(toDo.dueDate))
+                        .padding(.trailing, 14)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .bold()
+                        .font(.system(size: 14))
+                        .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                }
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width * 0.925, height: 55)
+        .padding(.bottom, 0)
+        .transition(.scale)
+    }
+    
+    func NoCourseToDoItemView(toDo: ToDo) -> some View {
+        ZStack {
+            NavigationLink(destination: {
+                ToDoEditView(table: getTable(), toDo: toDo)
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(colorScheme == .dark ? .black : .white)
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(toDo.isCompleted ? .gray.opacity(0.35) : .gray.opacity(0.75))
+                        .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
+                        .overlay(
+                            toDo.isNotificationScheduled
+                            ? Image(systemName: "bell.fill")
+                                .font(.system(size: 12))
+                                .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                                .padding(4)
+                                .background(Color.red)
+                                .clipShape(Circle())
+                                .offset(x: -4, y: -4)
+                            : nil,
+                            alignment: .topLeading
+                        )
+                }
+            })
+            
+            HStack(spacing: 0) {
+                if toDo.isCompleted {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.75)) {
+                            toDo.isCompleted = false
+                            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
+                        }
+                    }, label: {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 25))
+                    })
+                    .padding(.leading, 14)
+                    .padding(.trailing, 14)
+                    .foregroundColor(Color.white)
+                    .frame(alignment: .leading)
+                } else {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.75)) {
+                            toDo.isCompleted = true
+                            toDo.isNotificationScheduled = false
+                            cancelScheduledToDoNotification(toDo: toDo)
+                            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
+                        }
+                    }, label: {
+                        Image(systemName: "circle")
+                            .font(.system(size: 25))
+                    })
+                    .padding(.leading, 14)
+                    .padding(.trailing, 14)
+                    .foregroundColor(Color.white)
+                    .frame(alignment: .leading)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Lecture Not Selected")
                         .bold()
                         .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
                         .font(.system(size: 12))

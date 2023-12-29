@@ -122,6 +122,8 @@
 "Course" = "Course";
 "No courses on the timetable" = "No courses on the timetable";
 "Unselected" = "Unselected";
+"Unselected2" = "Unselected";
+"Lecture Not Selected" = "Lecture Not Selected";
 "Due Date" = "Due Date";
 "Notification time" = "Notification time";
 "At the due time" = "At the due time";

@@ -40,20 +40,15 @@ struct AddNewToDoView: View {
             }
             
             Section(header: Text("Course")) {
-                if table.courses.isEmpty {
-                    Text("No courses on the timetable")
-                        .foregroundColor(.red)
-                } else {
-                    Picker("", selection: $courseId) {
-                        Text("Unselected").tag("")
-                        ForEach(table.courses.sorted { ($0.day, $0.period) < ($1.day, $1.period) }) { course in
-                            Text(course.name).tag(course.id.uuidString)
-                        }
+                Picker("", selection: $courseId) {
+                    Text("Unselected2").tag("")
+                    ForEach(table.courses.sorted { ($0.day, $0.period) < ($1.day, $1.period) }) { course in
+                        Text(!course.name.isEmpty ? course.name : "-").tag(course.id.uuidString)
                     }
-                    .pickerStyle(.menu)
-                    .labelsHidden()
-                    .disabled(cameFromCourseView)
                 }
+                .pickerStyle(.menu)
+                .labelsHidden()
+                .disabled(cameFromCourseView)
             }
             
             Section(header: Text("Due Date")) {
@@ -90,7 +85,7 @@ struct AddNewToDoView: View {
                     dismiss()
                 }, label: {
                     Text("Create")
-                }).disabled(title.isEmpty || courseId.isEmpty)
+                }).disabled(title.isEmpty)
             }
         }
         .background(colorScheme == .dark ? .indigo.opacity(0.15) : .indigo.opacity(0.15))
