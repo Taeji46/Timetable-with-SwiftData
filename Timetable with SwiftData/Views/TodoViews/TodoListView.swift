@@ -186,6 +186,7 @@ struct ToDoListView: View {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
                             toDo.isCompleted = false
+                            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                         }
                     }, label: {
                         Image(systemName: "checkmark.circle.fill")
@@ -201,6 +202,7 @@ struct ToDoListView: View {
                             toDo.isCompleted = true
                             toDo.isNotificationScheduled = false
                             cancelScheduledToDoNotification(toDo: toDo)
+                            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                         }
                     }, label: {
                         Image(systemName: "circle")

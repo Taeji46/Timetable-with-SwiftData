@@ -41,7 +41,7 @@ struct MainView: View {
                             Text("ToDo")
                         }
                         .tag(2)
-//                        .badge(table.toDoList.filter { $0.isCompleted == false && ($0.dueDate < Date() || Calendar.current.isDate($0.dueDate, inSameDayAs: Date()))}.count) // Overdue & Today
+                    //                        .badge(table.toDoList.filter { $0.isCompleted == false && ($0.dueDate < Date() || Calendar.current.isDate($0.dueDate, inSameDayAs: Date()))}.count) // Overdue & Today
                         .badge(table.toDoList.filter({ $0.isCompleted == false }).count) // All
                 }
                 .toolbar {
@@ -87,6 +87,8 @@ struct MainView: View {
             }
             
             table.updateNotificationSetting()
+
+            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
         }
         .onChange(of: selectedTableId) {
             if !tables.isEmpty {
@@ -94,13 +96,19 @@ struct MainView: View {
             }
             
             table.updateNotificationSetting()
+            
+            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
         }
         .onChange(of: table.scheduledToBeDeleted) {
             if table.scheduledToBeDeleted {
+                UNUserNotificationCenter.current().setBadgeCount(0)
                 modelContext.delete(table)
                 try? modelContext.save()
                 selectedTableId = "unselected"
             }
+        }
+        .onChange(of: table.toDoList) {
+            UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
         }
         .alert(isPresented: $isShowingAlert) {
             switch alertType {
