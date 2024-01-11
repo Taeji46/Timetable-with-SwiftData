@@ -23,6 +23,9 @@ App Store : [Noti2me - 時間割](https://apps.apple.com/jp/app/noti2me-%E6%99%8
 iOS 17.0 以上
 
 ## 開発環境
-Xcode 15    
-SwiftUI  
-SwiftData 
+・Xcode 15  
+・iOS 17.0
+
+## 使用技術 
+・SwiftUI  
+・SwiftData 
