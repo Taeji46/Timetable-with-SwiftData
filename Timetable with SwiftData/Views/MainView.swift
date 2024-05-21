@@ -157,6 +157,13 @@ struct MainView: View {
                 NSLocalizedString("Total Credits: %d", comment: ""),
                 table.getTotalCredits()
             ))
+            ForEach(table.periods.sorted { $0.index < $1.index }, id: \.self) { period in // period[].indexの昇順に繰り返し
+                if period.index <= table.numOfPeriods {
+                    Text(String.localizedStringWithFormat(
+                        String(period.index) + ": " + period.getStartTimeText() + " ~ " + period.getEndTimeText()
+                    ))
+                }
+            }
         }, label: {
             Image(systemName: "info.circle")
         })

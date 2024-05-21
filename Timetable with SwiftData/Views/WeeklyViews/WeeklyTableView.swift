@@ -74,21 +74,28 @@ struct WeeklyTableView: View {
     func periodView() -> some View {
         return (
             VStack {
-                ForEach(1...table.numOfPeriods, id: \.self) { period in
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(colorScheme == .dark ? .black : .white)
-                        
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(table.getSelectedColor().opacity(0.75))
-                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
-                        
-                        Text(String(period))
+                ForEach(1...table.numOfPeriods, id: \.self) { index in
+                    let period = table.periods.first(where: { $0.index == index })
+                    Menu(content: {
+                        Text((period?.getStartTimeText() ?? "") + " ~ " + (period?.getEndTimeText() ?? ""))
                             .foregroundColor(Color.white)
                             .font(.system(size: 12))
                             .bold()
+                    }) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(colorScheme == .dark ? .black : .white)
+                            
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(table.getSelectedColor().opacity(0.75))
+                                .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
+                            Text(String(index))
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 12))
+                                .bold()
+                        }
+                        .frame(width: 20, height: getCourseHeight())
                     }
-                    .frame(width: 20, height: getCourseHeight())
                 }
             }
         )
