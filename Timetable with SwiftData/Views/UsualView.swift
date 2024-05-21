@@ -12,6 +12,7 @@ struct UsualView: View {
                 SelectTableView(selectedTableId: $selectedTableId)
             } else {
                 MainView(selectedTableId: $selectedTableId, table: getTable())
+                    .id(selectedTableId)
             }
         }
     }
