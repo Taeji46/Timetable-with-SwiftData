@@ -12,7 +12,9 @@ struct AddNewToDoView: View {
     @State var isNotificationScheduled: Bool
     @State var notificationTime: Int
     @State private var cameFromCourseView: Bool
-    
+    @State var repeating: Bool = false
+    @State var repeatInterval: Int = 7
+
     init(table: Table) {
         _table = State(initialValue: table)
         _title = State(initialValue: "")
@@ -52,8 +54,7 @@ struct AddNewToDoView: View {
             }
             
             Section(header: Text("Due Date")) {
-//                DatePicker("Date", selection: $dueDate, in: Date()...) // 実装
-                DatePicker("Due Date", selection: $dueDate) // テスト用
+                DatePicker("Due Date", selection: $dueDate)
                     .labelsHidden()
             }
             
@@ -80,6 +81,24 @@ struct AddNewToDoView: View {
             }
             
             Section {
+                Toggle("Repetition", isOn: $repeating)
+            }
+            
+            if repeating {
+                Section(header: Text("Repetition Interval")) {
+                    Picker("", selection: $repeatInterval) {
+                        Text("Daily").tag(1)
+                        Text("Every 3 days").tag(3)
+                        Text("Weekly").tag(7)
+                        Text("Every 2 weeks").tag(14)
+                        Text("Monthly (30 days)").tag(30)
+                    }
+                    .pickerStyle(.menu)
+                    .labelsHidden()
+                }
+            }
+            
+            Section {
                 Button(action: {
                     addToDo()
                     dismiss()
@@ -95,7 +114,7 @@ struct AddNewToDoView: View {
     }
     
     func addToDo() {
-        let newToDo = ToDo(table: table, title: title, courseId: courseId, dueDate: dueDate, isNotificationScheduled: isNotificationScheduled, notificationTime: notificationTime)
+        let newToDo = ToDo(table: table, title: title, courseId: courseId, dueDate: dueDate, repeating: repeating, repeatInterval: repeatInterval, isNotificationScheduled: isNotificationScheduled, notificationTime: notificationTime)
         table.toDoList.append(newToDo)
         table.updateNotificationSetting()
     }

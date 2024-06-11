@@ -91,7 +91,7 @@ final class Table {
         }
         
         for toDo in toDoList {
-            if toDo.isNotificationScheduled {
+            if !toDo.isCompleted && toDo.isNotificationScheduled && Calendar.current.date(byAdding: .minute, value: -toDo.notificationTime, to: toDo.dueDate) ?? Date() > Date() {
                 scheduleToDoNotification(toDo: toDo)
             } else {
                 cancelScheduledToDoNotification(toDo: toDo)

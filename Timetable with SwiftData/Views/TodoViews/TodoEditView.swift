@@ -18,7 +18,7 @@ struct ToDoEditView: View {
             
             Section(header: Text("Course")) {
                 Picker("Select a Course", selection: $toDo.courseId) {
-                    Text("Unselected2").tag("")
+                    Text("Unselected").tag("")
                     ForEach(table.courses.sorted { ($0.day, $0.period) < ($1.day, $1.period) }) { course in
                         Text(!course.name.isEmpty ? course.name : "-").tag(course.id.uuidString)
                     }
@@ -31,16 +31,14 @@ struct ToDoEditView: View {
             }
             
             Section(header: Text("Date")) {
-//                DatePicker("Date", selection: $toDo.dueDate, in: Date()...) // 実装用
-                DatePicker("Date", selection: $toDo.dueDate) //テスト用
+                DatePicker("Date", selection: $toDo.dueDate)
                     .labelsHidden()
                     .onChange(of: toDo.dueDate) {
                         table.updateNotificationSetting()
                     }
             }
             
-            
-            Section() {
+            Section {
                 Toggle("Notification", isOn: $toDo.isNotificationScheduled)
                     .onChange(of: toDo.isNotificationScheduled) {
                         table.updateNotificationSetting()
@@ -64,6 +62,30 @@ struct ToDoEditView: View {
                     .pickerStyle(.menu)
                     .labelsHidden()
                     .onChange(of: toDo.notificationTime) {
+                        table.updateNotificationSetting()
+                    }
+                }
+            }
+            
+            Section {
+                Toggle("Repetition", isOn: $toDo.repeating)
+                    .onChange(of: toDo.repeating) {
+                        table.updateNotificationSetting()
+                    }
+            }
+            
+            if toDo.repeating {
+                Section(header: Text("Repetition Interval")) {
+                    Picker("", selection: $toDo.repeatInterval) {
+                        Text("Daily").tag(1)
+                        Text("Every 3 days").tag(3)
+                        Text("Weekly").tag(7)
+                        Text("Every 2 weeks").tag(14)
+                        Text("Monthly (30 days)").tag(30)
+                    }
+                    .pickerStyle(.menu)
+                    .labelsHidden()
+                    .onChange(of: toDo.repeatInterval) {
                         table.updateNotificationSetting()
                     }
                 }

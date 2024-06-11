@@ -10,6 +10,7 @@ struct ToDoListView: View {
     @State private var currentDate = Date()
     @State private var today = Calendar.current.startOfDay(for: Date())
     @State private var oneWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: Date()))!
+    @State private var isButtonDisabled = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -20,7 +21,7 @@ struct ToDoListView: View {
             VStack(spacing: 0) {
                 Picker("", selection: $selectedToDoListView) {
                     Text("Not Done").tag(0)
-                    Text("Done2").tag(1)
+                    Text("Done").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: UIScreen.main.bounds.width * 0.625)
@@ -47,9 +48,9 @@ struct ToDoListView: View {
             today = Calendar.current.startOfDay(for: Date())
             oneWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: Date()))!
             
-            for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
-                toDo.isNotificationScheduled = false
-            }
+            //            for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
+            //                toDo.isNotificationScheduled = false
+            //            }
             
             table.updateNotificationSetting()
         }
@@ -174,10 +175,10 @@ struct ToDoListView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(colorScheme == .dark ? .black : .white)
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
+                        .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) : course.getSelectedColor().opacity(0.75))
                         .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                         .overlay(
-                            toDo.isNotificationScheduled
+                            !toDo.isCompleted && toDo.isNotificationScheduled && Calendar.current.date(byAdding: .minute, value: -toDo.notificationTime, to: toDo.dueDate) ?? Date() > Date()
                             ? Image(systemName: "bell.fill")
                                 .font(.system(size: 12))
                                 .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
@@ -187,6 +188,18 @@ struct ToDoListView: View {
                                 .offset(x: -4, y: -4)
                             : nil,
                             alignment: .topLeading
+                        )
+                        .overlay(
+                            toDo.repeating
+                            ? Image(systemName: "clock.arrow.2.circlepath")
+                                .font(.system(size: 12))
+                                .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                                .padding(4)
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                                .offset(x: 6, y: 6)
+                            : nil,
+                            alignment: .bottomTrailing
                         )
                 }
             })
@@ -209,10 +222,20 @@ struct ToDoListView: View {
                 } else {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
+                            guard !isButtonDisabled else { return }
+                            isButtonDisabled = true
                             toDo.isCompleted = true
+                            if toDo.repeating {
+                                let newDueDate = Calendar.current.date(byAdding: .day, value: toDo.repeatInterval, to: toDo.dueDate) ?? toDo.dueDate
+                                let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
+                                table.toDoList.append(newToDo)
+                            }
                             toDo.isNotificationScheduled = false
-                            cancelScheduledToDoNotification(toDo: toDo)
+                            table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                isButtonDisabled = false
+                            }
                         }
                     }, label: {
                         Image(systemName: "circle")
@@ -278,7 +301,7 @@ struct ToDoListView: View {
                         .fill(toDo.isCompleted ? .gray.opacity(0.35) : .gray.opacity(0.75))
                         .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                         .overlay(
-                            toDo.isNotificationScheduled
+                            !toDo.isCompleted && toDo.isNotificationScheduled && Calendar.current.date(byAdding: .minute, value: -toDo.notificationTime, to: toDo.dueDate) ?? Date() > Date()
                             ? Image(systemName: "bell.fill")
                                 .font(.system(size: 12))
                                 .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
@@ -288,6 +311,18 @@ struct ToDoListView: View {
                                 .offset(x: -4, y: -4)
                             : nil,
                             alignment: .topLeading
+                        )
+                        .overlay(
+                            toDo.repeating
+                            ? Image(systemName: "clock.arrow.2.circlepath")
+                                .font(.system(size: 12))
+                                .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                                .padding(4)
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                                .offset(x: 6, y: 6)
+                            : nil,
+                            alignment: .bottomTrailing
                         )
                 }
             })
@@ -310,10 +345,20 @@ struct ToDoListView: View {
                 } else {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
+                            guard !isButtonDisabled else { return }
+                            isButtonDisabled = true
                             toDo.isCompleted = true
+                            if toDo.repeating {
+                                let newDueDate = Calendar.current.date(byAdding: .day, value: toDo.repeatInterval, to: toDo.dueDate) ?? toDo.dueDate
+                                let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
+                                table.toDoList.append(newToDo)
+                            }
                             toDo.isNotificationScheduled = false
-                            cancelScheduledToDoNotification(toDo: toDo)
+                            table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                isButtonDisabled = false
+                            }
                         }
                     }, label: {
                         Image(systemName: "circle")

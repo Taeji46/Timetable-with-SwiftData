@@ -9,6 +9,7 @@ struct CourseView: View {
     @State var absentCount: Int
     @State var lateCount: Int
     @State var canceledCount: Int
+    @State private var isButtonDisabled = false
     let courseWidth: CGFloat = UIScreen.main.bounds.width * 0.925
     let courseInfoHeight: CGFloat = 76
     let attendanceInfoHeight: CGFloat = 50
@@ -224,7 +225,7 @@ struct CourseView: View {
                             .fill(toDo.isCompleted ? course.getSelectedColor().opacity(0.35) :course.getSelectedColor().opacity(0.75))
                             .shadow(color: colorScheme == .dark ? .black : .gray, radius: 3, x: 3, y: 3)
                             .overlay(
-                                toDo.isNotificationScheduled
+                                !toDo.isCompleted && Calendar.current.date(byAdding: .minute, value: -toDo.notificationTime, to: toDo.dueDate) ?? Date() > Date()
                                 ? Image(systemName: "bell.fill")
                                     .font(.system(size: 12))
                                     .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
@@ -234,6 +235,18 @@ struct CourseView: View {
                                     .offset(x: -4, y: -4)
                                 : nil,
                                 alignment: .topLeading
+                            )
+                            .overlay(
+                                toDo.repeating
+                                ? Image(systemName: "clock.arrow.2.circlepath")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
+                                    .padding(4)
+                                    .background(Color.blue)
+                                    .clipShape(Circle())
+                                    .offset(x: 6, y: 6)
+                                : nil,
+                                alignment: .bottomTrailing
                             )
                     }
                 })
@@ -256,10 +269,20 @@ struct CourseView: View {
                     } else {
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.75)) {
+                                guard !isButtonDisabled else { return }
+                                isButtonDisabled = true
                                 toDo.isCompleted = true
+                                if toDo.repeating {
+                                    let newDueDate = Calendar.current.date(byAdding: .day, value: toDo.repeatInterval, to: toDo.dueDate) ?? toDo.dueDate
+                                    let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
+                                    table.toDoList.append(newToDo)
+                                }
                                 toDo.isNotificationScheduled = false
-                                cancelScheduledToDoNotification(toDo: toDo)
+                                table.updateNotificationSetting()
                                 UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    isButtonDisabled = false
+                                }
                             }
                         }, label: {
                             Image(systemName: "circle")

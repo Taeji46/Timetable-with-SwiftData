@@ -137,6 +137,13 @@
 "Create" = "作成";
 "New ToDo" = "ToDoを作成";
 "Are you sure you want to delete this ToDo?" = "本当にToDoを削除しますか？";
+"Repetition" = "繰り返し";
+"Repetition Interval" = "繰り返しの間隔";
+"Daily" = "毎日";
+"Every 3 days" = "3日ごと";
+"Weekly" = "毎週";
+"Every 2 weeks" = "2週間ごと";
+"Monthly (30 days)" = "毎月 (30日ごと)";
 
 /* AddNewNoteView */
 "Content" = "内容";

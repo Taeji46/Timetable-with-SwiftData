@@ -138,6 +138,13 @@
 "Create" = "Create";
 "New ToDo" = "New ToDo";
 "Are you sure you want to delete this ToDo?" = "Are you sure you want to delete this ToDo?";
+"Repetition" = "Repetition";
+"Repetition Interval" = "Repetition Interval";
+"Daily" = "Daily";
+"Every 3 days" = "Every 3 days";
+"Weekly" = "Weekly";
+"Every 2 weeks" = "Every 2 weeks";
+"Monthly (30 days)" = "Monthly (30 days)";
 
 /* AddNewNoteView */
 "Content" = "Content";

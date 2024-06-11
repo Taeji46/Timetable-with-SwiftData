@@ -82,11 +82,11 @@ struct MainView: View {
         }
         .accentColor(colorScheme == .dark ? .white : .indigo)
         .onAppear() {
-            for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
-                toDo.isNotificationScheduled = false
-            }
-            
-            table.updateNotificationSetting()
+//            for toDo in table.toDoList.filter({ Calendar.current.date(byAdding: .minute, value: -$0.notificationTime, to: $0.dueDate) ?? Date() < Date() }) {
+//                toDo.isNotificationScheduled = false
+//            }
+//            
+//            table.updateNotificationSetting()
 
             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
         }
