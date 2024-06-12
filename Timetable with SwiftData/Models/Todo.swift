@@ -16,19 +16,6 @@ final class ToDo {
     var isNotificationScheduled: Bool
     var notificationTime: Int
     
-//    init(table: Table, title: String, courseId: String, dueDate: Date, isNotificationScheduled: Bool, notificationTime: Int) {
-//        self.title = title
-//        self.courseId = courseId
-//        self.dueDate = dueDate
-//        self.priority = 0
-//        self.isCompleted = false
-//        self.repeating = false
-//        self.repeatInterval = 0
-//        self.isNotificationScheduled = isNotificationScheduled
-//        self.notificationTime = notificationTime
-//        self.table = table // Relationは最後に書かないとエラー
-//    }
-    
     init(table: Table, title: String, courseId: String, dueDate: Date, repeating: Bool, repeatInterval: Int, isNotificationScheduled: Bool, notificationTime: Int) {
         self.title = title
         self.courseId = courseId

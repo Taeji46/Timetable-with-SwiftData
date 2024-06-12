@@ -237,7 +237,7 @@ struct CourseView: View {
                                 alignment: .topLeading
                             )
                             .overlay(
-                                toDo.repeating
+                                !toDo.isCompleted && toDo.repeating
                                 ? Image(systemName: "clock.arrow.2.circlepath")
                                     .font(.system(size: 12))
                                     .foregroundColor(toDo.isCompleted ? .white.opacity(0.7) : .white)
@@ -276,8 +276,10 @@ struct CourseView: View {
                                     let newDueDate = Calendar.current.date(byAdding: .day, value: toDo.repeatInterval, to: toDo.dueDate) ?? toDo.dueDate
                                     let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
                                     table.toDoList.append(newToDo)
+                                    table.toDoList.removeAll(where: { $0 == toDo })
+                                } else {
+                                    toDo.isNotificationScheduled = false
                                 }
-                                toDo.isNotificationScheduled = false
                                 table.updateNotificationSetting()
                                 UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
