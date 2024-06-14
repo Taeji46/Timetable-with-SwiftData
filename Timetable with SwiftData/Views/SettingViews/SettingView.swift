@@ -124,7 +124,7 @@ struct SettingView: View {
                     message: Text("All notifications for this timetable will be turned off"),
                     primaryButton: .destructive(Text("OK")) {
                         table.cancelAllScheduledNotification()
-                        table.updateNotificationSetting()
+//                        table.updateNotificationSetting()
                         selectedTableId = "unselected"
                     },
                     secondaryButton: .cancel()
@@ -142,12 +142,8 @@ struct SettingView: View {
                 )
             }
         }
-        .onChange(of: selectedTableId) {
-            if !tables.isEmpty {
-                table = getTable()
-            }
-        }
         .onAppear() {
+//            cancelAllSystemScheduledNotifications()
             UNUserNotificationCenter.current().getPendingNotificationRequests {
                 print("Pending requests :", $0)
             }

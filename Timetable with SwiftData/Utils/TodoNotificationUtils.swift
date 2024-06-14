@@ -43,3 +43,10 @@ func cancelScheduledToDoNotification(toDo: ToDo) {
 func createToDoNotificationIdentifier(toDo: ToDo) -> String {
     return "NI-" + String(toDo.id.uuidString)
 }
+
+func cancelAllSystemScheduledNotifications() {
+    let center = UNUserNotificationCenter.current()
+    center.removeAllPendingNotificationRequests()
+    center.removeAllDeliveredNotifications()
+    print("All notifications have been turned off.")
+}

@@ -18,6 +18,7 @@ struct SelectTableView: View {
                         ForEach(tables) { table in
                             Button(action: {
                                 selectedTableId = table.id.uuidString
+                                table.updateNotificationSetting()
                             }, label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)

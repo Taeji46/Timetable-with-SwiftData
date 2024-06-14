@@ -209,6 +209,7 @@ struct ToDoListView: View {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
                             toDo.isCompleted = false
+                            table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                         }
                     }, label: {
@@ -230,7 +231,6 @@ struct ToDoListView: View {
                                 let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
                                 table.toDoList.append(newToDo)
                             }
-                            toDo.isNotificationScheduled = false
                             toDo.repeating = false
                             table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
@@ -333,6 +333,7 @@ struct ToDoListView: View {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.75)) {
                             toDo.isCompleted = false
+                            table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                         }
                     }, label: {
@@ -354,7 +355,6 @@ struct ToDoListView: View {
                                 let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
                                 table.toDoList.append(newToDo)
                             }
-                            toDo.isNotificationScheduled = false
                             toDo.repeating = false
                             table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
