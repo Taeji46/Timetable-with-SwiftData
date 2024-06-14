@@ -153,7 +153,7 @@ struct ToDoListView: View {
             
             Divider()
             
-            ForEach(table.toDoList.filter({ $0.isCompleted == true }).sorted { $0.dueDate < $1.dueDate }) { toDo in
+            ForEach(table.toDoList.filter({ $0.isCompleted == true }).sorted { $1.dueDate < $0.dueDate }) { toDo in
                 if let course = toDo.getCourse() {
                     toDoItemView(course: course, toDo: toDo)
                 } else {
@@ -229,10 +229,9 @@ struct ToDoListView: View {
                                 let newDueDate = Calendar.current.date(byAdding: .day, value: toDo.repeatInterval, to: toDo.dueDate) ?? toDo.dueDate
                                 let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
                                 table.toDoList.append(newToDo)
-                                table.toDoList.removeAll(where: { $0 == toDo })
-                            } else {
-                                toDo.isNotificationScheduled = false
                             }
+                            toDo.isNotificationScheduled = false
+                            toDo.repeating = false
                             table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -354,10 +353,9 @@ struct ToDoListView: View {
                                 let newDueDate = Calendar.current.date(byAdding: .day, value: toDo.repeatInterval, to: toDo.dueDate) ?? toDo.dueDate
                                 let newToDo = ToDo(table: table, title: toDo.title, courseId: toDo.courseId, dueDate: newDueDate, repeating: toDo.repeating, repeatInterval: toDo.repeatInterval, isNotificationScheduled: toDo.isNotificationScheduled, notificationTime: toDo.notificationTime)
                                 table.toDoList.append(newToDo)
-                                table.toDoList.removeAll(where: { $0 == toDo })
-                            } else {
-                                toDo.isNotificationScheduled = false
                             }
+                            toDo.isNotificationScheduled = false
+                            toDo.repeating = false
                             table.updateNotificationSetting()
                             UNUserNotificationCenter.current().setBadgeCount(table.toDoList.filter({ !$0.isCompleted }).count)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
