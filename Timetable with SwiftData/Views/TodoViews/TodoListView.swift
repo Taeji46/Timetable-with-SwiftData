@@ -52,7 +52,7 @@ struct ToDoListView: View {
             //                toDo.isNotificationScheduled = false
             //            }
             
-            table.updateNotificationSetting()
+//            table.updateNotificationSetting()
         }
         .onReceive(timer) { _ in
             withAnimation(.easeInOut(duration: 0.75)) {
